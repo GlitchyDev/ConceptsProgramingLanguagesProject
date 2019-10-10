@@ -3,36 +3,46 @@ package com.DCB;
 import com.DCB.HelperStrucs.Identifier;
 import com.DCB.HelperStrucs.KeyWord;
 import com.DCB.HelperStrucs.Value;
-import com.sun.org.apache.xpath.internal.compiler.Keywords;
 
-import java.security.Key;
 import java.util.ArrayList;
 
 public class LexicalAnalyzer {
     // Every token we have currently analyzed, can be of object type KeyWord, Value, or Identifier
-    private ArrayList<Object> analyzedScript = new ArrayList<>();
+    private final ArrayList<Object> analyzedScript = new ArrayList<>();
     // Keeping track of our Identifiers, aka Variables as they are declared so we can reuse their objects across each instance
-    private ArrayList<Identifier> identifiers = new ArrayList<>();
+    private final ArrayList<Identifier> identifiers = new ArrayList<>();
 
+
+    private final ScriptReader scriptReader;
+    private String currentString;
+    private boolean numberOverride;
 
     public LexicalAnalyzer(ScriptReader scriptReader) {
+        this.scriptReader = scriptReader;
+        currentString = "";
+        numberOverride = false;
         // We keep track of every failed character we have pulled out till we get a success or run out of characters
-        String currentString = "";
         // Keep going on the loop till we run out of document
-        while(scriptReader.hasNextChar()) {
-            char c = scriptReader.getNextChar();
-            // We ignore spaces like a bad ass :O
-            if(c != ' ' && c != '\n' && c != '\r') {
-                // Add this character to our current collection of characters
-                currentString += c;
-                // This if statement will check and see if it can create a valid VariableType, Operator, Function Token, or Value
-                // From the Given input, if it passes, it resets the currentString and repeats the cycle
-                // If it fails, like this if statement requires, then it tries to see if its a valid identifier
-                if(!createVariableToken(currentString) && !createOperatorToken(currentString) && !createFunctionToken(currentString) && !createValueToken(currentString)) {
+        while(scriptReader.hasNextChar() || numberOverride) {
+            if(!numberOverride) {
+                char c = scriptReader.getNextChar();
+                // We ignore spaces like a bad ass :O
+                if (c != ' ' && c != '\n' && c != '\r' && c != '\t') {
+                    // Add this character to our current collection of characters
+                    currentString += c;
+                }
+            }
+            numberOverride = false;
+
+            // This if statement will check and see if it can create a valid VariableType, Operator, Function Token, or Value
+            // From the Given input, if it passes, it resets the currentString and repeats the cycle
+            // If it fails, like this if statement requires, then it tries to see if its a valid identifier
+            if (currentString.length() > 0) {
+                if (!createVariableToken(currentString) && !createOperatorToken(currentString) && !createFunctionToken(currentString) && !createValueToken(currentString)) {
                     // First we check if this is a identifier init, which is like "int obama = "
                     // We are specifically seeing if that "=" is there so we can create it
-                    if(currentString.charAt(currentString.length()-1) == '=') {
-                        createIdentifierToken(currentString.replace("=",""));
+                    if (currentString.charAt(currentString.length() - 1) == '=') {
+                        createIdentifierToken(currentString.replace("=", ""));
                         createOperatorToken("=");
                         currentString = "";
                     } else {
@@ -44,19 +54,22 @@ public class LexicalAnalyzer {
                                 foundCopy = true;
                             }
                         }
-                        if(foundCopy) {
+                        if (foundCopy) {
                             createIdentifierToken(currentString);
                             currentString = "";
                         }
                     }
                 } else {
                     // This happens if the Variable, Operation, Or Function operator Succeded
-                    currentString = "";
+                    if (!numberOverride) {
+                        currentString = "";
+                    }
+
                 }
             }
         }
-        // This ends when we run out of characters, so all the current String, aka unprocessed Characters should be done
-        if(currentString.length() >= 1) {
+            // This ends when we run out of characters, so all the current String, aka unprocessed Characters should be done
+        if (currentString.length() >= 1) {
             System.out.println("Error: Unprocessed Characters Remaining of count " + currentString.length());
             System.out.println("Invalid:" + currentString);
         }
@@ -208,24 +221,44 @@ public class LexicalAnalyzer {
     // Return True if it can create a valid Value from given Input
     public boolean createValueToken(String input) {
 
-        if(containsDigit(input)) { // Check if Number
-            if(input.matches("^[0-9]*$")) {
-                if (!input.contains(".")) {
-                    analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
-                    return true;
-                } else {
-                    analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Float.valueOf(input)));
-                    return true;
-                }
-            }
+        // Check if the input has a " on each side of the input string, representing a String
+        if (input.charAt(0) == '"' && input.length() > 1 &&  input.charAt(input.length()-1) == '"') {
+            analyzedScript.add(new Value<>(KeyWord.VariableType.STRING,input.replace("\"","")));
+            return true;
         } else {
-            if (input.toUpperCase().equals("TRUE") || input.toUpperCase().equals("FALSE")) { // Check if Boolean
-                analyzedScript.add(new Value<>(KeyWord.VariableType.BOOLEAN,input.toUpperCase().equals("TRUE")));
-                return true;
+            // If we know its not a string, lets see if it contains numbers, and if it is a number input
+            if (Character.isDigit(input.charAt(0))) { // Check if Number
+                if (!Character.isDigit(input.charAt(input.length()-1)) && input.charAt(input.length()-1) != '.' || !scriptReader.hasNextChar() ) {
+                    if (!input.contains(".")) {
+                        if(input.length() > 1) {
+                            char store = input.charAt(input.length() - 1);
+                            input = input.replace("" + store, "");
+                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                            this.numberOverride = true;
+                            currentString = "" + store;
+                            return true;
+                        } else {
+                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                            return true;
+                        }
+
+                    } else {
+                        if(input.length() > 1) {
+                            char store = input.charAt(input.length() - 1);
+                            input = input.replace("" + store, "");
+                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Float.valueOf(input)));
+                            this.numberOverride = true;
+                            currentString = "" + store;
+                            return true;
+                        } else {
+                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Float.valueOf(input)));
+                            return true;
+                        }
+                    }
+                }
             } else {
-                // Check if its a string
-                if (input.charAt(0) == '"' && input.length() > 1 &&  input.charAt(input.length()-1) == '"') {
-                    analyzedScript.add(new Value<>(KeyWord.VariableType.STRING,input.replace("\"","")));
+                if (input.toUpperCase().equals("TRUE") || input.toUpperCase().equals("FALSE")) { // Check if Boolean
+                    analyzedScript.add(new Value<>(KeyWord.VariableType.BOOLEAN, input.toUpperCase().equals("TRUE")));
                     return true;
                 }
             }

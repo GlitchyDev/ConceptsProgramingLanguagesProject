@@ -1,5 +1,8 @@
-int a = 5
+int a = 55
 if (a < 5)
-then
-print("YoYo")
+    then
+        print("YoYo")
 print(555)
+a = 5
+then while if
+5
