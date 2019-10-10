@@ -19,4 +19,9 @@ public class Value<T> {
     public T getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "[Value " + variableType + " " + value + "]";
+    }
 }

@@ -3,7 +3,9 @@ package com.DCB;
 import com.DCB.HelperStrucs.Identifier;
 import com.DCB.HelperStrucs.KeyWord;
 import com.DCB.HelperStrucs.Value;
+import com.sun.org.apache.xpath.internal.compiler.Keywords;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 public class LexicalAnalyzer {
@@ -20,16 +22,16 @@ public class LexicalAnalyzer {
         while(scriptReader.hasNextChar()) {
             char c = scriptReader.getNextChar();
             // We ignore spaces like a bad ass :O
-            if(c != ' ') {
+            if(c != ' ' && c != '\n' && c != '\r') {
                 // Add this character to our current collection of characters
-                currentString += scriptReader.getNextChar();
+                currentString += c;
                 // This if statement will check and see if it can create a valid VariableType, Operator, Function Token, or Value
                 // From the Given input, if it passes, it resets the currentString and repeats the cycle
                 // If it fails, like this if statement requires, then it tries to see if its a valid identifier
                 if(!createVariableToken(currentString) && !createOperatorToken(currentString) && !createFunctionToken(currentString) && !createValueToken(currentString)) {
                     // First we check if this is a identifier init, which is like "int obama = "
                     // We are specifically seeing if that "=" is there so we can create it
-                    if(currentString.charAt(currentString.length()-1) == '"') {
+                    if(currentString.charAt(currentString.length()-1) == '=') {
                         createIdentifierToken(currentString.replace("=",""));
                         createOperatorToken("=");
                         currentString = "";
@@ -54,8 +56,9 @@ public class LexicalAnalyzer {
             }
         }
         // This ends when we run out of characters, so all the current String, aka unprocessed Characters should be done
-        if(currentString.length() > 1) {
-            System.out.println("Error: Unprocessed Characters Remaining! " + currentString);
+        if(currentString.length() >= 1) {
+            System.out.println("Error: Unprocessed Characters Remaining of count " + currentString.length());
+            System.out.println("Invalid:" + currentString);
         }
     }
 
@@ -184,11 +187,16 @@ public class LexicalAnalyzer {
         // Keyword entered was a Variable Type, which it should be since int a = 1, we are on a so the previous
         // Keyword should be int, we check that here then create a new identifier and add it to our
         // AnalyzedScript and identifiers list
-        if (analyzedScript.size() > 1 && analyzedScript.get(analyzedScript.size() - 1) instanceof KeyWord && ((KeyWord) analyzedScript.get(analyzedScript.size() - 1)).getVariableType() != null) {
-            Identifier identifier = new Identifier(((KeyWord) analyzedScript.get(analyzedScript.size() - 1)).getVariableType(), input);
-            identifiers.add(identifier);
-            analyzedScript.add(identifier);
-            return true;
+        if (analyzedScript.size() >= 1) {
+            if(analyzedScript.get(analyzedScript.size() - 1) instanceof KeyWord) {
+                KeyWord keyWord = (KeyWord) analyzedScript.get(analyzedScript.size() - 1);
+                if(keyWord.getVariableType() != null) {
+                    Identifier identifier = new Identifier(((KeyWord) analyzedScript.get(analyzedScript.size() - 1)).getVariableType(), input);
+                    identifiers.add(identifier);
+                    analyzedScript.add(identifier);
+                    return true;
+                }
+            }
         }
         // If we f*** up this pops up!
         System.out.println("The Identifier " + input + " did not contain a proper initialization");
@@ -201,12 +209,14 @@ public class LexicalAnalyzer {
     public boolean createValueToken(String input) {
 
         if(containsDigit(input)) { // Check if Number
-            if(!input.contains("f")) {
-                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER,Integer.valueOf(input)));
-                return true;
-            } else {
-                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER,Float.valueOf(input)));
-                return true;
+            if(input.matches("^[0-9]*$")) {
+                if (!input.contains(".")) {
+                    analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                    return true;
+                } else {
+                    analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Float.valueOf(input)));
+                    return true;
+                }
             }
         } else {
             if (input.toUpperCase().equals("TRUE") || input.toUpperCase().equals("FALSE")) { // Check if Boolean
@@ -214,7 +224,7 @@ public class LexicalAnalyzer {
                 return true;
             } else {
                 // Check if its a string
-                if (input.charAt(0) == '"') {
+                if (input.charAt(0) == '"' && input.length() > 1 &&  input.charAt(input.length()-1) == '"') {
                     analyzedScript.add(new Value<>(KeyWord.VariableType.STRING,input.replace("\"","")));
                     return true;
                 }
@@ -241,5 +251,9 @@ public class LexicalAnalyzer {
 
     public ArrayList<Object> getAnalyzedScript() {
         return analyzedScript;
+    }
+
+    public ArrayList<Identifier> getIdentifiers() {
+        return identifiers;
     }
 }
