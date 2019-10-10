@@ -5,14 +5,14 @@ package com.DCB.HelperStrucs;
  * @param <T>
  */
 public class Value<T> {
-    private final KeyWords.VariableType variableType;
+    private final KeyWord.VariableType variableType;
     private final T value;
-    public Value(KeyWords.VariableType variableType, T value) {
+    public Value(KeyWord.VariableType variableType, T value) {
         this.variableType = variableType;
         this.value = value;
     }
 
-    public KeyWords.VariableType getVariableType() {
+    public KeyWord.VariableType getVariableType() {
         return variableType;
     }
 
