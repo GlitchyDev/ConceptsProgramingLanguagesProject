@@ -13,8 +13,12 @@ public class LexicalAnalyzer {
     private final ArrayList<Identifier> identifiers = new ArrayList<>();
 
 
+    // Store the script Reader as an class instance variable so the Number override can check it
     private final ScriptReader scriptReader;
+    // Current String of characters we are seeing is a valid keyword
     private String currentString;
+    // A special boolean that trips when a Number grabs a extra character to see when the end of the number is
+    // By tripping this we know an extra character was taken and can compensate
     private boolean numberOverride;
 
     public LexicalAnalyzer(ScriptReader scriptReader) {
@@ -23,7 +27,9 @@ public class LexicalAnalyzer {
         numberOverride = false;
         // We keep track of every failed character we have pulled out till we get a success or run out of characters
         // Keep going on the loop till we run out of document
+        // If there was a number override, we also check since a extra character has been stored
         while(scriptReader.hasNextChar() || numberOverride) {
+            // If there is a number override we check the char we stored first instead, incase its a single char lexime
             if(!numberOverride) {
                 char c = scriptReader.getNextChar();
                 // We ignore spaces like a bad ass :O
@@ -32,6 +38,7 @@ public class LexicalAnalyzer {
                     currentString += c;
                 }
             }
+            // We negate the number override if it happened
             numberOverride = false;
 
             // This if statement will check and see if it can create a valid VariableType, Operator, Function Token, or Value
@@ -228,9 +235,13 @@ public class LexicalAnalyzer {
         } else {
             // If we know its not a string, lets see if it contains numbers, and if it is a number input
             if (Character.isDigit(input.charAt(0))) { // Check if Number
+                // We check if the last letter of this input string is a nonnumber that isn't a period or there are no more characters
+                // If so, we can assume this number has ended and this can process it
                 if (!Character.isDigit(input.charAt(input.length()-1)) && input.charAt(input.length()-1) != '.' || !scriptReader.hasNextChar() ) {
                     if (!input.contains(".")) {
-                        if(input.length() > 1) {
+                        // We process one way if we know that there is an additional char, otherwise we know
+                        // The number is the last thing in the document and need to do it a different way
+                        if(scriptReader.hasNextChar()) {
                             char store = input.charAt(input.length() - 1);
                             input = input.replace("" + store, "");
                             analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
@@ -243,7 +254,7 @@ public class LexicalAnalyzer {
                         }
 
                     } else {
-                        if(input.length() > 1) {
+                        if(scriptReader.hasNextChar()) {
                             char store = input.charAt(input.length() - 1);
                             input = input.replace("" + store, "");
                             analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Float.valueOf(input)));
