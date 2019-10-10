@@ -140,4 +140,9 @@ public enum KeyWord {
         ASSIGNMENT, // =
         ENCAPSULATION,
     }
+
+    @Override
+    public String toString() {
+        return "[Keyword ID:" + this.ordinal() + " " + super.toString() + "]";
+    }
 }

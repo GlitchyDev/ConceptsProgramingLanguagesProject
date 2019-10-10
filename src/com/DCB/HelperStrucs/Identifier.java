@@ -21,7 +21,7 @@ public class Identifier {
 
     @Override
     public String toString() {
-        return "[Identifier " + variableType + " " + identifier + "]";
+        return "[Identifier " + " " + variableType + " " + identifier + "]";
 
     }
 }

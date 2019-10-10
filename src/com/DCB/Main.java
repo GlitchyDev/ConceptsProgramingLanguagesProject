@@ -12,7 +12,7 @@ public class Main {
         ScriptReader scriptReader = new ScriptReader(scanner);
         LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer(scriptReader);
         for(Object o: lexicalAnalyzer.getAnalyzedScript()) {
-            System.out.print(o + " ");
+            System.out.println(o);
         }
 	// write your code here
     }

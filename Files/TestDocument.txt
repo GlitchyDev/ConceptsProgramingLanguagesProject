@@ -1,8 +1,1 @@
-int a = 55
-if (a < 5)
-    then
-        print("YoYo")
-print(555)
-a = 5
-then while if
-5
+int recipt5 = 3+2
