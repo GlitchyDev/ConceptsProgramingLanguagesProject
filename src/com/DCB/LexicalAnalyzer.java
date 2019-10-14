@@ -249,21 +249,41 @@ public class LexicalAnalyzer {
                             currentString = "" + store;
                             return true;
                         } else {
-                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
-                            return true;
+                            if(!Character.isDigit(input.charAt(input.length()-1))) {
+                                char store = input.charAt(input.length() - 1);
+                                input = input.replace("" + store, "");
+                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                                this.numberOverride = true;
+                                currentString = "" + store;
+                                return true;
+                            } else {
+                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                                return true;
+                            }
                         }
 
                     } else {
+                        // We process one way if we know that there is an additional char, otherwise we know
+                        // The number is the last thing in the document and need to do it a different way
                         if(scriptReader.hasNextChar()) {
                             char store = input.charAt(input.length() - 1);
                             input = input.replace("" + store, "");
-                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Float.valueOf(input)));
+                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                             this.numberOverride = true;
                             currentString = "" + store;
                             return true;
                         } else {
-                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Float.valueOf(input)));
-                            return true;
+                            if (!Character.isDigit(input.charAt(input.length() - 1))) {
+                                char store = input.charAt(input.length() - 1);
+                                input = input.replace("" + store, "");
+                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                                this.numberOverride = true;
+                                currentString = "" + store;
+                                return true;
+                            } else {
+                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                                return true;
+                            }
                         }
                     }
                 }
