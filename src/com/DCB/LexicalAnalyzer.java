@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /*
  * Class:       CS 4308 Section 2
  * Term:        Fall 2019
- * Name:        Joe Blow
+ * Name:        Robert, Chris, James
  * Instructor:   Deepa Muralidhar
  * Project:  Deliverable 1 Scanner - Java
  */
