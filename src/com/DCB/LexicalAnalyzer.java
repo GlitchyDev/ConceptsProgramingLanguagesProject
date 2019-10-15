@@ -6,6 +6,14 @@ import com.DCB.HelperStrucs.Value;
 
 import java.util.ArrayList;
 
+/*
+ * Class:       CS 4308 Section 2
+ * Term:        Fall 2019
+ * Name:        Joe Blow
+ * Instructor:   Deepa Muralidhar
+ * Project:  Deliverable 1 Scanner - Java
+ */
+
 public class LexicalAnalyzer {
     // Every token we have currently analyzed, can be of object type KeyWord, Value, or Identifier
     private final ArrayList<Object> analyzedScript = new ArrayList<>();

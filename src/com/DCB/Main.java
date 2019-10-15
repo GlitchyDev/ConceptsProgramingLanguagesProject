@@ -1,7 +1,6 @@
 package com.DCB;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -14,6 +13,23 @@ public class Main {
         for(Object o: lexicalAnalyzer.getAnalyzedScript()) {
             System.out.println(o);
         }
-	// write your code here
+        try {
+            usingBufferedWritter(lexicalAnalyzer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // write your code here
+    }
+
+
+    public static void usingBufferedWritter(LexicalAnalyzer lexicalAnalyzer) throws IOException
+    {
+        String fileContent = "";
+        for(Object o: lexicalAnalyzer.getAnalyzedScript()) {
+            fileContent += o + "\n";
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter("Files/OutputFile.txt"));
+        writer.write(fileContent);
+        writer.close();
     }
 }
