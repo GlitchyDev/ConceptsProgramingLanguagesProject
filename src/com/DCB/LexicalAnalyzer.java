@@ -149,9 +149,16 @@ public class LexicalAnalyzer {
                 return true;
             case "+":
                 analyzedScript.add(KeyWord.ADD);
+                // We check if this is actually a String Add, Number Add, or
                 return true;
             case "-":
                 analyzedScript.add(KeyWord.SUBTRACT);
+                return true;
+            case "\\":
+                analyzedScript.add(KeyWord.INVERT_DIVIDE);
+                return true;
+            case "%":
+                analyzedScript.add(KeyWord.MOD);
                 return true;
         }
         return false;
