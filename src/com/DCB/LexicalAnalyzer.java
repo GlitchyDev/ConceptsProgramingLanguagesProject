@@ -58,7 +58,7 @@ public class LexicalAnalyzer {
                     // We are specifically seeing if that "=" is there so we can create it
                     if (currentString.charAt(currentString.length() - 1) == '=') {
                         createIdentifierToken(currentString.replace("=", ""));
-                        createOperatorToken("=");
+                        createFunctionToken("=");
                         currentString = "";
                     } else {
                         // If that init identifier failed, we see if it matches any that currently exist
@@ -114,9 +114,6 @@ public class LexicalAnalyzer {
     // Return True if it can create a valid Operator Keyword from given Input
     public boolean createOperatorToken(String input) {
         switch(input) {
-            case "++":
-                analyzedScript.add(KeyWord.STRING_CONCAT);
-                return true;
             case "<":
                 analyzedScript.add(KeyWord.LESS_THAN);
                 return true;
@@ -159,6 +156,9 @@ public class LexicalAnalyzer {
                 return true;
             case "%":
                 analyzedScript.add(KeyWord.MOD);
+                return true;
+            case "&&":
+                analyzedScript.add(KeyWord.AND);
                 return true;
         }
         return false;
@@ -215,6 +215,7 @@ public class LexicalAnalyzer {
         for (Identifier identifier : identifiers) {
             if (identifier.getIdentifier().equals(input)) {
                 analyzedScript.add(identifier);
+                afterNumberAdded();
                 return true;
             }
         }
@@ -229,6 +230,12 @@ public class LexicalAnalyzer {
                     Identifier identifier = new Identifier(((KeyWord) analyzedScript.get(analyzedScript.size() - 1)).getVariableType(), input);
                     identifiers.add(identifier);
                     analyzedScript.add(identifier);
+                    if(keyWord.getVariableType() == KeyWord.VariableType.NUMBER) {
+                        afterNumberAdded();
+                    }
+                    if(keyWord.getVariableType() == KeyWord.VariableType.STRING) {
+                        afterStringAdded();
+                    }
                     return true;
                 }
             }
@@ -244,48 +251,26 @@ public class LexicalAnalyzer {
     public boolean createValueToken(String input) {
 
         // Check if the input has a " on each side of the input string, representing a String
-        if (input.charAt(0) == '"' && input.length() > 1 &&  input.charAt(input.length()-1) == '"') {
-            analyzedScript.add(new Value<>(KeyWord.VariableType.STRING,input.replace("\"","")));
+        if (input.charAt(0) == '"' && input.length() > 1 && input.charAt(input.length() - 1) == '"') {
+            analyzedScript.add(new Value<>(KeyWord.VariableType.STRING, input.replace("\"", "")));
+            afterStringAdded();
             return true;
         } else {
             // If we know its not a string, lets see if it contains numbers, and if it is a number input
             if (Character.isDigit(input.charAt(0))) { // Check if Number
                 // We check if the last letter of this input string is a nonnumber that isn't a period or there are no more characters
                 // If so, we can assume this number has ended and this can process it
-                if (!Character.isDigit(input.charAt(input.length()-1)) && input.charAt(input.length()-1) != '.' || !scriptReader.hasNextChar() ) {
+                if (!Character.isDigit(input.charAt(input.length() - 1)) && input.charAt(input.length() - 1) != '.' || !scriptReader.hasNextChar()) {
                     if (!input.contains(".")) {
                         // We process one way if we know that there is an additional char, otherwise we know
                         // The number is the last thing in the document and need to do it a different way
-                        if(scriptReader.hasNextChar()) {
+                        if (scriptReader.hasNextChar()) {
                             char store = input.charAt(input.length() - 1);
                             input = input.replace("" + store, "");
                             analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                             this.numberOverride = true;
                             currentString = "" + store;
-                            return true;
-                        } else {
-                            if(!Character.isDigit(input.charAt(input.length()-1))) {
-                                char store = input.charAt(input.length() - 1);
-                                input = input.replace("" + store, "");
-                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
-                                this.numberOverride = true;
-                                currentString = "" + store;
-                                return true;
-                            } else {
-                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
-                                return true;
-                            }
-                        }
-
-                    } else {
-                        // We process one way if we know that there is an additional char, otherwise we know
-                        // The number is the last thing in the document and need to do it a different way
-                        if(scriptReader.hasNextChar()) {
-                            char store = input.charAt(input.length() - 1);
-                            input = input.replace("" + store, "");
-                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
-                            this.numberOverride = true;
-                            currentString = "" + store;
+                            afterNumberAdded();
                             return true;
                         } else {
                             if (!Character.isDigit(input.charAt(input.length() - 1))) {
@@ -294,9 +279,38 @@ public class LexicalAnalyzer {
                                 analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                                 this.numberOverride = true;
                                 currentString = "" + store;
+                                afterNumberAdded();
                                 return true;
                             } else {
                                 analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                                afterNumberAdded();
+                                return true;
+                            }
+                        }
+
+                    } else {
+                        // We process one way if we know that there is an additional char, otherwise we know
+                        // The number is the last thing in the document and need to do it a different way
+                        if (scriptReader.hasNextChar()) {
+                            char store = input.charAt(input.length() - 1);
+                            input = input.replace("" + store, "");
+                            analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                            this.numberOverride = true;
+                            currentString = "" + store;
+                            afterNumberAdded();
+                            return true;
+                        } else {
+                            if (!Character.isDigit(input.charAt(input.length() - 1))) {
+                                char store = input.charAt(input.length() - 1);
+                                input = input.replace("" + store, "");
+                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                                this.numberOverride = true;
+                                currentString = "" + store;
+                                afterNumberAdded();
+                                return true;
+                            } else {
+                                analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
+                                afterNumberAdded();
                                 return true;
                             }
                         }
@@ -314,6 +328,95 @@ public class LexicalAnalyzer {
 
     }
 
+    public void afterStringAdded() {
+        if(getAnalyzedScript().size()-2 >= 0) {
+            if (instanceOfAddKeyword(getAnalyzedScript().size() - 2)) {
+                if (checkIfString(getAnalyzedScript().size() - 3)) {
+                    getAnalyzedScript().set(getAnalyzedScript().size() - 2, KeyWord.STRING_CONCAT);
+                } else {
+                    System.out.println("ERROR STRING CONCAT");
+                }
+            }
+        }
+    }
+
+    public void afterNumberAdded() {
+        if(getAnalyzedScript().size()-2 >= 0) {
+
+            if (instanceOfAddKeyword(getAnalyzedScript().size() - 2)) {
+                if (checkIfNumber(getAnalyzedScript().size() - 3)) {
+                    getAnalyzedScript().set(getAnalyzedScript().size() - 2, KeyWord.NUMBER_ADD);
+                } else {
+                    getAnalyzedScript().set(getAnalyzedScript().size() - 2, KeyWord.NUMBER_IDENTITY);
+                }
+            } else {
+                if (instanceOfSubtractKeyword(getAnalyzedScript().size() - 2)) {
+                    if (checkIfNumber(getAnalyzedScript().size() - 3)) {
+                        getAnalyzedScript().set(getAnalyzedScript().size() - 2, KeyWord.NUMBER_SUBTRACT);
+                    } else {
+                        getAnalyzedScript().set(getAnalyzedScript().size() - 2, KeyWord.NUMBER_INVERT);
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean checkIfNumber(int index) {
+        if(index >= 0 && getAnalyzedScript().size() > index) {
+            if (getAnalyzedScript().get(index) instanceof Value) {
+                if (((Value) getAnalyzedScript().get(index)).getVariableType() == KeyWord.VariableType.NUMBER) {
+                    return true;
+                }
+            } else {
+                if (getAnalyzedScript().get(index) instanceof Identifier) {
+                    if (((Identifier) getAnalyzedScript().get(index)).getVariableType() == KeyWord.VariableType.NUMBER) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfString(int index) {
+        if(index >= 0 && getAnalyzedScript().size() > index) {
+            if (getAnalyzedScript().get(index) instanceof Value) {
+                if (((Value) getAnalyzedScript().get(index)).getVariableType() == KeyWord.VariableType.STRING) {
+                    return true;
+                }
+            } else {
+                if (getAnalyzedScript().get(index) instanceof Identifier) {
+                    if (((Identifier) getAnalyzedScript().get(index)).getVariableType() == KeyWord.VariableType.STRING) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean instanceOfAddKeyword(int index) {
+        if(index >= 0 && getAnalyzedScript().size() > index) {
+           if(getAnalyzedScript().get(index) instanceof KeyWord)  {
+               if(getAnalyzedScript().get(index) == KeyWord.ADD) {
+                   return true;
+               }
+           }
+        }
+        return false;
+    }
+
+    public boolean instanceOfSubtractKeyword(int index) {
+        if(index >= 0 && getAnalyzedScript().size() > index) {
+            if(getAnalyzedScript().get(index) instanceof KeyWord)  {
+                if(getAnalyzedScript().get(index) == KeyWord.SUBTRACT) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public final boolean containsDigit(String s) {
         boolean containsDigit = false;
 
@@ -327,6 +430,8 @@ public class LexicalAnalyzer {
 
         return containsDigit;
     }
+
+
 
     public ArrayList<Object> getAnalyzedScript() {
         return analyzedScript;
