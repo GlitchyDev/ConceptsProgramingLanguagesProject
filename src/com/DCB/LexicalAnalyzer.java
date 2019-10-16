@@ -215,7 +215,12 @@ public class LexicalAnalyzer {
         for (Identifier identifier : identifiers) {
             if (identifier.getIdentifier().equals(input)) {
                 analyzedScript.add(identifier);
-                afterNumberAdded();
+                if(identifier.getVariableType() == KeyWord.VariableType.NUMBER) {
+                    afterNumberAdded();
+                }
+                if(identifier.getVariableType() == KeyWord.VariableType.STRING) {
+                    afterStringAdded();
+                }
                 return true;
             }
         }
