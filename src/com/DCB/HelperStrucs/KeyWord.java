@@ -166,6 +166,6 @@ public enum KeyWord {
 
     @Override
     public String toString() {
-        return "[Keyword ID:" + this.ordinal() + " " + super.toString() + "]";
+        return "[Token Keyword ID:" + this.ordinal() + " " + super.toString() + "]";
     }
 }

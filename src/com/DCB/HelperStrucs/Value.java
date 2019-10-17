@@ -31,6 +31,6 @@ public class Value<T> {
 
     @Override
     public String toString() {
-        return "[Value " + variableType + " " + value + "]";
+        return "[Lexime Value " + variableType + " " + value + "]";
     }
 }
