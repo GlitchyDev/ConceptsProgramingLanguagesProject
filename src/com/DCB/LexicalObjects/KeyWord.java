@@ -1,4 +1,4 @@
-package com.DCB.HelperStrucs;
+package com.DCB.LexicalObjects;
 
 
 /**
@@ -73,13 +73,12 @@ public enum KeyWord {
     UNTIL(FunctionType.CONDITIONAL), // Logic that runs Repeat
     PRINT(FunctionType.OUTPUT),
     ASSIGN(FunctionType.ASSIGNMENT),
-    LEFT_PARENTHESIS(FunctionType.ENCAPSULATION),
-    RIGHT_PARENTHESIS(FunctionType.ENCAPSULATION),
     FOR(FunctionType.CONDITIONAL),
     FOR_EACH(FunctionType.CONDITIONAL),
 
 
-
+    LEFT_PARENTHESIS(FunctionType.ENCAPSULATION),
+    RIGHT_PARENTHESIS(FunctionType.ENCAPSULATION),
             ;
 
 

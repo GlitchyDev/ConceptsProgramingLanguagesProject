@@ -1,7 +1,8 @@
-package com.DCB.HelperStrucs;
+package com.DCB.LexicalObjects;
 
 /**
- * Variable Names, "Bob" ect
+ * Variable Values
+ * @param <T>
  */
 
 /*
@@ -12,25 +13,24 @@ package com.DCB.HelperStrucs;
  * Project:  Deliverable 1 Scanner - Java
  */
 
-public class Identifier {
+public class Value<T> {
     private final KeyWord.VariableType variableType;
-    private final String identifier;
-    public Identifier(KeyWord.VariableType variableType, String identifier) {
+    private final T value;
+    public Value(KeyWord.VariableType variableType, T value) {
         this.variableType = variableType;
-        this.identifier = identifier;
+        this.value = value;
     }
 
     public KeyWord.VariableType getVariableType() {
         return variableType;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public T getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return "[Lexime Identifier " + " " + variableType + " " + identifier + "]";
-
+        return "[Lexime Value " + variableType + " " + value + "]";
     }
 }

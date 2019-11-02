@@ -1,8 +1,8 @@
 package com.DCB;
 
-import com.DCB.HelperStrucs.Identifier;
-import com.DCB.HelperStrucs.KeyWord;
-import com.DCB.HelperStrucs.Value;
+import com.DCB.LexicalObjects.Identifier;
+import com.DCB.LexicalObjects.KeyWord;
+import com.DCB.LexicalObjects.Value;
 
 import java.util.ArrayList;
 
@@ -131,7 +131,7 @@ public class LexicalAnalyzer {
                 return true;
             case "!=":
                 analyzedScript.add(KeyWord.NOT_EQUAL);
-                return true;3
+                return true;
             case "*":
                 analyzedScript.add(KeyWord.MULTIPLY);
                 return true;
@@ -219,10 +219,10 @@ public class LexicalAnalyzer {
             if (identifier.getIdentifier().equals(input)) {
                 analyzedScript.add(identifier);
                 if(identifier.getVariableType() == KeyWord.VariableType.NUMBER) {
-                    afterNumberAdded();
+                    numberAddCheck();
                 }
                 if(identifier.getVariableType() == KeyWord.VariableType.STRING) {
-                    afterStringAdded();
+                    stringAddCheck();
                 }
                 return true;
             }
@@ -239,10 +239,10 @@ public class LexicalAnalyzer {
                     identifiers.add(identifier);
                     analyzedScript.add(identifier);
                     if(keyWord.getVariableType() == KeyWord.VariableType.NUMBER) {
-                        afterNumberAdded();
+                        numberAddCheck();
                     }
                     if(keyWord.getVariableType() == KeyWord.VariableType.STRING) {
-                        afterStringAdded();
+                        stringAddCheck();
                     }
                     return true;
                 }
@@ -261,7 +261,7 @@ public class LexicalAnalyzer {
         // Check if the input has a " on each side of the input string, representing a String
         if (input.charAt(0) == '"' && input.length() > 1 && input.charAt(input.length() - 1) == '"') {
             analyzedScript.add(new Value<>(KeyWord.VariableType.STRING, input.replace("\"", "")));
-            afterStringAdded();
+            stringAddCheck();
             return true;
         } else {
             // If we know its not a string, lets see if it contains numbers, and if it is a number input
@@ -278,7 +278,7 @@ public class LexicalAnalyzer {
                             analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                             this.numberOverride = true;
                             currentString = "" + store;
-                            afterNumberAdded();
+                            numberAddCheck();
                             return true;
                         } else {
                             if (!Character.isDigit(input.charAt(input.length() - 1))) {
@@ -287,11 +287,11 @@ public class LexicalAnalyzer {
                                 analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                                 this.numberOverride = true;
                                 currentString = "" + store;
-                                afterNumberAdded();
+                                numberAddCheck();
                                 return true;
                             } else {
                                 analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
-                                afterNumberAdded();
+                                numberAddCheck();
                                 return true;
                             }
                         }
@@ -305,7 +305,7 @@ public class LexicalAnalyzer {
                             analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                             this.numberOverride = true;
                             currentString = "" + store;
-                            afterNumberAdded();
+                            numberAddCheck();
                             return true;
                         } else {
                             if (!Character.isDigit(input.charAt(input.length() - 1))) {
@@ -314,11 +314,11 @@ public class LexicalAnalyzer {
                                 analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                                 this.numberOverride = true;
                                 currentString = "" + store;
-                                afterNumberAdded();
+                                numberAddCheck();
                                 return true;
                             } else {
                                 analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
-                                afterNumberAdded();
+                                numberAddCheck();
                                 return true;
                             }
                         }
@@ -336,7 +336,9 @@ public class LexicalAnalyzer {
 
     }
 
-    public void afterStringAdded() {
+
+
+    public void stringAddCheck() {
         if(getAnalyzedScript().size()-2 >= 0) {
             if (instanceOfAddKeyword(getAnalyzedScript().size() - 2)) {
                 if (checkIfString(getAnalyzedScript().size() - 3)) {
@@ -348,7 +350,7 @@ public class LexicalAnalyzer {
         }
     }
 
-    public void afterNumberAdded() {
+    public void numberAddCheck() {
         if(getAnalyzedScript().size()-2 >= 0) {
 
             if (instanceOfAddKeyword(getAnalyzedScript().size() - 2)) {
