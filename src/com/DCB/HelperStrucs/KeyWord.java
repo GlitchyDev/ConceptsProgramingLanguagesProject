@@ -32,14 +32,13 @@ public enum KeyWord {
     // String Operations
     STRING_CONCAT(OperationType.STRING, OperationType.STRING),
     // Boolean Operations
-    LESS_THAN(OperationType.BOOLEAN, OperationType.BOOLEAN),
+    LESS_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
     GREATER_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
     EQUAL_LESS_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
     EQUAL_GREATER_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
     AND(OperationType.BOOLEAN, OperationType.BOOLEAN),
     EQUAL(OperationType.TYPELESS, OperationType.BOOLEAN),
     NOT_EQUAL(OperationType.TYPELESS, OperationType.BOOLEAN),
-    SUM(OperationType.NUMBER, OperationType.NUMBER),
     // Number Operations
     NUMBER_ADD(OperationType.NUMBER, OperationType.NUMBER),
     NUMBER_SUBTRACT(OperationType.NUMBER, OperationType.NUMBER),
@@ -76,6 +75,8 @@ public enum KeyWord {
     ASSIGN(FunctionType.ASSIGNMENT),
     LEFT_PARENTHESIS(FunctionType.ENCAPSULATION),
     RIGHT_PARENTHESIS(FunctionType.ENCAPSULATION),
+    FOR(FunctionType.CONDITIONAL),
+    FOR_EACH(FunctionType.CONDITIONAL),
 
 
 

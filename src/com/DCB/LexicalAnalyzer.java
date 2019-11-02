@@ -131,10 +131,7 @@ public class LexicalAnalyzer {
                 return true;
             case "!=":
                 analyzedScript.add(KeyWord.NOT_EQUAL);
-                return true;
-            case "+=":
-                analyzedScript.add(KeyWord.SUM);
-                return true;
+                return true;3
             case "*":
                 analyzedScript.add(KeyWord.MULTIPLY);
                 return true;
@@ -202,6 +199,12 @@ public class LexicalAnalyzer {
                 return true;
             case ")":
                 analyzedScript.add(KeyWord.RIGHT_PARENTHESIS);
+                return true;
+            case "FOR":
+                analyzedScript.add(KeyWord.FOR);
+                return true;
+            case "FOR EACH":
+                analyzedScript.add(KeyWord.FOR_EACH);
                 return true;
 
         }
