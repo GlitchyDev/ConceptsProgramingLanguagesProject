@@ -1,5 +1,7 @@
 package com.DCB;
 
+import com.DCB.ParserObjects.CoupledObject;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -25,6 +27,11 @@ public class Main {
             usingBufferedWritter(lexicalAnalyzer);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        System.out.println("=========================");
+        Parser parser = new Parser(lexicalAnalyzer.getAnalyzedScript());
+        for(Object o: parser.getAnalyzedScript()) {
+            System.out.println(((CoupledObject)o).getStringIdentifier());
         }
         // write your code here
     }

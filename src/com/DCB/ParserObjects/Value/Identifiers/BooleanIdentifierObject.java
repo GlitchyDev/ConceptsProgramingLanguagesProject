@@ -1,8 +1,9 @@
-package com.DCB.ParserObjects.Value;
+package com.DCB.ParserObjects.Value.Identifiers;
 
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 public class BooleanIdentifierObject extends CoupledObject implements BooleanValueObject {
     private final Identifier identifier;
@@ -26,5 +27,15 @@ public class BooleanIdentifierObject extends CoupledObject implements BooleanVal
     @Override
     public boolean getValue() {
         return booleanValueObject.getValue();
+    }
+
+    @Override
+    public String getStringIdentifier() {
+        return "[" + coupleObjectType + " | " + identifier + " ]";
+    }
+
+    @Override
+    public String getParsedGrammar() {
+        return "";
     }
 }

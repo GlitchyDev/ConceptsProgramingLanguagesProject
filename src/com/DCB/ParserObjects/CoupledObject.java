@@ -3,7 +3,7 @@ package com.DCB.ParserObjects;
 import com.DCB.LexicalObjects.KeyWord;
 
 public abstract class CoupledObject {
-    private final CoupleObjectType coupleObjectType;
+    protected final CoupleObjectType coupleObjectType;
     public CoupledObject(CoupleObjectType coupleObjectType) {
         this.coupleObjectType = coupleObjectType;
     }
@@ -14,6 +14,10 @@ public abstract class CoupledObject {
 
     public abstract boolean hasReturnType();
     public abstract KeyWord.VariableType getReturnType();
+
+    public abstract String getStringIdentifier();
+    public abstract String getParsedGrammar();
+
 
     public enum CoupleObjectType {
         BOOLEAN_VALUE,
@@ -26,7 +30,7 @@ public abstract class CoupledObject {
 
         BOOLEAN_PARENTHIS,
         INT_PARENTHIS,
-        STRING_PARENTHIS,
+        STRING_PARENTHESES,
 
         STRING_CONCAT,
         BOOLEAN_LESS_THAN,

@@ -1,8 +1,9 @@
-package com.DCB.ParserObjects.Value;
+package com.DCB.ParserObjects.Value.Identifiers;
 
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.Value.StringValueObject;
 
 public class StringIdentifierObject  extends CoupledObject implements StringValueObject {
     private final Identifier identifier;
@@ -26,5 +27,15 @@ public class StringIdentifierObject  extends CoupledObject implements StringValu
     @Override
     public String getValue() {
         return stringValueObject.getValue();
+    }
+
+    @Override
+    public String getStringIdentifier() {
+        return "[" + coupleObjectType + " | " + identifier + " ]";
+    }
+
+    @Override
+    public String getParsedGrammar() {
+        return "";
     }
 }

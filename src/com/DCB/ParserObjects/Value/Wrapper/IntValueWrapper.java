@@ -1,10 +1,11 @@
-package com.DCB.ParserObjects.Value;
+package com.DCB.ParserObjects.Value.Wrapper;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.Value.IntValueObject;
 
-public class IntValueWrapper extends CoupledObject implements IntValueObject{
+public class IntValueWrapper extends CoupledObject implements IntValueObject {
     private final Value value;
 
     public IntValueWrapper(Value value) {
@@ -26,5 +27,15 @@ public class IntValueWrapper extends CoupledObject implements IntValueObject{
     @Override
     public KeyWord.VariableType getReturnType() {
         return KeyWord.VariableType.NUMBER;
+    }
+
+    @Override
+    public String getStringIdentifier() {
+        return "[" + coupleObjectType + " | " + value + " ]";
+    }
+
+    @Override
+    public String getParsedGrammar() {
+        return "";
     }
 }

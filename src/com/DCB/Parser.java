@@ -13,16 +13,13 @@ public class Parser {
         this.couplingObjectFactory = new CouplingObjectFactory(analyzedScript);
 
         if(couplingObjectFactory.createAllCouplings()) {
-            for(Object object: analyzedScript) {
-                System.out.println(object);
-            }
+            System.out.println("Parsing Completed!");
         } else {
             System.out.println("Parsing Failed");
         }
     }
 
-
-
-
-
+    public ArrayList<Object> getAnalyzedScript() {
+        return analyzedScript;
+    }
 }

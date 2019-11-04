@@ -6,10 +6,14 @@ import com.DCB.ParserObjects.Value.StringValueObject;
 
 public class CouplingStringConcat extends CoupledObject implements StringValueObject {
     private final String value;
+    private final StringValueObject string1;
+    private final StringValueObject string2;
 
     public CouplingStringConcat(StringValueObject string1, StringValueObject string2) {
         super(CoupleObjectType.STRING_CONCAT);
         value = string1.getValue() + string2.getValue();
+        this.string1 = string1;
+        this.string2 = string2;
     }
 
     @Override
@@ -24,7 +28,20 @@ public class CouplingStringConcat extends CoupledObject implements StringValueOb
 
 
     @Override
+    public String getStringIdentifier() {
+        return "[" + coupleObjectType + " | " + string1.getStringIdentifier() + " | " + string2.getStringIdentifier() + " ]";
+    }
+
+    @Override
+    public String getParsedGrammar() {
+        return "";
+    }
+
+
+    @Override
     public String getValue() {
         return value;
     }
+
+
 }
