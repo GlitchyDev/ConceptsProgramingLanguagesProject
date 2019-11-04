@@ -7,6 +7,7 @@ import com.DCB.ParserObjects.Value.StringValueObject;
 public class CouplingStringParentheses extends CoupledObject implements StringValueObject {
     private final String value;
     private final StringValueObject stringValueObject;
+
     public CouplingStringParentheses(StringValueObject stringValueObject) {
         super(CoupleObjectType.STRING_PARENTHESES);
         this.value = stringValueObject.getValue();

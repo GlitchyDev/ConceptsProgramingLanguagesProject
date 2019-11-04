@@ -29,8 +29,6 @@ public enum KeyWord {
     FLOAT(VariableType.NUMBER),
 
     // Double Sided Operations
-    // String Operations
-    STRING_CONCAT(OperationType.STRING, OperationType.STRING),
     // Boolean Operations
     LESS_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
     GREATER_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
@@ -40,8 +38,6 @@ public enum KeyWord {
     EQUAL(OperationType.TYPELESS, OperationType.BOOLEAN),
     NOT_EQUAL(OperationType.TYPELESS, OperationType.BOOLEAN),
     // Number Operations
-    NUMBER_ADD(OperationType.NUMBER, OperationType.NUMBER),
-    NUMBER_SUBTRACT(OperationType.NUMBER, OperationType.NUMBER),
     MULTIPLY(OperationType.NUMBER, OperationType.NUMBER),
     DIVIDE(OperationType.NUMBER, OperationType.NUMBER),
     INVERT_DIVIDE(OperationType.NUMBER, OperationType.NUMBER),

@@ -24,20 +24,24 @@ public class Main {
             System.out.println(o);
         }
         try {
-            usingBufferedWritter(lexicalAnalyzer);
+            usingBufferedWriter(lexicalAnalyzer);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("=========================");
         Parser parser = new Parser(lexicalAnalyzer.getAnalyzedScript());
         for(Object o: parser.getAnalyzedScript()) {
-            System.out.println(((CoupledObject)o).getStringIdentifier());
+            if(o instanceof CoupledObject) {
+                System.out.println(((CoupledObject) o).getStringIdentifier());
+            } else {
+                System.out.println(o);
+            }
         }
         // write your code here
     }
 
 
-    public static void usingBufferedWritter(LexicalAnalyzer lexicalAnalyzer) throws IOException
+    public static void usingBufferedWriter(LexicalAnalyzer lexicalAnalyzer) throws IOException
     {
         String fileContent = "";
         for(Object o: lexicalAnalyzer.getAnalyzedScript()) {
