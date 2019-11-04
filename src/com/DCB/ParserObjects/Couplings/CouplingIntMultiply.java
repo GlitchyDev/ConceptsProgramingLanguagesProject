@@ -3,16 +3,15 @@ package com.DCB.ParserObjects.Couplings;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
-import com.DCB.ParserObjects.Value.StringValueObject;
 
-public class CouplingIntAdd extends CoupledObject implements IntValueObject {
+public class CouplingIntMultiply extends CoupledObject implements IntValueObject {
     private final int value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
-    public CouplingIntAdd(IntValueObject number1, IntValueObject number2) {
-        super(CoupleObjectType.NUMBER_ADD);
-        value = number1.getValue() + number2.getValue();
+    public CouplingIntMultiply(IntValueObject number1, IntValueObject number2) {
+        super(CoupleObjectType.NUMBER_MULTIPLY);
+        value = number1.getValue() * number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }

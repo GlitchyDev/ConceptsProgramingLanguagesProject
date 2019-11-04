@@ -3,8 +3,6 @@ package com.DCB.ParserObjects.Couplings;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
-import com.DCB.ParserObjects.Value.StringValueObject;
-import com.sun.jdi.IntegerValue;
 
 public class CouplingIntParentheses extends CoupledObject implements IntValueObject {
     private final int value;

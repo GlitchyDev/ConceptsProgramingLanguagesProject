@@ -3,10 +3,7 @@ package com.DCB.ParserObjects;
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
-import com.DCB.ParserObjects.Couplings.CouplingIntParentheses;
-import com.DCB.ParserObjects.Couplings.CouplingIntAdd;
-import com.DCB.ParserObjects.Couplings.CouplingStringConcat;
-import com.DCB.ParserObjects.Couplings.CouplingStringParentheses;
+import com.DCB.ParserObjects.Couplings.*;
 import com.DCB.ParserObjects.Value.*;
 import com.DCB.ParserObjects.Value.Identifiers.BooleanIdentifierObject;
 import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
@@ -18,9 +15,9 @@ import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
 import java.util.ArrayList;
 
 public class CouplingObjectFactory {
-    private final KeyWord[] NUMBER_OPERATIONS = new KeyWord[]{KeyWord.EXPONENTIAL,KeyWord.MULTIPLY, KeyWord.DIVIDE,
+    private final KeyWord[] NUMBER_OPERATIONS = new KeyWord[]{KeyWord.LEFT_PARENTHESIS, KeyWord.EXPONENTIAL,KeyWord.MULTIPLY, KeyWord.DIVIDE,
             KeyWord.INVERT_DIVIDE, KeyWord.ADD, KeyWord.SUBTRACT, KeyWord.NUMBER_IDENTITY, KeyWord.NUMBER_INVERT, KeyWord.LESS_THAN, KeyWord.GREATER_THAN,KeyWord.EQUAL_LESS_THAN, KeyWord.EQUAL_GREATER_THAN,
-            KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL,KeyWord.LEFT_PARENTHESIS
+            KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL
     };
 
     private KeyWord[] FUNCTIONS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, KeyWord.DO, KeyWord.REPEAT,
@@ -183,6 +180,8 @@ public class CouplingObjectFactory {
                 if(getObject(couplingPosition-1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+1) instanceof IntValueObject) {
                         return true;
+                    } else {
+                        return true;
                     }
                 }
                 if(getObject(couplingPosition-1) instanceof StringValueObject) {
@@ -195,6 +194,8 @@ public class CouplingObjectFactory {
                 if(getObject(couplingPosition-1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+1) instanceof IntValueObject) {
                         return true;
+                    } else {
+                        return true;
                     }
                 }
                 if(getObject(couplingPosition-1) instanceof StringValueObject) {
@@ -204,7 +205,11 @@ public class CouplingObjectFactory {
                 }
                 break;
             case MULTIPLY:
-
+                if(getObject(couplingPosition-1) instanceof IntValueObject) {
+                    if (getObject(couplingPosition + 1) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case DIVIDE:
 
@@ -329,7 +334,15 @@ public class CouplingObjectFactory {
                 }
                 break;
             case MULTIPLY:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition-1) instanceof IntValueObject) {
+                        CouplingIntMultiply couplingIntMultiply = new CouplingIntMultiply(((IntValueObject)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
+                        parsedScript.remove(couplingPosition+(1));
+                        parsedScript.set(couplingPosition,couplingIntMultiply);
+                        parsedScript.remove(couplingPosition+(-1));
+                        // This is Number Identity
+                    }
+                }
                 break;
             case DIVIDE:
 
