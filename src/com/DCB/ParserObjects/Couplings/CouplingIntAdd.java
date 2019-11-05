@@ -5,6 +5,9 @@ import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
+/**
+ * Coupling that supports the Integer Add Operation
+ */
 public class CouplingIntAdd extends CoupledObject implements IntValueObject {
     private final int value;
     private final IntValueObject number1;

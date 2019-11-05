@@ -143,7 +143,6 @@ public class LexicalAnalyzer {
                 return true;
             case "+":
                 analyzedScript.add(KeyWord.ADD);
-                // We check if this is actually a String Add, Number Add, or
                 return true;
             case "-":
                 analyzedScript.add(KeyWord.SUBTRACT);

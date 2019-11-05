@@ -6,6 +6,9 @@ import com.DCB.LexicalObjects.Value;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
+/**
+ * Coupling that supports Value objects, and properly encapsulates them
+ */
 public class BooleanValueWrapper extends CoupledObject implements BooleanValueObject {
     private final Value value;
     public BooleanValueWrapper(Value value) {

@@ -2,6 +2,11 @@ package com.DCB.ParserObjects;
 
 import com.DCB.LexicalObjects.KeyWord;
 
+
+/**
+ * This is a Coupling Object that is used to encapsulate all Operations and Statements that allows for proper parsing via
+ * the grammer encapsulation assignment method
+ */
 public abstract class CoupledObject {
     protected final CoupleObjectType coupleObjectType;
     public CoupledObject(CoupleObjectType coupleObjectType) {

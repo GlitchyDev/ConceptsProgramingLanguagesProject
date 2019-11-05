@@ -4,6 +4,10 @@ import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
+
+/**
+ * Coupling that supports the String Parentheses Operation
+ */
 public class CouplingStringParentheses extends CoupledObject implements StringValueObject {
     private final String value;
     private final StringValueObject stringValueObject;

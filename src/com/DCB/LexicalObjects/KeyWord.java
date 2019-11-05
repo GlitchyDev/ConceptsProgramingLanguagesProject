@@ -2,7 +2,7 @@ package com.DCB.LexicalObjects;
 
 
 /**
- * Keywords are everything, Variables and Operations
+ * Keywords are everything, Variables and Operations supported by the program
  *
  * They can be one or the other, so there is a isOperation() to differentiate.
  *
@@ -20,6 +20,7 @@ package com.DCB.LexicalObjects;
  * Instructor:   Deepa Muralidhar
  * Project:  Deliverable 1 Scanner - Java
  */
+
 
 public enum KeyWord {
     // Variable Types

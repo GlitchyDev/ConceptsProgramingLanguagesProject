@@ -5,6 +5,9 @@ import com.DCB.LexicalObjects.Value;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
+/**
+ * Coupling that supports Value objects, and properly encapsulates them
+ */
 public class StringValueWrapper extends CoupledObject implements StringValueObject {
     private final Value value;
 

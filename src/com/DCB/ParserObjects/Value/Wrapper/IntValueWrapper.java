@@ -5,6 +5,9 @@ import com.DCB.LexicalObjects.Value;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
+/**
+ * Coupling that supports Value objects, and properly encapsulates them
+ */
 public class IntValueWrapper extends CoupledObject implements IntValueObject {
     private final Value value;
 

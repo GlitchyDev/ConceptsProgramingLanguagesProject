@@ -14,14 +14,24 @@ import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
 
 import java.util.ArrayList;
 
+
+/**
+ * This is a Object that builds the Coupling required for the parser, it works by working with operations first, working its
+ * way up into statements, then branching statements
+ */
 public class CouplingObjectFactory {
+
+
     private final KeyWord[] NUMBER_OPERATIONS = new KeyWord[]{KeyWord.LEFT_PARENTHESIS, KeyWord.EXPONENTIAL,KeyWord.MULTIPLY, KeyWord.DIVIDE,
             KeyWord.INVERT_DIVIDE, KeyWord.ADD, KeyWord.SUBTRACT, KeyWord.NUMBER_IDENTITY, KeyWord.NUMBER_INVERT, KeyWord.LESS_THAN, KeyWord.GREATER_THAN,KeyWord.EQUAL_LESS_THAN, KeyWord.EQUAL_GREATER_THAN,
             KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL
     };
 
-    private KeyWord[] FUNCTIONS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, KeyWord.DO, KeyWord.REPEAT,
-            KeyWord.FOR, KeyWord.FOR_EACH,KeyWord.PRINT,KeyWord.PRINT,KeyWord.ASSIGN
+    private KeyWord[] FUNCTIONS = new KeyWord[]{KeyWord.ASSIGN,KeyWord.PRINT
+    };
+
+    private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, KeyWord.DO, KeyWord.REPEAT,
+            KeyWord.FOR, KeyWord.FOR_EACH
     };
     private final ArrayList<Object> parsedScript;
 
@@ -113,7 +123,12 @@ public class CouplingObjectFactory {
     }
 
 
-
+    /**
+     * Checks if a coupling can be created at the current location
+     * @param keyword
+     * @param couplingPosition
+     * @return
+     */
     public boolean canCreateCoupling(KeyWord keyword,int couplingPosition) {
         switch(keyword) {
             case IF:
@@ -233,6 +248,11 @@ public class CouplingObjectFactory {
         return false;
     }
 
+    /**
+     * Creates the coupling that has been verified to exist, just needs to replace the keywords 
+     * @param keyword
+     * @param couplingPosition
+     */
     public void createCoupling(KeyWord keyword,int couplingPosition) {
         switch(keyword) {
             case IF:

@@ -5,6 +5,9 @@ import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
+/**
+ * Coupling that supports identifier objects, and keep tracks of their values
+ */
 public class BooleanIdentifierObject extends CoupledObject implements BooleanValueObject {
     private final Identifier identifier;
     private final BooleanValueObject booleanValueObject;

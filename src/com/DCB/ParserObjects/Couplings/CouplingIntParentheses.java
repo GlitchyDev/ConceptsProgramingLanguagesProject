@@ -4,6 +4,10 @@ import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
+
+/**
+ * Coupling that supports the Integer Parentheses operation
+ */
 public class CouplingIntParentheses extends CoupledObject implements IntValueObject {
     private final int value;
     private final IntValueObject intValueObject;

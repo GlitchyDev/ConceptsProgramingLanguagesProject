@@ -5,6 +5,9 @@ import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
+/**
+ * Coupling that supports identifier objects, and keep tracks of their values
+ */
 public class StringIdentifierObject  extends CoupledObject implements StringValueObject {
     private final Identifier identifier;
     private final StringValueObject stringValueObject;
