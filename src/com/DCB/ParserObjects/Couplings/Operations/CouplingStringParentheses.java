@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings;
+package com.DCB.ParserObjects.Couplings.Operations;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
@@ -40,6 +40,6 @@ public class CouplingStringParentheses extends CoupledObject implements StringVa
 
     @Override
     public String getParsedGrammar() {
-        return null;
+        return stringValueObject.getParsedGrammar();
     }
 }

@@ -28,12 +28,21 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("=========================");
+        System.out.println("[Identifiers]=========================");
         Parser parser = new Parser(lexicalAnalyzer.getAnalyzedScript(),lexicalAnalyzer.getScriptLines(),lexicalAnalyzer.getCurrentLineNumber());
         for(int i = 0; i < parser.getAnalyzedScript().size(); i++) {
             Object o = parser.getAnalyzedScript().get(i);
             if(o instanceof CoupledObject) {
                 System.out.println(((CoupledObject) o).getStringIdentifier());
+            } else {
+                System.out.println(o + " ||| " + parser.getLineNumbers().get(i));
+            }
+        }
+        System.out.println("[Grammer]=========================");
+        for(int i = 0; i < parser.getAnalyzedScript().size(); i++) {
+            Object o = parser.getAnalyzedScript().get(i);
+            if(o instanceof CoupledObject) {
+                System.out.println(((CoupledObject) o).getParsedGrammar());
             } else {
                 System.out.println(o + " ||| " + parser.getLineNumbers().get(i));
             }

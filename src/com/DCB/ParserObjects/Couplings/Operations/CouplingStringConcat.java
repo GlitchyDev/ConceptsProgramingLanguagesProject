@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings;
+package com.DCB.ParserObjects.Couplings.Operations;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
@@ -38,7 +38,11 @@ public class CouplingStringConcat extends CoupledObject implements StringValueOb
 
     @Override
     public String getParsedGrammar() {
-        return "";
+        return "<arithmetic_expression> -> <binary_expression> \n"
+                + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
+                + string1.getParsedGrammar() + string2.getParsedGrammar()
+                + "<arithmetic_op> + <add_operator>"
+                ;
     }
 
 

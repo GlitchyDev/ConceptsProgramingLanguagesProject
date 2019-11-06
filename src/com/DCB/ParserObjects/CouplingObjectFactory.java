@@ -3,7 +3,8 @@ package com.DCB.ParserObjects;
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
-import com.DCB.ParserObjects.Couplings.*;
+import com.DCB.ParserObjects.Couplings.Operations.*;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStringPrint;
 import com.DCB.ParserObjects.Value.*;
 import com.DCB.ParserObjects.Value.Identifiers.BooleanIdentifierObject;
 import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
@@ -12,6 +13,7 @@ import com.DCB.ParserObjects.Value.Wrapper.BooleanValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -25,7 +27,7 @@ public class CouplingObjectFactory {
             KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL
     };
 
-    private KeyWord[] FUNCTIONS = new KeyWord[]{KeyWord.ASSIGN,KeyWord.PRINT
+    private KeyWord[] STATEMENTS = new KeyWord[]{KeyWord.ASSIGN,KeyWord.PRINT
     };
 
     private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, KeyWord.DO, KeyWord.REPEAT,
@@ -146,6 +148,34 @@ public class CouplingObjectFactory {
             */
             completedAllValueIdentifierCouplings = true;
         }
+
+
+
+        boolean completedAllStatementCouplings = false;
+        while(!completedAllStatementCouplings) {
+            int statementCompleteCount = 0;
+            for(KeyWord currentKeyword: STATEMENTS) {
+                int nextStatementCouplingLocation = -1;
+
+                for(int i = 0; i < parsedScript.size(); i++) {
+                    Object object = getObject(i);
+                    if(object instanceof KeyWord && object == currentKeyword) {
+                        nextStatementCouplingLocation = i;
+                        break;
+                    }
+                }
+                if(nextStatementCouplingLocation != -1) {
+                    KeyWord keyword = (KeyWord) getObject(nextStatementCouplingLocation);
+                    if(canCreateCoupling(keyword,nextStatementCouplingLocation)) {
+                        createCoupling(keyword,nextStatementCouplingLocation);
+                        statementCompleteCount++;
+                    }
+                }
+            }
+            if(statementCompleteCount == 0) {
+                completedAllStatementCouplings = true;
+            }
+        }
         return true;
     }
 
@@ -174,7 +204,9 @@ public class CouplingObjectFactory {
 
                 break;
             case PRINT:
-
+                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                    return true;
+                }
                 break;
             case ASSIGN:
 
@@ -298,7 +330,11 @@ public class CouplingObjectFactory {
 
                 break;
             case PRINT:
-
+                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                    CouplingStringPrint couplingStringPrint = new CouplingStringPrint((StringValueObject) getObject(couplingPosition+1));
+                    replace(couplingPosition,couplingStringPrint);
+                    remove(couplingPosition+1);
+                }
                 break;
             case ASSIGN:
 

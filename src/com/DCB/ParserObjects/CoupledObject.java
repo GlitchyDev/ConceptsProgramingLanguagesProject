@@ -61,7 +61,8 @@ public abstract class CoupledObject {
         WHILE,
         DO,
         REPEAT,
-        PRINT,
+        PRINT_INT,
+        PRINT_STRING,
         ASSIGN,
         FOR,
         FOR_EACH
