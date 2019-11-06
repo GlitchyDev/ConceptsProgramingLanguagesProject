@@ -13,13 +13,18 @@ package com.DCB.LexicalObjects;
  */
 
 public class Identifier {
-    private final KeyWord.VariableType variableType;
+    private KeyWord.VariableType variableType;
+    private Value value;
     private final String identifier;
 
     public Identifier(KeyWord.VariableType variableType, String identifier) {
         this.variableType = variableType;
         this.identifier = identifier;
+        value = null;
+    }
 
+    public void setVariableType(KeyWord.VariableType variableType) {
+        this.variableType = variableType;
     }
 
     public KeyWord.VariableType getVariableType() {
@@ -30,11 +35,17 @@ public class Identifier {
         return identifier;
     }
 
+    public void setValue(Value value) {
+        this.value = value;
+    }
 
+    public Value getValue() {
+        return value;
+    }
 
     @Override
     public String toString() {
-        return "[Lexime Identifier " + " " + variableType + " " + identifier + "]";
+        return "[Lexime Identifier " + " " + variableType + " " + identifier + " " + value + "]";
 
 
     }

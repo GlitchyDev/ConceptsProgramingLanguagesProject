@@ -23,11 +23,6 @@ package com.DCB.LexicalObjects;
 
 
 public enum KeyWord {
-    // Variable Types
-    STRING(VariableType.STRING),
-    BOOLEAN(VariableType.BOOLEAN),
-    INT(VariableType.NUMBER),
-    FLOAT(VariableType.NUMBER),
 
     // Double Sided Operations
     // Boolean Operations
@@ -144,7 +139,8 @@ public enum KeyWord {
     public enum VariableType {
         STRING,
         BOOLEAN,
-        NUMBER
+        NUMBER,
+        TYPELESS,
     }
 
     public enum OperationType {

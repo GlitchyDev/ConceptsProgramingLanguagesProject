@@ -20,8 +20,6 @@ import java.util.ArrayList;
  * way up into statements, then branching statements
  */
 public class CouplingObjectFactory {
-
-
     private final KeyWord[] NUMBER_OPERATIONS = new KeyWord[]{KeyWord.LEFT_PARENTHESIS, KeyWord.EXPONENTIAL,KeyWord.MULTIPLY, KeyWord.DIVIDE,
             KeyWord.INVERT_DIVIDE, KeyWord.ADD, KeyWord.SUBTRACT, KeyWord.NUMBER_IDENTITY, KeyWord.NUMBER_INVERT, KeyWord.LESS_THAN, KeyWord.GREATER_THAN,KeyWord.EQUAL_LESS_THAN, KeyWord.EQUAL_GREATER_THAN,
             KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL
@@ -33,10 +31,16 @@ public class CouplingObjectFactory {
     private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, KeyWord.DO, KeyWord.REPEAT,
             KeyWord.FOR, KeyWord.FOR_EACH
     };
-    private final ArrayList<Object> parsedScript;
 
-    public CouplingObjectFactory(ArrayList<Object> parsedScript) {
+    private final ArrayList<Object> parsedScript;
+    private final ArrayList<Integer> lineNumbers;
+    private final int currentLineNumber;
+
+
+    public CouplingObjectFactory(ArrayList<Object> parsedScript, ArrayList<Integer> lineNumbers, int currentLineNumber) {
         this.parsedScript = parsedScript;
+        this.lineNumbers = lineNumbers;
+        this.currentLineNumber = currentLineNumber;
     }
 
 
@@ -59,13 +63,31 @@ public class CouplingObjectFactory {
                 Value value = (Value) object;
                 switch (value.getVariableType()) {
                     case NUMBER:
-                        parsedScript.set(i, new IntValueWrapper(value));
+                        replace(i,new IntValueWrapper(value));
                         break;
                     case STRING:
-                        parsedScript.set(i, new StringValueWrapper(value));
+                        replace(i,new StringValueWrapper(value));
                         break;
                     case BOOLEAN:
-                        parsedScript.set(i, new BooleanValueWrapper(value));
+                        replace(i,new BooleanValueWrapper(value));
+                        break;
+                }
+            }
+            // Identifiers should actually be filled in once their assignment statement has initialized, but for now this will cheat.
+            // The values of these identifiers will be what they where when initialized, mind you that will be incorrect
+            // As the assignment a = 5*4 will initalize a = 5, but this is only to maintain typing
+            if (object instanceof Identifier) {
+                Identifier identifier = ((Identifier) object);
+                // Ye
+                switch (identifier.getVariableType()) {
+                    case NUMBER:
+                        replace(i,new IntIdentifierObject(identifier,new IntValueWrapper(identifier.getValue())));
+                        break;
+                    case STRING:
+                        replace(i,new StringIdentifierObject(identifier,new StringValueWrapper(identifier.getValue())));
+                        break;
+                    case BOOLEAN:
+                        replace(i,new BooleanIdentifierObject(identifier,new BooleanValueWrapper(identifier.getValue())));
                         break;
                 }
             }
@@ -286,9 +308,9 @@ public class CouplingObjectFactory {
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.RIGHT_PARENTHESIS) {
                         CouplingIntParentheses couplingIntParentheses = new CouplingIntParentheses(((IntValueObject)getObject(couplingPosition+1)));
-                        parsedScript.set(couplingPosition, couplingIntParentheses);
-                        parsedScript.remove(couplingPosition+(2));
-                        parsedScript.remove(couplingPosition+(1));
+                        replace(couplingPosition, couplingIntParentheses);
+                        remove(couplingPosition+(2));
+                        remove(couplingPosition+(1));
                     }
                 } else {
                     if (getObject(couplingPosition + 1) instanceof StringValueObject) {
@@ -328,18 +350,19 @@ public class CouplingObjectFactory {
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition-1) instanceof IntValueObject) {
                         CouplingIntAdd couplingIntAdd = new CouplingIntAdd(((IntValueObject)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
-                        parsedScript.remove(couplingPosition+(1));
-                        parsedScript.set(couplingPosition,couplingIntAdd);
-                        parsedScript.remove(couplingPosition+(-1));                    } else {
+                        remove(couplingPosition+(1));
+                        replace(couplingPosition,couplingIntAdd);
+                        remove(couplingPosition+(-1));
+                    } else {
                         // This is Number Identity
                     }
                 } else {
                     if (getObject(couplingPosition + 1) instanceof StringValueObject) {
                         if (getObject(couplingPosition - 1) instanceof StringValueObject) {
                             CouplingStringConcat couplingStringConcat = new CouplingStringConcat(((StringValueObject) getObject(couplingPosition - 1)), ((StringValueObject) getObject(couplingPosition + 1)));
-                            parsedScript.remove(couplingPosition + (1));
-                            parsedScript.set(couplingPosition, couplingStringConcat);
-                            parsedScript.remove(couplingPosition + (-1));
+                            remove(couplingPosition + (1));
+                            replace(couplingPosition, couplingStringConcat);
+                            remove(couplingPosition + (-1));
                         }
                     }
                 }
@@ -357,9 +380,9 @@ public class CouplingObjectFactory {
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition-1) instanceof IntValueObject) {
                         CouplingIntMultiply couplingIntMultiply = new CouplingIntMultiply(((IntValueObject)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
-                        parsedScript.remove(couplingPosition+(1));
-                        parsedScript.set(couplingPosition,couplingIntMultiply);
-                        parsedScript.remove(couplingPosition+(-1));
+                        remove(couplingPosition+(1));
+                        replace(couplingPosition,couplingIntMultiply);
+                        remove(couplingPosition+(-1));
                         // This is Number Identity
                     }
                 }
@@ -385,119 +408,17 @@ public class CouplingObjectFactory {
         }
     }
 
-    /*
-     case IF:
-
-                    break;
-                case ELSE:
-
-                    break;
-                case WHILE:
-
-                    break;
-                case DO:
-
-                    break;
-                case REPEAT:
-
-                    break;
-                case PRINT:
-
-                    break;
-                case ASSIGN:
-
-                    break;
-                case FOR:
-
-                    break;
-                case FOR_EACH:
-
-                    break;
-     */
 
 
-/*
-switch(keyword) {
-                case STRING_CONCAT:
+    public void replace(int position, Object object) {
+        parsedScript.set(position,object);
+        lineNumbers.set(position,-1);
+    }
 
-                    break;
-                case LESS_THAN:
-
-                    break;
-                case GREATER_THAN:
-
-                    break;
-                case EQUAL_LESS_THAN:
-
-                    break;
-                case EQUAL_GREATER_THAN:
-
-                    break;
-                case AND:
-
-                    break;
-                case EQUAL:
-
-                    break;
-                case NOT_EQUAL:
-
-                    break;
-                case NUMBER_ADD:
-
-                    break;
-                case NUMBER_SUBTRACT:
-
-                    break;
-                case MULTIPLY:
-
-                    break;
-                case DIVIDE:
-
-                    break;
-                case INVERT_DIVIDE:
-
-                    break;
-                case EXPONENTIAL:
-
-                    break;
-                case MOD:
-
-                    break;
-                case NUMBER_IDENTITY:
-
-                    break;
-                case NUMBER_INVERT:
-
-                    break;
-                case IF:
-
-                    break;
-                case ELSE:
-
-                    break;
-                case WHILE:
-
-                    break;
-                case DO:
-
-                    break;
-                case REPEAT:
-
-                    break;
-                case PRINT:
-
-                    break;
-                case ASSIGN:
-
-                    break;
-                case FOR:
-
-                    break;
-                case FOR_EACH:
-
-                    break;
-            }
- */
+    public void remove(int position) {
+        parsedScript.remove(position);
+        lineNumbers.remove(position);
+    }
 
     private boolean isKeyword(Object object) {
         return (object instanceof KeyWord);
@@ -537,6 +458,10 @@ switch(keyword) {
 
     private Object getObject(int i) {
         return parsedScript.get(i);
+    }
+
+    private Object getObjectLineNumber(int i) {
+        return lineNumbers.get(i);
     }
 
     private Object getObjectOffset(int i, int offset) {
