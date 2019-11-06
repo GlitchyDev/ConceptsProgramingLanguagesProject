@@ -55,6 +55,10 @@ public class CouplingObjectFactory {
     // Do all other Statements except for   IF THEN    WHILE    FOR   REPEAT Ect
 
     // Then do all the Statement containers
+
+
+    // So what if we looked ahead, and marked anything intertwine parenthesis as "Urgent Complete first",
+
     public boolean createAllCouplings() {
         // Check and removal all raw values and replace with other couplings
         for(int i = 0; i < parsedScript.size(); i++) {
@@ -118,6 +122,7 @@ public class CouplingObjectFactory {
                             if(canCreateCoupling(keyword,nextPotentialCouplingLocation)) {
                                 createCoupling(keyword,nextPotentialCouplingLocation);
                                 numberOfOperationsCompleted++;
+                                completedKeywordCouplings = true;
                             } else {
                                 failedCouplings.add(nextPotentialCouplingLocation);
                             }
@@ -218,7 +223,7 @@ public class CouplingObjectFactory {
                     if(getObject(couplingPosition+1) instanceof IntValueObject) {
                         return true;
                     } else {
-                        return true;
+                        // Have it check if there is a unresolved statement next to it, like a parenthis
                     }
                 }
                 if(getObject(couplingPosition-1) instanceof StringValueObject) {
