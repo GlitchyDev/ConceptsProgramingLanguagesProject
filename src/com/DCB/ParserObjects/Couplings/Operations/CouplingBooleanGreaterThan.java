@@ -2,19 +2,17 @@ package com.DCB.ParserObjects.Couplings.Operations;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
-/**
- * Coupling that supports the Integer Multiply Operation
- */
-public class CouplingIntMultiply extends CoupledObject implements IntValueObject {
-    private final int value;
+public class CouplingBooleanGreaterThan extends CoupledObject implements BooleanValueObject {
+    private final boolean value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
-    public CouplingIntMultiply(IntValueObject number1, IntValueObject number2) {
-        super(CoupleObjectType.NUMBER_MULTIPLY);
-        value = number1.getValue() * number2.getValue();
+    public CouplingBooleanGreaterThan(IntValueObject number1, IntValueObject number2) {
+        super(CoupleObjectType.BOOLEAN_GREATER_THAN);
+        value = number1.getValue() > number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -26,7 +24,7 @@ public class CouplingIntMultiply extends CoupledObject implements IntValueObject
 
     @Override
     public KeyWord.VariableType getReturnType() {
-        return KeyWord.VariableType.NUMBER;
+        return KeyWord.VariableType.BOOLEAN;
     }
 
 
@@ -37,16 +35,16 @@ public class CouplingIntMultiply extends CoupledObject implements IntValueObject
 
     @Override
     public String getParsedGrammar() {
-        return "<arithmetic_expression> -> <binary_expression> \n"
-                + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
-                + "<arithmetic_op> -> <mul_operator>\n"
-                + number1.getParsedGrammar() + number2.getParsedGrammar()
+        return "<boolean_operation> -> <relative_operation> <arithmetic_expression> <arithmetic_expression>  \n"
+                + number1.getParsedGrammar()
+                + number2.getParsedGrammar()
+                + "<relative_operation> -> <gt_operator>"
                 ;
     }
 
 
     @Override
-    public int getValue() {
+    public boolean getValue() {
         return value;
     }
 

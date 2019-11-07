@@ -38,7 +38,7 @@ public enum KeyWord {
     DIVIDE(OperationType.NUMBER, OperationType.NUMBER),
     INVERT_DIVIDE(OperationType.NUMBER, OperationType.NUMBER),
     EXPONENTIAL(OperationType.NUMBER, OperationType.NUMBER),
-    MOD(OperationType.NUMBER, OperationType.NUMBER),
+    MOD(OperationType.NUMBER,OperationType.NUMBER),
 
 
     // Single Sided Operations
@@ -60,9 +60,9 @@ public enum KeyWord {
     ELSE(FunctionType.CONDITIONAL),
     END(FunctionType.ENCAPSULATION), // Ends a "If(bla) {    } <===
     WHILE(FunctionType.CONDITIONAL),
-    DO(FunctionType.ENCAPSULATION), // Ends While Statement Conditional
-    REPEAT(FunctionType.CONDITIONAL), // Do Repeat Stuff
-    UNTIL(FunctionType.CONDITIONAL), // Logic that runs Repeat
+    //DO(FunctionType.ENCAPSULATION), // Ends While Statement Conditional
+    //REPEAT(FunctionType.CONDITIONAL), // Do Repeat Stuff
+    //UNTIL(FunctionType.CONDITIONAL), // Logic that runs Repeat
     PRINT(FunctionType.OUTPUT),
     ASSIGN(FunctionType.ASSIGNMENT),
     FOR(FunctionType.CONDITIONAL),
@@ -71,7 +71,10 @@ public enum KeyWord {
 
     LEFT_PARENTHESIS(FunctionType.ENCAPSULATION),
     RIGHT_PARENTHESIS(FunctionType.ENCAPSULATION),
+
+    FUNCTION(FunctionType.ENCAPSULATION);
             ;
+
 
 
     private final VariableType variableType;
@@ -141,6 +144,7 @@ public enum KeyWord {
         BOOLEAN,
         NUMBER,
         TYPELESS,
+        FUNCTION_IDENTIFIER,
     }
 
     public enum OperationType {

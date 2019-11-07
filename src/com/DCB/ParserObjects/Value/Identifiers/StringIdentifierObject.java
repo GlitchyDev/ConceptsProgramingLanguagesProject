@@ -39,6 +39,6 @@ public class StringIdentifierObject  extends CoupledObject implements StringValu
 
     @Override
     public String getParsedGrammar() {
-        return "";
+        return "<arithmetic_expression> -> id \n";
     }
 }

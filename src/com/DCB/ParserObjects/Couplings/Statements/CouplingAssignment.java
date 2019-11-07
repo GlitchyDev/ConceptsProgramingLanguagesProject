@@ -1,14 +1,21 @@
 package com.DCB.ParserObjects.Couplings.Statements;
 
 import com.DCB.LexicalObjects.KeyWord;
+import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
+import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 
-public class CouplingIntPrint extends CouplingStatement implements IntValueObject {
+import javax.print.attribute.standard.PrinterState;
+
+public class CouplingAssignment extends CouplingStatement implements IntValueObject {
+    private final IntIdentifierObject intIdentifierObject;
     private final IntValueObject intValueObject;
 
-    public CouplingIntPrint(IntValueObject intValueObject) {
-        super(CoupleObjectType.PRINT_INT);
+    public CouplingAssignment(IntIdentifierObject intIdentifierObject, IntValueObject intValueObject) {
+        super(CoupleObjectType.ASSIGN);
+        this.intIdentifierObject = intIdentifierObject;
         this.intValueObject = intValueObject;
     }
 
@@ -35,15 +42,15 @@ public class CouplingIntPrint extends CouplingStatement implements IntValueObjec
     @Override
     public String getParsedGrammar() {
         String grammer = "";
-        if(!isLateStatement()) {
+        if (!isLateStatement()) {
             grammer += "<block> -> <statement> <block> \n";
         } else {
             grammer += "<block> -> <statement> \n";
         }
 
-        grammer += "<statement> -> <print_statement> \n" +
-                "<print_statement> -> print (<arithmetic_expression) \n"
-                + intValueObject.getParsedGrammar();
+        grammer += "<statement> -> <assignment_statement> \n" +
+                "<assignment_statement> -> id assignment_operator <arithmetic_expression> \n" +
+                intValueObject.getParsedGrammar();
         return grammer;
     }
 }

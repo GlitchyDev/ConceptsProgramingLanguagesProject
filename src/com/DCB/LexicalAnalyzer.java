@@ -160,6 +160,7 @@ public class LexicalAnalyzer {
                 analyzedScript.add(KeyWord.WHILE);
                 scriptLines.add(currentLineNumber);
                 return true;
+                /*
             case "DO":
                 analyzedScript.add(KeyWord.DO);
                 scriptLines.add(currentLineNumber);
@@ -172,6 +173,7 @@ public class LexicalAnalyzer {
                 analyzedScript.add(KeyWord.UNTIL);
                 scriptLines.add(currentLineNumber);
                 return true;
+                */
             case "PRINT":
                 analyzedScript.add(KeyWord.PRINT);
                 scriptLines.add(currentLineNumber);
@@ -196,6 +198,10 @@ public class LexicalAnalyzer {
                 analyzedScript.add(KeyWord.FOR_EACH);
                 scriptLines.add(currentLineNumber);
                 return true;
+            case "FUNCTION":
+                analyzedScript.add(KeyWord.FUNCTION);
+                scriptLines.add(currentLineNumber);
+                return true;
 
         }
         return false;
@@ -214,6 +220,11 @@ public class LexicalAnalyzer {
                 newIdentifer.setValue(identifier.getValue());
                 analyzedScript.add(newIdentifer);
                 scriptLines.add(currentLineNumber);
+                if(analyzedScript.size() > 1) {
+                    if(analyzedScript.get(analyzedScript.size()-2) instanceof KeyWord && analyzedScript.get(analyzedScript.size()-2) == KeyWord.FUNCTION) {
+                        newIdentifer.setVariableType(KeyWord.VariableType.FUNCTION_IDENTIFIER);
+                    }
+                }
                 return true;
             }
         }

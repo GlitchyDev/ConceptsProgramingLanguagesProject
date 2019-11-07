@@ -39,6 +39,6 @@ public class BooleanIdentifierObject extends CoupledObject implements BooleanVal
 
     @Override
     public String getParsedGrammar() {
-        return "";
+        return "<arithmetic_expression> -> id \n";
     }
 }

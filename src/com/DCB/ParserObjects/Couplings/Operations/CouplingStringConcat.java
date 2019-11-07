@@ -40,8 +40,8 @@ public class CouplingStringConcat extends CoupledObject implements StringValueOb
     public String getParsedGrammar() {
         return "<arithmetic_expression> -> <binary_expression> \n"
                 + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
+                + "<arithmetic_op> -> <add_operator> \n"
                 + string1.getParsedGrammar() + string2.getParsedGrammar()
-                + "<arithmetic_op> + <add_operator>"
                 ;
     }
 

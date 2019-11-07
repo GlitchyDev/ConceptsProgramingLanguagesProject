@@ -39,6 +39,6 @@ public class BooleanValueWrapper extends CoupledObject implements BooleanValueOb
 
     @Override
     public String getParsedGrammar() {
-        return "";
+        return "<arithmetic_expression> -> <literal_boolean> \n";
     }
 }

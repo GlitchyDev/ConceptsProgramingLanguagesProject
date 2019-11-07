@@ -4,17 +4,14 @@ import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
-/**
- * Coupling that supports the Integer Multiply Operation
- */
-public class CouplingIntMultiply extends CoupledObject implements IntValueObject {
+public class CouplingIntMod extends CoupledObject implements IntValueObject {
     private final int value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
-    public CouplingIntMultiply(IntValueObject number1, IntValueObject number2) {
-        super(CoupleObjectType.NUMBER_MULTIPLY);
-        value = number1.getValue() * number2.getValue();
+    public CouplingIntMod(IntValueObject number1, IntValueObject number2) {
+        super(CoupleObjectType.NUMBER_MOD);
+        value = number1.getValue() % number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -39,8 +36,9 @@ public class CouplingIntMultiply extends CoupledObject implements IntValueObject
     public String getParsedGrammar() {
         return "<arithmetic_expression> -> <binary_expression> \n"
                 + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
-                + "<arithmetic_op> -> <mul_operator>\n"
+                + "<arithmetic_op> -> <mod_operator> \n"
                 + number1.getParsedGrammar() + number2.getParsedGrammar()
+
                 ;
     }
 
@@ -52,4 +50,3 @@ public class CouplingIntMultiply extends CoupledObject implements IntValueObject
 
 
 }
-

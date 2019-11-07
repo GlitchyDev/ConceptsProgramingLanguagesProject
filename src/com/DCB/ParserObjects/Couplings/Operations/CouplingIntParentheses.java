@@ -40,6 +40,6 @@ public class CouplingIntParentheses extends CoupledObject implements IntValueObj
 
     @Override
     public String getParsedGrammar() {
-        return null;
+        return intValueObject.getParsedGrammar();
     }
 }

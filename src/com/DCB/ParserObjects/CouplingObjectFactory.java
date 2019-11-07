@@ -3,7 +3,10 @@ package com.DCB.ParserObjects;
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingFunction;
 import com.DCB.ParserObjects.Couplings.Operations.*;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingAssignment;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingIntPrint;
 import com.DCB.ParserObjects.Couplings.Statements.CouplingStringPrint;
 import com.DCB.ParserObjects.Value.*;
 import com.DCB.ParserObjects.Value.Identifiers.BooleanIdentifierObject;
@@ -30,7 +33,7 @@ public class CouplingObjectFactory {
     private KeyWord[] STATEMENTS = new KeyWord[]{KeyWord.ASSIGN,KeyWord.PRINT
     };
 
-    private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, KeyWord.DO, KeyWord.REPEAT,
+    private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, //KeyWord.DO, KeyWord.REPEAT,
             KeyWord.FOR, KeyWord.FOR_EACH
     };
 
@@ -176,7 +179,37 @@ public class CouplingObjectFactory {
                 completedAllStatementCouplings = true;
             }
         }
+
+
+
+        //
+        boolean completedAllControlStatementCouplings = false;
+        while(!completedAllControlStatementCouplings) {
+            int controlStatementsComplete = 0;
+            for(KeyWord currentKeyword: CONTROL_STATEMENTS) {
+                int nextStatementCouplingLocation = -1;
+
+                for(int i = 0; i < parsedScript.size(); i++) {
+                    Object object = getObject(i);
+                    if(object instanceof KeyWord && object == currentKeyword) {
+                        nextStatementCouplingLocation = i;
+                        break;
+                    }
+                }
+                if(nextStatementCouplingLocation != -1) {
+                    KeyWord keyword = (KeyWord) getObject(nextStatementCouplingLocation);
+                    if(canCreateCoupling(keyword,nextStatementCouplingLocation)) {
+                        createCoupling(keyword,nextStatementCouplingLocation);
+                        controlStatementsComplete++;
+                    }
+                }
+            }
+            if(controlStatementsComplete == 0) {
+                completedAllControlStatementCouplings= true;
+            }
+        }
         return true;
+
     }
 
 
@@ -188,6 +221,25 @@ public class CouplingObjectFactory {
      */
     public boolean canCreateCoupling(KeyWord keyword,int couplingPosition) {
         switch(keyword) {
+            case FUNCTION:
+                if(getObject(couplingPosition+1) instanceof Identifier && ((Identifier) getObject(couplingPosition+1)).getVariableType() == KeyWord.VariableType.FUNCTION_IDENTIFIER) {
+                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.LEFT_PARENTHESIS) {
+                        if(getObject(couplingPosition+3) instanceof KeyWord && getObject(couplingPosition+3) == KeyWord.RIGHT_PARENTHESIS) {
+                            boolean passed = true;
+                            for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
+                                if(!(getObject(i) instanceof CouplingStatement)) {
+                                    passed = false;
+                                }
+                            }
+                            if(passed) {
+                                if(getObject(parsedScript.size()-1) instanceof KeyWord && getObject(parsedScript.size()-1) == KeyWord.END) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
             case IF:
 
                 break;
@@ -197,19 +249,28 @@ public class CouplingObjectFactory {
             case WHILE:
 
                 break;
+                /*
             case DO:
 
                 break;
             case REPEAT:
 
                 break;
+                */
             case PRINT:
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
                     return true;
                 }
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    return true;
+                }
                 break;
             case ASSIGN:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition-1) instanceof IntIdentifierObject) {
+                        return true;
+                    }
+                }
                 break;
             case FOR:
 
@@ -314,6 +375,17 @@ public class CouplingObjectFactory {
      */
     public void createCoupling(KeyWord keyword,int couplingPosition) {
         switch(keyword) {
+            case FUNCTION:
+                ArrayList<CouplingStatement> couplingStatements = new ArrayList<>();
+                for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
+                    couplingStatements.add((CouplingStatement) getObject(couplingPosition));
+                }
+                CouplingFunction couplingFunction = new CouplingFunction(couplingStatements);
+                replace(0,couplingFunction);
+                for(int i = couplingPosition+1; i < parsedScript.size(); i++) {
+                    remove(i);
+                }
+                break;
             case IF:
 
                 break;
@@ -323,21 +395,31 @@ public class CouplingObjectFactory {
             case WHILE:
 
                 break;
+                /*
             case DO:
 
                 break;
             case REPEAT:
 
                 break;
+                */
             case PRINT:
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
                     CouplingStringPrint couplingStringPrint = new CouplingStringPrint((StringValueObject) getObject(couplingPosition+1));
                     replace(couplingPosition,couplingStringPrint);
                     remove(couplingPosition+1);
                 }
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    CouplingIntPrint couplingIntPrint = new CouplingIntPrint((IntValueObject) getObject(couplingPosition+1));
+                    replace(couplingPosition,couplingIntPrint);
+                    remove(couplingPosition+1);
+                }
                 break;
             case ASSIGN:
-
+                CouplingAssignment couplingAssignment = new CouplingAssignment(((IntIdentifierObject)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
+                replace(couplingPosition,couplingAssignment);
+                remove(couplingPosition+1);
+                remove(couplingPosition-1);
                 break;
             case FOR:
 

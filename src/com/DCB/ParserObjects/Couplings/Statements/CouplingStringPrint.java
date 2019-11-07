@@ -1,10 +1,10 @@
 package com.DCB.ParserObjects.Couplings.Statements;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingStatement;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
-public class CouplingStringPrint extends CoupledObject implements StringValueObject {
+public class CouplingStringPrint extends CouplingStatement implements StringValueObject {
     private final StringValueObject stringValueObject;
 
     public CouplingStringPrint(StringValueObject stringValueObject) {
@@ -34,8 +34,16 @@ public class CouplingStringPrint extends CoupledObject implements StringValueObj
 
     @Override
     public String getParsedGrammar() {
-        return "<statement> -> <print_statement> \n"
-                + "<print_statement> -> print (<arithmetic_expression) \n"
-                 + stringValueObject.getParsedGrammar();
+        String grammer = "";
+        if(!isLateStatement()) {
+            grammer += "<block> -> <statement> <block> \n";
+        } else {
+            grammer += "<block> -> <statement> \n";
+        }
+
+        grammer += "<statement> -> <print_statement> \n" +
+                "<print_statement> -> print (<arithmetic_expression) \n"
+                + stringValueObject.getParsedGrammar();
+        return grammer;
     }
 }

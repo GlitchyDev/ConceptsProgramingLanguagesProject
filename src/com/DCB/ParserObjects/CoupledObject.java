@@ -25,6 +25,7 @@ public abstract class CoupledObject {
 
 
     public enum CoupleObjectType {
+        // Completed
         BOOLEAN_VALUE,
         INT_VALUE,
         STRING_VALUE,
@@ -36,6 +37,7 @@ public abstract class CoupledObject {
         BOOLEAN_PARENTHIS,
         INT_PARENTHIS,
         STRING_PARENTHESES,
+        // No worry
 
         STRING_CONCAT,
         BOOLEAN_LESS_THAN,
@@ -52,19 +54,21 @@ public abstract class CoupledObject {
         NUMBER_INVERT_DIVIDE,
         NUMBER_EXPONTENTIAL,
         NUMBER_MOD,
-        NUMBER_IDENTITY,
-        NUMBER_INVERT,
+        NUMBER_IDENTITY, // NO
+        NUMBER_INVERT, // NO
 
 
         IF,
         ELSE,
         WHILE,
-        DO,
-        REPEAT,
+        //DO,
+        //REPEAT,
         PRINT_INT,
         PRINT_STRING,
         ASSIGN,
         FOR,
-        FOR_EACH
+
+        FUNCTION,
+        //FOR_EACH,
     }
 }

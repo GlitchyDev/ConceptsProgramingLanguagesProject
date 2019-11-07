@@ -1,6 +1,7 @@
 package com.DCB;
 
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingStatement;
 
 import java.io.*;
 import java.util.Scanner;
@@ -39,6 +40,9 @@ public class Main {
             }
         }
         System.out.println("[Grammer]=========================");
+        if(parser.getAnalyzedScript().get(parser.getAnalyzedScript().size()-1) instanceof CouplingStatement) {
+            ((CouplingStatement) parser.getAnalyzedScript().get(parser.getAnalyzedScript().size()-1)).setLateStatement();
+        }
         for(int i = 0; i < parser.getAnalyzedScript().size(); i++) {
             Object o = parser.getAnalyzedScript().get(i);
             if(o instanceof CoupledObject) {
