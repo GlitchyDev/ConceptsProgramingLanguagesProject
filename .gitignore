@@ -29,3 +29,4 @@ hs_err_pid*
 ConceptsProgramingLanguagesProject.iml
 *.kotlin_module
 .idea/workspace.xml
+/bin/
