@@ -39,6 +39,6 @@ public class StringValueWrapper extends CoupledObject implements StringValueObje
 
     @Override
     public String getParsedGrammar() {
-        return "<arithmetic_expression> -> <literal_string> \n";
+        return "<arithmetic_expression> -> literal_string\n";
     }
 }

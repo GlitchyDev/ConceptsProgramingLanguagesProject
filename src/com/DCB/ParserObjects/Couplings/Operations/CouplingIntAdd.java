@@ -40,7 +40,7 @@ public class CouplingIntAdd extends CoupledObject implements IntValueObject {
     public String getParsedGrammar() {
         return "<arithmetic_expression> -> <binary_expression> \n"
                 + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
-                + "<arithmetic_op> -> <add_operator> \n"
+                + "<arithmetic_op> -> add_operator\n"
                 + number1.getParsedGrammar() + number2.getParsedGrammar()
 
                 ;
