@@ -194,14 +194,16 @@ public class LexicalAnalyzer {
                 analyzedScript.add(KeyWord.FOR);
                 scriptLines.add(currentLineNumber);
                 return true;
+                /*
             case "FOR EACH":
                 analyzedScript.add(KeyWord.FOR_EACH);
                 scriptLines.add(currentLineNumber);
-                return true;
-            case "FUNCTION":
-                analyzedScript.add(KeyWord.FUNCTION);
+                */
+            case ":":
+                analyzedScript.add(KeyWord.COLLEN);
                 scriptLines.add(currentLineNumber);
                 return true;
+
 
         }
         return false;

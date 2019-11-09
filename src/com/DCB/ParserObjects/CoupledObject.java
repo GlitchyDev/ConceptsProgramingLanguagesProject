@@ -26,10 +26,12 @@ public abstract class CoupledObject {
 
     public enum CoupleObjectType {
         // Completed
+        UNDECLARED_VALUE,
         BOOLEAN_VALUE,
         INT_VALUE,
         STRING_VALUE,
 
+        UNDECLARED_IDENTIFIER,
         BOOLEAN_IDENTIFIER,
         INT_IDENTIFIER,
         STRING_IDENTIFIER,
@@ -59,16 +61,14 @@ public abstract class CoupledObject {
 
 
         IF,
-        ELSE,
         WHILE,
+        FOR,
         //DO,
         //REPEAT,
         PRINT_INT,
         PRINT_STRING,
+        PRINT_BOOLEAN,
         ASSIGN,
-        FOR,
-
-        FUNCTION,
         //FOR_EACH,
     }
 }

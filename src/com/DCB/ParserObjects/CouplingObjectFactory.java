@@ -12,6 +12,7 @@ import com.DCB.ParserObjects.Value.*;
 import com.DCB.ParserObjects.Value.Identifiers.BooleanIdentifierObject;
 import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
 import com.DCB.ParserObjects.Value.Identifiers.StringIdentifierObject;
+import com.DCB.ParserObjects.Value.Identifiers.UndeclaredIdentifierObject;
 import com.DCB.ParserObjects.Value.Wrapper.BooleanValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
@@ -33,8 +34,8 @@ public class CouplingObjectFactory {
     private KeyWord[] STATEMENTS = new KeyWord[]{KeyWord.ASSIGN,KeyWord.PRINT
     };
 
-    private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.ELSE, KeyWord.WHILE, //KeyWord.DO, KeyWord.REPEAT,
-            KeyWord.FOR, KeyWord.FOR_EACH
+    private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.WHILE, //KeyWord.DO, KeyWord.REPEAT,
+            KeyWord.FOR
     };
 
     private final ArrayList<Object> parsedScript;
@@ -97,6 +98,9 @@ public class CouplingObjectFactory {
                         break;
                     case BOOLEAN:
                         replace(i,new BooleanIdentifierObject(identifier,new BooleanValueWrapper(identifier.getValue())));
+                        break;
+                    default:
+                        replace(i,new UndeclaredIdentifierObject(identifier));
                         break;
                 }
             }
@@ -221,32 +225,134 @@ public class CouplingObjectFactory {
      */
     public boolean canCreateCoupling(KeyWord keyword,int couplingPosition) {
         switch(keyword) {
-            case FUNCTION:
-                if(getObject(couplingPosition+1) instanceof Identifier && ((Identifier) getObject(couplingPosition+1)).getVariableType() == KeyWord.VariableType.FUNCTION_IDENTIFIER) {
-                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.LEFT_PARENTHESIS) {
-                        if(getObject(couplingPosition+3) instanceof KeyWord && getObject(couplingPosition+3) == KeyWord.RIGHT_PARENTHESIS) {
-                            boolean passed = true;
-                            for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
-                                if(!(getObject(i) instanceof CouplingStatement)) {
-                                    passed = false;
-                                }
-                            }
-                            if(passed) {
-                                if(getObject(parsedScript.size()-1) instanceof KeyWord && getObject(parsedScript.size()-1) == KeyWord.END) {
-                                    return true;
-                                }
+
+            case IF:
+                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    int foundElseLine = -1;
+                    int nonStatementFoundLine = -1;
+                    for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
+                        if(!(getObject(i) instanceof CouplingStatement)) {
+                            if(getObject(i) instanceof KeyWord && getObject(i) == KeyWord.ELSE) {
+                                foundElseLine = i;
+                                break;
+                            } else {
+                                nonStatementFoundLine = getObjectLineNumber(i);
+                                break;
                             }
                         }
                     }
+
+                    if(nonStatementFoundLine != -1) {
+                        System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
+                    }
+
+                    if(foundElseLine != -1) {
+                        int foundEndLine = -1;
+                        nonStatementFoundLine = -1;
+                        for(int i = foundElseLine+1; i < parsedScript.size() - 1; i++) {
+                            if(!(getObject(i) instanceof CouplingStatement)) {
+                                if(getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
+                                    foundEndLine = i;
+                                    break;
+                                } else {
+                                    nonStatementFoundLine = getObjectLineNumber(i);
+                                    break;
+                                }
+                            }
+                        }
+
+
+                        if(nonStatementFoundLine != -1) {
+                            System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
+                        }
+
+                        if(foundEndLine != -1) {
+                            return true;
+                        }
+
+                    } else {
+                        System.out.println("Error found at Line " + couplingPosition + " no end to if statement ");
+
+                    }
+                } else {
+                    System.out.println("Error found at Line " + couplingPosition + " no boolean found for is statement ");
                 }
                 break;
-            case IF:
-
-                break;
-            case ELSE:
-
-                break;
             case WHILE:
+                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    int foundEndLine = -1;
+                    int nonStatementFoundLine = -1;
+                    for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
+                        if(!(getObject(i) instanceof CouplingStatement)) {
+                            if(getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
+                                foundEndLine = i;
+                                break;
+                            } else {
+                                nonStatementFoundLine = getObjectLineNumber(i);
+                                break;
+                            }
+                        }
+                    }
+
+                    if(nonStatementFoundLine != -1) {
+                        System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
+                    }
+
+                    if(foundEndLine != -1) {
+                        return true;
+                    } else {
+                        System.out.println("Error found at Line " + couplingPosition + " no end to if statement ");
+
+                    }
+                } else {
+                    System.out.println("Error found at Line " + couplingPosition+1 + " no boolean value found for While Statement");
+                }
+                break;
+            case FOR:
+                if(getObject(couplingPosition+1) instanceof CouplingAssignment) {
+                    if (getObject(couplingPosition + 2) instanceof KeyWord && getObject(couplingPosition + 2) == KeyWord.COLLEN) {
+                        if (getObject(couplingPosition + 2) instanceof IntValueObject) {
+
+
+                            int foundEndLine = -1;
+                            int nonStatementFoundLine = -1;
+                            for (int i = couplingPosition + 4; i < parsedScript.size() - 1; i++) {
+                                if (!(getObject(i) instanceof CouplingStatement)) {
+                                    if (getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
+                                        foundEndLine = i;
+                                        break;
+                                    } else {
+                                        nonStatementFoundLine = getObjectLineNumber(i);
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (nonStatementFoundLine != -1) {
+                                System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
+                            }
+
+                            if (foundEndLine != -1) {
+                                if (nonStatementFoundLine != -1) {
+                                    System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
+                                }
+
+                                if (foundEndLine != -1) {
+                                    return true;
+                                }
+
+                            } else {
+                                System.out.println("Error found at Line " + couplingPosition + " no end to For statement ");
+                            }
+                        } else {
+                                System.out.println("Error found at Line " + couplingPosition + " No Iterator Cap found for Foor Loop");
+                        }
+                    } else {
+                        System.out.println("Error found at Line " + couplingPosition + " No Colen found for the Foor Loop ");
+                    }
+                } else {
+                    System.out.println("Error found at Line " + couplingPosition + " No Assingment statement for the For Loop ");
+                }
 
                 break;
                 /*
@@ -258,28 +364,36 @@ public class CouplingObjectFactory {
                 break;
                 */
             case PRINT:
-                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     return true;
                 }
-                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    return true;
+                }
+                if(getObject(couplingPosition+1) instanceof StringValueObject) {
                     return true;
                 }
                 break;
             case ASSIGN:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition-1) instanceof IntIdentifierObject) {
+                    if(getObject(couplingPosition-1) instanceof IntIdentifierObject || getObject(couplingPosition-1) instanceof UndeclaredIdentifierObject) {
                         return true;
                     }
                 }
-                break;
-            case FOR:
-
-                break;
-            case FOR_EACH:
+                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    if(getObject(couplingPosition-1) instanceof BooleanValueObject || getObject(couplingPosition-1) instanceof UndeclaredIdentifierObject) {
+                        return true;
+                    }
+                }
+                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                    if(getObject(couplingPosition-1) instanceof StringValueObject || getObject(couplingPosition-1) instanceof UndeclaredIdentifierObject) {
+                        return true;
+                    }
+                }
 
                 break;
             case LEFT_PARENTHESIS:
-                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2)== KeyWord.RIGHT_PARENTHESIS) {
                         return true;
                     }
@@ -289,6 +403,12 @@ public class CouplingObjectFactory {
                         return true;
                     }
                 }
+                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2)== KeyWord.RIGHT_PARENTHESIS) {
+                        return true;
+                    }
+                }
+
                 break;
             case LESS_THAN:
 
@@ -300,69 +420,100 @@ public class CouplingObjectFactory {
 
                 break;
             case EQUAL_GREATER_THAN:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case AND:
-
+                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    if(getObject(couplingPosition+2) instanceof BooleanValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case EQUAL:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject | getObject(couplingPosition+1) instanceof StringValueObject | getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject | getObject(couplingPosition+2) instanceof StringValueObject | getObject(couplingPosition+2) instanceof BooleanValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case NOT_EQUAL:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject | getObject(couplingPosition+1) instanceof StringValueObject | getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject | getObject(couplingPosition+2) instanceof StringValueObject | getObject(couplingPosition+2) instanceof BooleanValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case ADD:
-                if(getObject(couplingPosition-1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
                         return true;
                     } else {
                         // Have it check if there is a unresolved statement next to it, like a parenthis
                     }
                 }
-                if(getObject(couplingPosition-1) instanceof StringValueObject) {
-                    if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                    if(getObject(couplingPosition+2) instanceof StringValueObject) {
                         return true;
                     }
                 }
                 break;
             case SUBTRACT:
-                if(getObject(couplingPosition-1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
                         return true;
                     } else {
                         return true;
                     }
                 }
-                if(getObject(couplingPosition-1) instanceof StringValueObject) {
-                    if(getObject(couplingPosition+1) instanceof StringValueObject) {
-                        return true;
-                    }
-                }
                 break;
             case MULTIPLY:
-                if(getObject(couplingPosition-1) instanceof IntValueObject) {
-                    if (getObject(couplingPosition + 1) instanceof IntValueObject) {
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if (getObject(couplingPosition + 2) instanceof IntValueObject) {
                         return true;
                     }
                 }
                 break;
             case DIVIDE:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if (getObject(couplingPosition + 2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case INVERT_DIVIDE:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if (getObject(couplingPosition + 2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case EXPONENTIAL:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if (getObject(couplingPosition + 2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case MOD:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if (getObject(couplingPosition + 2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case NUMBER_IDENTITY:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    return true;
+                }
                 break;
             case NUMBER_INVERT:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    return true;
+                }
                 break;
         }
         return false;
@@ -471,28 +622,28 @@ public class CouplingObjectFactory {
                 break;
             case ADD:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition-1) instanceof IntValueObject) {
-                        CouplingIntAdd couplingIntAdd = new CouplingIntAdd(((IntValueObject)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
-                        remove(couplingPosition+(1));
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        CouplingIntAdd couplingIntAdd = new CouplingIntAdd(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                        remove(couplingPosition+(2));
                         replace(couplingPosition,couplingIntAdd);
-                        remove(couplingPosition+(-1));
+                        remove(couplingPosition+(1));
                     } else {
                         // This is Number Identity
                     }
                 } else {
                     if (getObject(couplingPosition + 1) instanceof StringValueObject) {
-                        if (getObject(couplingPosition - 1) instanceof StringValueObject) {
-                            CouplingStringConcat couplingStringConcat = new CouplingStringConcat(((StringValueObject) getObject(couplingPosition - 1)), ((StringValueObject) getObject(couplingPosition + 1)));
-                            remove(couplingPosition + (1));
+                        if (getObject(couplingPosition + 2) instanceof StringValueObject) {
+                            CouplingStringConcat couplingStringConcat = new CouplingStringConcat(((StringValueObject) getObject(couplingPosition + 1)), ((StringValueObject) getObject(couplingPosition + 2)));
+                            remove(couplingPosition + (2));
                             replace(couplingPosition, couplingStringConcat);
-                            remove(couplingPosition + (-1));
+                            remove(couplingPosition + (1));
                         }
                     }
                 }
                 break;
             case SUBTRACT:
-                if(getObject(couplingPosition-1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
 
                     } else {
                         // This is Number Invert
@@ -501,11 +652,11 @@ public class CouplingObjectFactory {
                 break;
             case MULTIPLY:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition-1) instanceof IntValueObject) {
-                        CouplingIntMultiply couplingIntMultiply = new CouplingIntMultiply(((IntValueObject)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
-                        remove(couplingPosition+(1));
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        CouplingIntMultiply couplingIntMultiply = new CouplingIntMultiply(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                        remove(couplingPosition+(2));
                         replace(couplingPosition,couplingIntMultiply);
-                        remove(couplingPosition+(-1));
+                        remove(couplingPosition+(1));
                         // This is Number Identity
                     }
                 }
@@ -583,7 +734,7 @@ public class CouplingObjectFactory {
         return parsedScript.get(i);
     }
 
-    private Object getObjectLineNumber(int i) {
+    private int getObjectLineNumber(int i) {
         return lineNumbers.get(i);
     }
 

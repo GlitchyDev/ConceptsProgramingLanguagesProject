@@ -26,6 +26,7 @@ public enum KeyWord {
 
     // Double Sided Operations
     // Boolean Operations
+    COLLEN(FunctionType.CONDITIONAL),
     LESS_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
     GREATER_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
     EQUAL_LESS_THAN(OperationType.NUMBER, OperationType.BOOLEAN),
@@ -66,7 +67,7 @@ public enum KeyWord {
     PRINT(FunctionType.OUTPUT),
     ASSIGN(FunctionType.ASSIGNMENT),
     FOR(FunctionType.CONDITIONAL),
-    FOR_EACH(FunctionType.CONDITIONAL),
+    //FOR_EACH(FunctionType.CONDITIONAL),
 
 
     LEFT_PARENTHESIS(FunctionType.ENCAPSULATION),

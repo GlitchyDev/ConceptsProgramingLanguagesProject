@@ -1,2 +1,2 @@
-z = 5 + 2
-print ( z ) 
+z = + 2 5
+print ( z )
