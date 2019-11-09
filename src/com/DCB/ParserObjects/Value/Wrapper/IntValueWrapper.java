@@ -39,6 +39,6 @@ public class IntValueWrapper extends CoupledObject implements IntValueObject {
 
     @Override
     public String getParsedGrammar() {
-         return "<arithmetic_expression> -> <literal_integer>\n";
+         return "<arithmetic_expression> -> literal_integer\n";
     }
 }

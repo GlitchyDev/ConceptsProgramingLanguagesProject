@@ -42,7 +42,7 @@ public class CouplingStringPrint extends CouplingStatement implements StringValu
         }
 
         grammer += "<statement> -> <print_statement> \n" +
-                "<print_statement> -> print (<arithmetic_expression) \n"
+                "<print_statement> -> print (<arithmetic_expression>) \n"
                 + stringValueObject.getParsedGrammar();
         return grammer;
     }

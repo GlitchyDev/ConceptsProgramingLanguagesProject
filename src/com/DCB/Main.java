@@ -40,6 +40,7 @@ public class Main {
             }
         }
         System.out.println("[Grammer]=========================");
+        System.out.println("\n<program> -> function id ( ) <block> end\n");
         if(parser.getAnalyzedScript().get(parser.getAnalyzedScript().size()-1) instanceof CouplingStatement) {
             ((CouplingStatement) parser.getAnalyzedScript().get(parser.getAnalyzedScript().size()-1)).setLateStatement();
         }
@@ -51,6 +52,7 @@ public class Main {
                 System.out.println(o + " ||| " + parser.getLineNumbers().get(i));
             }
         }
+        int i = 0;
         // write your code here
     }
 

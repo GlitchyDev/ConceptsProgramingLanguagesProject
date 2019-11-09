@@ -42,7 +42,7 @@ public class CouplingIntPrint extends CouplingStatement implements IntValueObjec
         }
 
         grammer += "<statement> -> <print_statement> \n" +
-                "<print_statement> -> print (<arithmetic_expression) \n"
+                "<print_statement> -> print (<arithmetic_expression>) \n"
                 + intValueObject.getParsedGrammar();
         return grammer;
     }

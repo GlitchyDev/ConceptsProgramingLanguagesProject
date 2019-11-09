@@ -1,2 +1,6 @@
-z = + 2 5
-print ( z )
+x = 2
+y = true
+if < x 2
+z = < x y
+else
+end
