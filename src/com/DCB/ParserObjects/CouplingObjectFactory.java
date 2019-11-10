@@ -3,6 +3,9 @@ package com.DCB.ParserObjects;
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingForStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingIfStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingWhileStatement;
 import com.DCB.ParserObjects.Couplings.Operations.*;
 import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanEqualGreaterThan;
 import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanEqualLessThan;
@@ -26,6 +29,7 @@ import com.DCB.ParserObjects.Value.Wrapper.BooleanValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 
@@ -100,58 +104,45 @@ public class CouplingObjectFactory {
             }
         }
 
-        boolean completedAllValueIdentifierCouplings = false;
-        while(!completedAllValueIdentifierCouplings) {
 
-            boolean completedAllValueCouplings = false;
-            while(!completedAllValueCouplings) {
-                int numberOfOperationsCompleted = 0;
 
-                for (KeyWord currentKeyword : NUMBER_OPERATIONS) {
-                    boolean completedKeywordCouplings = false;
-                    ArrayList<Integer> failedCouplings = new ArrayList<>();
-                    while(!completedKeywordCouplings) {
-                        int nextPotentialCouplingLocation = -1;
+        boolean completedAllValueCouplings = false;
+        while(!completedAllValueCouplings) {
+            int numberOfOperationsCompleted = 0;
 
-                        for(int i = 0; i < parsedScript.size(); i++) {
-                            Object object = getObject(i);
-                            if(object instanceof KeyWord && object == currentKeyword && !failedCouplings.contains(i)) {
-                                nextPotentialCouplingLocation = i;
-                                break;
-                            }
-                        }
-                        if(nextPotentialCouplingLocation != -1) {
-                            KeyWord keyword = (KeyWord) getObject(nextPotentialCouplingLocation);
-                            if(keyword == KeyWord.ADD) {
-                                int xxx = 0;
-                            }
-                            if(canCreateCoupling(keyword,nextPotentialCouplingLocation)) {
-                                createCoupling(keyword,nextPotentialCouplingLocation);
-                                numberOfOperationsCompleted++;
-                                completedKeywordCouplings = true;
-                            } else {
-                                failedCouplings.add(nextPotentialCouplingLocation);
-                            }
-                        } else {
-                            completedKeywordCouplings = true;
+            for (KeyWord currentKeyword : NUMBER_OPERATIONS) {
+                boolean completedKeywordCouplings = false;
+                ArrayList<Integer> failedCouplings = new ArrayList<>();
+                while(!completedKeywordCouplings) {
+                    int nextPotentialCouplingLocation = -1;
+
+                    for(int i = 0; i < parsedScript.size(); i++) {
+                        Object object = getObject(i);
+                        if(object instanceof KeyWord && object == currentKeyword && !failedCouplings.contains(i)) {
+                            nextPotentialCouplingLocation = i;
+                            break;
                         }
                     }
+                    if(nextPotentialCouplingLocation != -1) {
+                        KeyWord keyword = (KeyWord) getObject(nextPotentialCouplingLocation);
+                        if(canCreateCoupling(keyword,nextPotentialCouplingLocation)) {
+                            createCoupling(keyword,nextPotentialCouplingLocation);
+                            numberOfOperationsCompleted++;
+                            completedKeywordCouplings = true;
+                        } else {
+                            failedCouplings.add(nextPotentialCouplingLocation);
+                        }
+                    } else {
+                        completedKeywordCouplings = true;
+                    }
                 }
-                if(numberOfOperationsCompleted == 0) {
-                    completedAllValueCouplings = true;
-                }
-
             }
-            /*
-            boolean completedAllIdentifierCouplings = false;
-            while(!completedAllIdentifierCouplings) {
-                for(int i = 0; i < parsedScript.size(); i++) {
-
-                }
+            if(numberOfOperationsCompleted == 0) {
+                completedAllValueCouplings = true;
             }
-            */
-            completedAllValueIdentifierCouplings = true;
+
         }
+
 
 
 
@@ -182,33 +173,43 @@ public class CouplingObjectFactory {
         }
 
 
-
-        //
         boolean completedAllControlStatementCouplings = false;
         while(!completedAllControlStatementCouplings) {
-            int controlStatementsComplete = 0;
-            for(KeyWord currentKeyword: CONTROL_STATEMENTS) {
-                int nextStatementCouplingLocation = -1;
+            int numberOfOperationsCompleted = 0;
 
-                for(int i = 0; i < parsedScript.size(); i++) {
-                    Object object = getObject(i);
-                    if(object instanceof KeyWord && object == currentKeyword) {
-                        nextStatementCouplingLocation = i;
-                        break;
+            for (KeyWord currentKeyword : CONTROL_STATEMENTS) {
+                boolean completedControlStatementCoupling = false;
+                ArrayList<Integer> failedCouplings = new ArrayList<>();
+                while(!completedControlStatementCoupling) {
+                    int nextPotentialCouplingLocation = -1;
+
+                    for(int i = 0; i < parsedScript.size(); i++) {
+                        Object object = getObject(i);
+                        if(object instanceof KeyWord && object == currentKeyword && !failedCouplings.contains(i)) {
+                            nextPotentialCouplingLocation = i;
+                            break;
+                        }
                     }
-                }
-                if(nextStatementCouplingLocation != -1) {
-                    KeyWord keyword = (KeyWord) getObject(nextStatementCouplingLocation);
-                    if(canCreateCoupling(keyword,nextStatementCouplingLocation)) {
-                        createCoupling(keyword,nextStatementCouplingLocation);
-                        controlStatementsComplete++;
+                    if(nextPotentialCouplingLocation != -1) {
+                        KeyWord keyword = (KeyWord) getObject(nextPotentialCouplingLocation);
+                        if(canCreateCoupling(keyword,nextPotentialCouplingLocation)) {
+                            createCoupling(keyword,nextPotentialCouplingLocation);
+                            numberOfOperationsCompleted++;
+                            completedControlStatementCoupling = true;
+                        } else {
+                            failedCouplings.add(nextPotentialCouplingLocation);
+                        }
+                    } else {
+                        completedControlStatementCoupling = true;
                     }
                 }
             }
-            if(controlStatementsComplete == 0) {
-                completedAllControlStatementCouplings= true;
+            if(numberOfOperationsCompleted == 0) {
+                completedAllControlStatementCouplings = true;
             }
+
         }
+
         return true;
 
     }
@@ -227,7 +228,7 @@ public class CouplingObjectFactory {
                 if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
                     int foundElseLine = -1;
                     int nonStatementFoundLine = -1;
-                    for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
+                    for(int i = couplingPosition+2; i < parsedScript.size(); i++) {
                         if(!(getObject(i) instanceof CouplingStatement)) {
                             if(getObject(i) instanceof KeyWord && getObject(i) == KeyWord.ELSE) {
                                 foundElseLine = i;
@@ -239,81 +240,14 @@ public class CouplingObjectFactory {
                         }
                     }
 
-                    if(nonStatementFoundLine != -1) {
-                        System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
-                    }
-
-                    if(foundElseLine != -1) {
-                        int foundEndLine = -1;
-                        nonStatementFoundLine = -1;
-                        for(int i = foundElseLine+1; i < parsedScript.size() - 1; i++) {
-                            if(!(getObject(i) instanceof CouplingStatement)) {
-                                if(getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
-                                    foundEndLine = i;
-                                    break;
-                                } else {
-                                    nonStatementFoundLine = getObjectLineNumber(i);
-                                    break;
-                                }
-                            }
-                        }
-
-
-                        if(nonStatementFoundLine != -1) {
-                            System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
-                        }
-
-                        if(foundEndLine != -1) {
-                            return true;
-                        }
-
-                    } else {
-                        System.out.println("Error found at Line " + couplingPosition + " no end to if statement ");
-
-                    }
-                } else {
-                    System.out.println("Error found at Line " + couplingPosition + " no boolean found for if statement ");
-                }
-                break;
-            case WHILE:
-                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
-                    int foundEndLine = -1;
-                    int nonStatementFoundLine = -1;
-                    for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
-                        if(!(getObject(i) instanceof CouplingStatement)) {
-                            if(getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
-                                foundEndLine = i;
-                                break;
-                            } else {
-                                nonStatementFoundLine = getObjectLineNumber(i);
-                                break;
-                            }
-                        }
-                    }
-
-                    if(nonStatementFoundLine != -1) {
-                        System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
-                    }
-
-                    if(foundEndLine != -1) {
-                        return true;
-                    } else {
-                        System.out.println("Error found at Line " + couplingPosition + " no end to if statement ");
-
-                    }
-                } else {
-                    System.out.println("Error found at Line " + couplingPosition+1 + " no boolean value found for While Statement");
-                }
-                break;
-            case FOR:
-                if(getObject(couplingPosition+1) instanceof CouplingIntAssignment) {
-                    if (getObject(couplingPosition + 2) instanceof KeyWord && getObject(couplingPosition + 2) == KeyWord.COLLEN) {
-                        if (getObject(couplingPosition + 2) instanceof IntValueObject) {
-
+                    // Everything found needs to be a statement
+                    if(nonStatementFoundLine == -1) {
+                        // They actually did find the Else line
+                        if(foundElseLine != -1) {
 
                             int foundEndLine = -1;
-                            int nonStatementFoundLine = -1;
-                            for (int i = couplingPosition + 4; i < parsedScript.size() - 1; i++) {
+                            nonStatementFoundLine = -1;
+                            for (int i = foundElseLine + 1; i < parsedScript.size(); i++) {
                                 if (!(getObject(i) instanceof CouplingStatement)) {
                                     if (getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
                                         foundEndLine = i;
@@ -325,32 +259,69 @@ public class CouplingObjectFactory {
                                 }
                             }
 
-                            if (nonStatementFoundLine != -1) {
-                                System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
-                            }
 
-                            if (foundEndLine != -1) {
-                                if (nonStatementFoundLine != -1) {
-                                    System.out.println("Error found at Line " + nonStatementFoundLine + " non statement in if scope of Line " + couplingPosition);
-                                }
-
+                            if (nonStatementFoundLine == -1) {
                                 if (foundEndLine != -1) {
                                     return true;
                                 }
-
-                            } else {
-                                System.out.println("Error found at Line " + couplingPosition + " no end to For statement ");
                             }
-                        } else {
-                                System.out.println("Error found at Line " + couplingPosition + " No Iterator Cap found for Foor Loop");
                         }
-                    } else {
-                        System.out.println("Error found at Line " + couplingPosition + " No Colen found for the Foor Loop ");
                     }
-                } else {
-                    System.out.println("Error found at Line " + couplingPosition + " No Assingment statement for the For Loop ");
                 }
+                break;
+            case WHILE:
+                if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
+                    int foundEndLine = -1;
+                    int nonStatementFoundLine = -1;
+                    for(int i = couplingPosition+2; i < parsedScript.size(); i++) {
+                        if(!(getObject(i) instanceof CouplingStatement)) {
+                            if(getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
+                                foundEndLine = i;
+                                break;
+                            } else {
+                                nonStatementFoundLine = getObjectLineNumber(i);
+                                break;
+                            }
+                        }
+                    }
+                    if (nonStatementFoundLine == -1) {
+                        if (foundEndLine != -1) {
+                            return true;
+                        }
 
+                    }
+                }
+                break;
+            case FOR:
+                if(getObject(couplingPosition+1) instanceof KeyWord && getObject(couplingPosition+1) == KeyWord.LEFT_PARENTHESIS) {
+                    if(getObject(couplingPosition+2) instanceof CouplingIntAssignment) {
+                        if (getObject(couplingPosition + 3) instanceof KeyWord && getObject(couplingPosition + 3) == KeyWord.COLLEN) {
+                            if (getObject(couplingPosition + 4) instanceof IntValueObject) {
+                                if (getObject(couplingPosition + 5) instanceof KeyWord && getObject(couplingPosition + 5) == KeyWord.RIGHT_PARENTHESIS) {
+                                    int foundEndLine = -1;
+                                    int nonStatementFoundLine = -1;
+                                    for (int i = couplingPosition + 6; i < parsedScript.size(); i++) {
+                                        if (!(getObject(i) instanceof CouplingStatement)) {
+                                            if (getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
+                                                foundEndLine = i;
+                                                break;
+                                            } else {
+                                                nonStatementFoundLine = getObjectLineNumber(i);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (nonStatementFoundLine == -1) {
+                                        if (foundEndLine != -1) {
+                                            return true;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 break;
                 /*
             case DO:
@@ -536,10 +507,102 @@ public class CouplingObjectFactory {
     public void createCoupling(KeyWord keyword,int couplingPosition) {
         switch(keyword) {
             case IF:
-                System.out.println("We got the if working!");
+                ArrayList<Integer> encapsulatedStatements = new ArrayList<>();
+                BooleanValueObject booleanValueObject = (BooleanValueObject) getObject(couplingPosition+1);
+                encapsulatedStatements.add(couplingPosition+1);
+                ArrayList<CouplingStatement> ifStatements = new ArrayList<>();
+                ArrayList<CouplingStatement> elseStatements = new ArrayList<>();
+                boolean foundEnd = false;
+                int cursor = couplingPosition+2;
+                boolean ifMode = true;
+                while(!foundEnd) {
+                    if(getObject(cursor) instanceof CouplingStatement) {
+                        if(ifMode) {
+                            ifStatements.add((CouplingStatement) getObject(cursor));
+                        } else {
+                            elseStatements.add((CouplingStatement) getObject(cursor));
+                        }
+                    } else {
+                        if(getObject(cursor) instanceof KeyWord) {
+                            switch(((KeyWord)getObject(cursor))) {
+                                case ELSE:
+                                    ifMode = false;
+                                    break;
+                                case END:
+                                    foundEnd = true;
+                                    break;
+                            }
+                        }
+                    }
+                    encapsulatedStatements.add(cursor);
+                    if(!foundEnd) {
+                        cursor++;
+                    }
+                }
+                CouplingIfStatement couplingIfStatement = new CouplingIfStatement(booleanValueObject,ifStatements,elseStatements);
+                replace(couplingPosition,couplingIfStatement);
+                for(int i = cursor; i > couplingPosition; i--) {
+                    remove(i);
+                }
+                break;
+            case FOR:
+                encapsulatedStatements = new ArrayList<>();
+                CouplingIntAssignment assignmentStatemnt = (CouplingIntAssignment) getObject(couplingPosition+2);
+                IntValueObject intValueObject = (IntValueObject) getObject(couplingPosition+4);
+
+                encapsulatedStatements.add(couplingPosition+1); // (
+                encapsulatedStatements.add(couplingPosition+2); // x = 5
+                encapsulatedStatements.add(couplingPosition+3); // :
+                encapsulatedStatements.add(couplingPosition+4); // x
+                encapsulatedStatements.add(couplingPosition+5); // )
+
+                ArrayList<CouplingStatement> containedStatements = new ArrayList<>();
+                foundEnd = false;
+                cursor = couplingPosition+6;
+                while(!foundEnd) {
+                    if(getObject(cursor) instanceof CouplingStatement) {
+                        containedStatements.add((CouplingStatement) getObject(cursor));
+                    } else {
+                        if(getObject(cursor) instanceof KeyWord && getObject(cursor) == KeyWord.END) {
+                            foundEnd = true;
+                        }
+                    }
+                    encapsulatedStatements.add(cursor);
+                    if(!foundEnd) {
+                        cursor++;
+                    }
+                }
+                CouplingForStatement couplingForStatement = new CouplingForStatement(assignmentStatemnt,intValueObject,containedStatements);
+                replace(couplingPosition,couplingForStatement);
+                for(int i = cursor; i > couplingPosition; i--) {
+                    remove(i);
+                }
                 break;
             case WHILE:
-                System.out.println("We got the While working!");
+                encapsulatedStatements = new ArrayList<>();
+                booleanValueObject = (BooleanValueObject) getObject(couplingPosition+1);
+                encapsulatedStatements.add(couplingPosition+1);
+                containedStatements = new ArrayList<>();
+                foundEnd = false;
+                cursor = couplingPosition+2;
+                while(!foundEnd) {
+                    if(getObject(cursor) instanceof CouplingStatement) {
+                        containedStatements.add((CouplingStatement) getObject(cursor));
+                    } else {
+                        if(getObject(cursor) instanceof KeyWord && getObject(cursor) == KeyWord.END) {
+                            foundEnd = true;
+                        }
+                    }
+                    encapsulatedStatements.add(cursor);
+                    if(!foundEnd) {
+                        cursor++;
+                    }
+                }
+                CouplingWhileStatement couplingWhileStatement = new CouplingWhileStatement(booleanValueObject,containedStatements);
+                replace(couplingPosition,couplingWhileStatement);
+                for(int i = cursor; i > couplingPosition; i--) {
+                    remove(i);
+                }
                 break;
                 /*
             case DO:
@@ -606,7 +669,7 @@ public class CouplingObjectFactory {
                         if (getObject(couplingPosition - 1) instanceof UnidentifiedIdentifierObject) {
                             intIdentifierObject = wrapIntegerIdentifier(((UnidentifiedIdentifierObject) getObject(couplingPosition - 1)), ((IntValueObject) getObject(couplingPosition + 1)));
                         } else {
-                            if (getObject(couplingPosition - 1) instanceof StringIdentifierObject) {
+                            if (getObject(couplingPosition - 1) instanceof IntIdentifierObject) {
                                 intIdentifierObject = (IntIdentifierObject) getObject(couplingPosition - 1);
                                 intIdentifierObject.setIntValueObject((IntValueObject) getObject(couplingPosition + 1));
                             }
@@ -666,9 +729,7 @@ public class CouplingObjectFactory {
                     }
                 }
                 break;
-            case FOR:
 
-                break;
 
             case LEFT_PARENTHESIS:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {

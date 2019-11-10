@@ -1,5 +1,14 @@
 x = + 3 8
-x = true
+if ( < x 7 )
+while ( < x 2 )
+for ( x = 5 : 5 )
+print ( + 5 2 )
+end
+print ( + 5 2 )
+print ( + 5 2 )
+end
 print ( x )
-x = "BB"
 print ( x )
+print ( x )
+else
+end

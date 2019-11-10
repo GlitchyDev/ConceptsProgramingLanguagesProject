@@ -1,21 +1,19 @@
 package com.DCB.ParserObjects.Couplings.ControlStatements;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.CouplingStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 import java.util.ArrayList;
 
-public class CouplingIfStatement extends CouplingStatement {
+public class CouplingWhileStatement extends CouplingStatement {
     private final BooleanValueObject booleanValueObject;
-    private final ArrayList<CouplingStatement> ifStatements;
-    private final ArrayList<CouplingStatement> elseStatements;
-    public CouplingIfStatement(BooleanValueObject booleanValueObject, ArrayList<CouplingStatement> ifStatements, ArrayList<CouplingStatement> elseStatements) {
-        super(CoupleObjectType.IF);
+    private final ArrayList<CouplingStatement> containedStatements;
+
+    public CouplingWhileStatement(BooleanValueObject booleanValueObject, ArrayList<CouplingStatement> containedStatements) {
+        super(CoupleObjectType.WHILE);
         this.booleanValueObject = booleanValueObject;
-        this.ifStatements = ifStatements;
-        this.elseStatements = elseStatements;
+        this.containedStatements = containedStatements;
     }
 
     @Override
@@ -33,13 +31,9 @@ public class CouplingIfStatement extends CouplingStatement {
         String identifier = "";
         identifier += "[" + coupleObjectType + " \n";
         identifier += " Boolean Value: " + booleanValueObject.getStringIdentifier() + " \n";
-        identifier += " IF Statements\n";
-        for(int i = 0; i < ifStatements.size(); i++) {
-            identifier += "~     " + ifStatements.get(i).getStringIdentifier();
-        }
-        identifier += " ELSE Statements\n";
-        for(int i = 0; i < elseStatements.size(); i++) {
-            identifier += "~     " + elseStatements.get(i).getStringIdentifier() + "\n";
+        identifier += " Contained Statements\n";
+        for(int i = 0; i < containedStatements.size(); i++) {
+            identifier += "~    " + containedStatements.get(i).getStringIdentifier() + "\n";
         }
         identifier += "]\n";
         return identifier;
@@ -50,3 +44,4 @@ public class CouplingIfStatement extends CouplingStatement {
         return "I CANT DO THIS AHHHH~!!!!";
     }
 }
+
