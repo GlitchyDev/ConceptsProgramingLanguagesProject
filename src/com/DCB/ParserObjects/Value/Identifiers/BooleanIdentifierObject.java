@@ -10,10 +10,22 @@ import com.DCB.ParserObjects.Value.BooleanValueObject;
  */
 public class BooleanIdentifierObject extends CoupledObject implements BooleanValueObject {
     private final Identifier identifier;
-    private final BooleanValueObject booleanValueObject;
+    private BooleanValueObject booleanValueObject;
     public BooleanIdentifierObject(Identifier identifier, BooleanValueObject booleanValueObject) {
         super(CoupleObjectType.BOOLEAN_IDENTIFIER);
         this.identifier = identifier;
+        this.booleanValueObject = booleanValueObject;
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public BooleanValueObject getBooleanValueObject() {
+        return booleanValueObject;
+    }
+
+    public void setBooleanValueObject(BooleanValueObject booleanValueObject) {
         this.booleanValueObject = booleanValueObject;
     }
 

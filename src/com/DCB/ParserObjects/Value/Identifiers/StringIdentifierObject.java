@@ -3,6 +3,7 @@ package com.DCB.ParserObjects.Value.Identifiers;
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.Value.IntValueObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
 /**
@@ -10,10 +11,22 @@ import com.DCB.ParserObjects.Value.StringValueObject;
  */
 public class StringIdentifierObject  extends CoupledObject implements StringValueObject {
     private final Identifier identifier;
-    private final StringValueObject stringValueObject;
+    private StringValueObject stringValueObject;
     public StringIdentifierObject(Identifier identifier, StringValueObject stringValueObject) {
         super(CoupleObjectType.STRING_IDENTIFIER);
         this.identifier = identifier;
+        this.stringValueObject = stringValueObject;
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public StringValueObject getStringValueObject() {
+        return stringValueObject;
+    }
+
+    public void setStringValueObject(StringValueObject stringValueObject) {
         this.stringValueObject = stringValueObject;
     }
 

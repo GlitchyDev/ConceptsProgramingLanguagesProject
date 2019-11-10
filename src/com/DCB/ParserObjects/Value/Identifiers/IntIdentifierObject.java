@@ -10,10 +10,22 @@ import com.DCB.ParserObjects.Value.IntValueObject;
  */
 public class IntIdentifierObject  extends CoupledObject implements IntValueObject {
     private final Identifier identifier;
-    private final IntValueObject intValueObject;
+    private IntValueObject intValueObject;
     public IntIdentifierObject(Identifier identifier, IntValueObject intValueObject) {
         super(CoupleObjectType.INT_IDENTIFIER);
         this.identifier = identifier;
+        this.intValueObject = intValueObject;
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public IntValueObject getIntValueObject() {
+        return intValueObject;
+    }
+
+    public void setIntValueObject(IntValueObject intValueObject) {
         this.intValueObject = intValueObject;
     }
 

@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings.Operations;
+package com.DCB.ParserObjects.Couplings.Operations.Parentheses;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
@@ -13,7 +13,7 @@ public class CouplingIntParentheses extends CoupledObject implements IntValueObj
     private final IntValueObject intValueObject;
 
     public CouplingIntParentheses(IntValueObject intValueObject) {
-        super(CoupleObjectType.INT_PARENTHIS);
+        super(CoupleObjectType.INT_PARENTHESES);
         this.value = intValueObject.getValue();
         this.intValueObject = intValueObject;
     }

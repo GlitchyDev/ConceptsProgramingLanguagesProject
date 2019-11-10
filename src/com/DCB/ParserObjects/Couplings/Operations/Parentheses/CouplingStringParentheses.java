@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings.Operations;
+package com.DCB.ParserObjects.Couplings.Operations.Parentheses;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;

@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings.Statements;
+package com.DCB.ParserObjects.Couplings.Statements.Assignment;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
@@ -9,12 +9,12 @@ import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 
 import javax.print.attribute.standard.PrinterState;
 
-public class CouplingAssignment extends CouplingStatement implements IntValueObject {
+public class CouplingIntAssignment extends CouplingStatement implements IntValueObject {
     private final IntIdentifierObject intIdentifierObject;
     private final IntValueObject intValueObject;
 
-    public CouplingAssignment(IntIdentifierObject intIdentifierObject, IntValueObject intValueObject) {
-        super(CoupleObjectType.ASSIGN);
+    public CouplingIntAssignment(IntIdentifierObject intIdentifierObject, IntValueObject intValueObject) {
+        super(CoupleObjectType.ASSIGN_INT);
         this.intIdentifierObject = intIdentifierObject;
         this.intValueObject = intValueObject;
     }
@@ -31,12 +31,12 @@ public class CouplingAssignment extends CouplingStatement implements IntValueObj
 
     @Override
     public int getValue() {
-        return 0;
+        return intValueObject.getValue();
     }
 
     @Override
     public String getStringIdentifier() {
-        return null;
+        return "[" + coupleObjectType + " | ID:" + intIdentifierObject.getStringIdentifier() + " Value:" +  intValueObject.getStringIdentifier() + " ]";
     }
 
     @Override

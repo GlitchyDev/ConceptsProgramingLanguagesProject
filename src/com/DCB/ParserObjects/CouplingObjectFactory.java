@@ -3,21 +3,29 @@ package com.DCB.ParserObjects;
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
-import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingFunction;
 import com.DCB.ParserObjects.Couplings.Operations.*;
-import com.DCB.ParserObjects.Couplings.Statements.CouplingAssignment;
-import com.DCB.ParserObjects.Couplings.Statements.CouplingIntPrint;
-import com.DCB.ParserObjects.Couplings.Statements.CouplingStringPrint;
+import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanEqualGreaterThan;
+import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanEqualLessThan;
+import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanGreaterThan;
+import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanLessThan;
+import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingBooleanParetheses;
+import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingIntParentheses;
+import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingStringParentheses;
+import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingBooleanAssignment;
+import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingIntAssignment;
+import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingStringAssignment;
+import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingBooleanPrint;
+import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingIntPrint;
+import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingStringPrint;
 import com.DCB.ParserObjects.Value.*;
 import com.DCB.ParserObjects.Value.Identifiers.BooleanIdentifierObject;
 import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
 import com.DCB.ParserObjects.Value.Identifiers.StringIdentifierObject;
-import com.DCB.ParserObjects.Value.Identifiers.UndeclaredIdentifierObject;
+import com.DCB.ParserObjects.Value.Identifiers.UnidentifiedIdentifierObject;
 import com.DCB.ParserObjects.Value.Wrapper.BooleanValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
 
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -28,10 +36,10 @@ import java.util.ArrayList;
 public class CouplingObjectFactory {
     private final KeyWord[] NUMBER_OPERATIONS = new KeyWord[]{KeyWord.LEFT_PARENTHESIS, KeyWord.EXPONENTIAL,KeyWord.MULTIPLY, KeyWord.DIVIDE,
             KeyWord.INVERT_DIVIDE, KeyWord.ADD, KeyWord.SUBTRACT, KeyWord.NUMBER_IDENTITY, KeyWord.NUMBER_INVERT, KeyWord.LESS_THAN, KeyWord.GREATER_THAN,KeyWord.EQUAL_LESS_THAN, KeyWord.EQUAL_GREATER_THAN,
-            KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL
+            KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL, KeyWord.ASSIGN
     };
 
-    private KeyWord[] STATEMENTS = new KeyWord[]{KeyWord.ASSIGN,KeyWord.PRINT
+    private KeyWord[] STATEMENTS = new KeyWord[]{KeyWord.PRINT
     };
 
     private KeyWord[] CONTROL_STATEMENTS = new KeyWord[]{KeyWord.IF, KeyWord.WHILE, //KeyWord.DO, KeyWord.REPEAT,
@@ -88,21 +96,7 @@ public class CouplingObjectFactory {
             // As the assignment a = 5*4 will initalize a = 5, but this is only to maintain typing
             if (object instanceof Identifier) {
                 Identifier identifier = ((Identifier) object);
-                // Ye
-                switch (identifier.getVariableType()) {
-                    case NUMBER:
-                        replace(i,new IntIdentifierObject(identifier,new IntValueWrapper(identifier.getValue())));
-                        break;
-                    case STRING:
-                        replace(i,new StringIdentifierObject(identifier,new StringValueWrapper(identifier.getValue())));
-                        break;
-                    case BOOLEAN:
-                        replace(i,new BooleanIdentifierObject(identifier,new BooleanValueWrapper(identifier.getValue())));
-                        break;
-                    default:
-                        replace(i,new UndeclaredIdentifierObject(identifier));
-                        break;
-                }
+                replace(i,new UnidentifiedIdentifierObject(identifier));
             }
         }
 
@@ -128,6 +122,9 @@ public class CouplingObjectFactory {
                         }
                         if(nextPotentialCouplingLocation != -1) {
                             KeyWord keyword = (KeyWord) getObject(nextPotentialCouplingLocation);
+                            if(keyword == KeyWord.ADD) {
+                                int xxx = 0;
+                            }
                             if(canCreateCoupling(keyword,nextPotentialCouplingLocation)) {
                                 createCoupling(keyword,nextPotentialCouplingLocation);
                                 numberOfOperationsCompleted++;
@@ -275,7 +272,7 @@ public class CouplingObjectFactory {
 
                     }
                 } else {
-                    System.out.println("Error found at Line " + couplingPosition + " no boolean found for is statement ");
+                    System.out.println("Error found at Line " + couplingPosition + " no boolean found for if statement ");
                 }
                 break;
             case WHILE:
@@ -309,7 +306,7 @@ public class CouplingObjectFactory {
                 }
                 break;
             case FOR:
-                if(getObject(couplingPosition+1) instanceof CouplingAssignment) {
+                if(getObject(couplingPosition+1) instanceof CouplingIntAssignment) {
                     if (getObject(couplingPosition + 2) instanceof KeyWord && getObject(couplingPosition + 2) == KeyWord.COLLEN) {
                         if (getObject(couplingPosition + 2) instanceof IntValueObject) {
 
@@ -376,17 +373,17 @@ public class CouplingObjectFactory {
                 break;
             case ASSIGN:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition-1) instanceof IntIdentifierObject || getObject(couplingPosition-1) instanceof UndeclaredIdentifierObject) {
+                    if(getObject(couplingPosition-1) instanceof IntIdentifierObject || getObject(couplingPosition-1) instanceof UnidentifiedIdentifierObject) {
                         return true;
                     }
                 }
                 if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
-                    if(getObject(couplingPosition-1) instanceof BooleanValueObject || getObject(couplingPosition-1) instanceof UndeclaredIdentifierObject) {
+                    if(getObject(couplingPosition-1) instanceof BooleanIdentifierObject || getObject(couplingPosition-1) instanceof UnidentifiedIdentifierObject) {
                         return true;
                     }
                 }
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
-                    if(getObject(couplingPosition-1) instanceof StringValueObject || getObject(couplingPosition-1) instanceof UndeclaredIdentifierObject) {
+                    if(getObject(couplingPosition-1) instanceof StringIdentifierObject || getObject(couplingPosition-1) instanceof UnidentifiedIdentifierObject) {
                         return true;
                     }
                 }
@@ -411,13 +408,25 @@ public class CouplingObjectFactory {
 
                 break;
             case LESS_THAN:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case GREATER_THAN:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case EQUAL_LESS_THAN:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        return true;
+                    }
+                }
                 break;
             case EQUAL_GREATER_THAN:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
@@ -526,25 +535,11 @@ public class CouplingObjectFactory {
      */
     public void createCoupling(KeyWord keyword,int couplingPosition) {
         switch(keyword) {
-            case FUNCTION:
-                ArrayList<CouplingStatement> couplingStatements = new ArrayList<>();
-                for(int i = couplingPosition+4; i < parsedScript.size() - 1; i++) {
-                    couplingStatements.add((CouplingStatement) getObject(couplingPosition));
-                }
-                CouplingFunction couplingFunction = new CouplingFunction(couplingStatements);
-                replace(0,couplingFunction);
-                for(int i = couplingPosition+1; i < parsedScript.size(); i++) {
-                    remove(i);
-                }
-                break;
             case IF:
-
-                break;
-            case ELSE:
-
+                System.out.println("We got the if working!");
                 break;
             case WHILE:
-
+                System.out.println("We got the While working!");
                 break;
                 /*
             case DO:
@@ -559,25 +554,122 @@ public class CouplingObjectFactory {
                     CouplingStringPrint couplingStringPrint = new CouplingStringPrint((StringValueObject) getObject(couplingPosition+1));
                     replace(couplingPosition,couplingStringPrint);
                     remove(couplingPosition+1);
-                }
-                if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    CouplingIntPrint couplingIntPrint = new CouplingIntPrint((IntValueObject) getObject(couplingPosition+1));
-                    replace(couplingPosition,couplingIntPrint);
-                    remove(couplingPosition+1);
+                } else {
+                    if (getObject(couplingPosition + 1) instanceof IntValueObject) {
+                        CouplingIntPrint couplingIntPrint = new CouplingIntPrint((IntValueObject) getObject(couplingPosition + 1));
+                        replace(couplingPosition, couplingIntPrint);
+                        remove(couplingPosition + 1);
+                    } else {
+                        if (getObject(couplingPosition + 1) instanceof BooleanValueObject) {
+                            CouplingBooleanPrint couplingBooleanPrint = new CouplingBooleanPrint((BooleanValueObject) getObject(couplingPosition + 1));
+                            replace(couplingPosition, couplingBooleanPrint);
+                            remove(couplingPosition + 1);
+                        }
+                    }
                 }
                 break;
             case ASSIGN:
-                CouplingAssignment couplingAssignment = new CouplingAssignment(((IntIdentifierObject)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
-                replace(couplingPosition,couplingAssignment);
-                remove(couplingPosition+1);
-                remove(couplingPosition-1);
+                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                    StringIdentifierObject stringIdentifierObject = null;
+                    if(getObject(couplingPosition-1) instanceof UnidentifiedIdentifierObject) {
+                        stringIdentifierObject = wrapStringIdentifier(((UnidentifiedIdentifierObject)getObject(couplingPosition-1)),((StringValueObject)getObject(couplingPosition+1)));
+                    } else {
+                        if(getObject(couplingPosition-1) instanceof StringIdentifierObject) {
+                            stringIdentifierObject = (StringIdentifierObject) getObject(couplingPosition-1);
+                            stringIdentifierObject.setStringValueObject((StringValueObject) getObject(couplingPosition+1));
+                        }
+                    }
+
+                    Identifier identifier = stringIdentifierObject.getIdentifier();
+                    for(int i = currentLineNumber; i < parsedScript.size(); i++) {
+                        if(getObject(i) instanceof UnidentifiedIdentifierObject) {
+                            if(((UnidentifiedIdentifierObject) getObject(i)).getIdentifier().equals(identifier)) {
+                                replace(i,stringIdentifierObject);
+                            }
+                        }
+                        if(getObject(i) instanceof StringIdentifierObject) {
+                            if(((StringIdentifierObject) getObject(i)).getIdentifier().equals(identifier)) {
+                                replace(i,stringIdentifierObject);
+                            }
+                        }
+                    }
+
+
+                    CouplingStringAssignment couplingStringAssignment = new CouplingStringAssignment(stringIdentifierObject,((StringValueObject)getObject(couplingPosition+1)));
+                    replace(couplingPosition, couplingStringAssignment);
+                    remove(couplingPosition+1);
+                    remove(couplingPosition-1);
+                } else {
+
+                    if (getObject(couplingPosition + 1) instanceof IntValueObject) {
+                        IntIdentifierObject intIdentifierObject = null;
+                        if (getObject(couplingPosition - 1) instanceof UnidentifiedIdentifierObject) {
+                            intIdentifierObject = wrapIntegerIdentifier(((UnidentifiedIdentifierObject) getObject(couplingPosition - 1)), ((IntValueObject) getObject(couplingPosition + 1)));
+                        } else {
+                            if (getObject(couplingPosition - 1) instanceof StringIdentifierObject) {
+                                intIdentifierObject = (IntIdentifierObject) getObject(couplingPosition - 1);
+                                intIdentifierObject.setIntValueObject((IntValueObject) getObject(couplingPosition + 1));
+                            }
+                        }
+
+                        Identifier identifier = intIdentifierObject.getIdentifier();
+                        for (int i = couplingPosition - 1; i < parsedScript.size(); i++) {
+                            if (getObject(i) instanceof UnidentifiedIdentifierObject) {
+                                if (((UnidentifiedIdentifierObject) getObject(i)).getIdentifier().getIdentifier().equals(identifier.getIdentifier())) {
+                                    replace(i, intIdentifierObject);
+                                }
+                            }
+                            if (getObject(i) instanceof IntIdentifierObject) {
+                                if (((IntIdentifierObject) getObject(i)).getIdentifier().equals(identifier)) {
+                                    replace(i, intIdentifierObject);
+                                }
+                            }
+                        }
+
+
+                        CouplingIntAssignment couplingIntAssignment = new CouplingIntAssignment(intIdentifierObject, ((IntValueObject) getObject(couplingPosition + 1)));
+                        replace(couplingPosition, couplingIntAssignment);
+                        remove(couplingPosition + 1);
+                        remove(couplingPosition - 1);
+                    } else {
+                        if (getObject(couplingPosition + 1) instanceof BooleanValueObject) {
+                            BooleanIdentifierObject booleanIdentifierObject = null;
+                            if (getObject(couplingPosition - 1) instanceof UnidentifiedIdentifierObject) {
+                                booleanIdentifierObject = wrapBooleanIdentifier(((UnidentifiedIdentifierObject) getObject(couplingPosition - 1)), ((BooleanValueObject) getObject(couplingPosition + 1)));
+                            } else {
+                                if (getObject(couplingPosition - 1) instanceof BooleanIdentifierObject) {
+                                    booleanIdentifierObject = (BooleanIdentifierObject) getObject(couplingPosition - 1);
+                                    booleanIdentifierObject.setBooleanValueObject((BooleanValueObject) getObject(couplingPosition + 1));
+                                }
+                            }
+
+                            Identifier identifier = booleanIdentifierObject.getIdentifier();
+                            for (int i = currentLineNumber; i < parsedScript.size(); i++) {
+                                if (getObject(i) instanceof UnidentifiedIdentifierObject) {
+                                    if (((UnidentifiedIdentifierObject) getObject(i)).getIdentifier().equals(identifier)) {
+                                        replace(i, booleanIdentifierObject);
+                                    }
+                                }
+                                if (getObject(i) instanceof StringIdentifierObject) {
+                                    if (((StringIdentifierObject) getObject(i)).getIdentifier().equals(identifier)) {
+                                        replace(i, booleanIdentifierObject);
+                                    }
+                                }
+                            }
+
+
+                            CouplingBooleanAssignment couplingBooleanAssignment = new CouplingBooleanAssignment(booleanIdentifierObject, ((BooleanValueObject) getObject(couplingPosition + 1)));
+                            replace(couplingPosition, couplingBooleanAssignment);
+                            remove(couplingPosition + 1);
+                            remove(couplingPosition - 1);
+                        }
+                    }
+                }
                 break;
             case FOR:
 
                 break;
-            case FOR_EACH:
 
-                break;
             case LEFT_PARENTHESIS:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.RIGHT_PARENTHESIS) {
@@ -594,22 +686,43 @@ public class CouplingObjectFactory {
                             parsedScript.remove(couplingPosition + (2));
                             parsedScript.remove(couplingPosition + (1));
                         }
+                    } else {
+                        if (getObject(couplingPosition + 1) instanceof BooleanValueObject) {
+                            if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.RIGHT_PARENTHESIS) {
+                                CouplingBooleanParetheses couplingBooleanParetheses = new CouplingBooleanParetheses(((BooleanValueObject) getObject(couplingPosition + 1)));
+                                parsedScript.set(couplingPosition, couplingBooleanParetheses);
+                                parsedScript.remove(couplingPosition + (2));
+                                parsedScript.remove(couplingPosition + (1));
+                            }
+                        }
                     }
                 }
 
 
                 break;
             case LESS_THAN:
-
+                CouplingBooleanLessThan couplingBooleanLessThan = new CouplingBooleanLessThan(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                remove(couplingPosition+(2));
+                replace(couplingPosition,couplingBooleanLessThan);
+                remove(couplingPosition+(1));
                 break;
             case GREATER_THAN:
-
+                CouplingBooleanGreaterThan couplingBooleanGreaterThan = new CouplingBooleanGreaterThan(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                remove(couplingPosition+(2));
+                replace(couplingPosition,couplingBooleanGreaterThan);
+                remove(couplingPosition+(1));
                 break;
             case EQUAL_LESS_THAN:
-
+                CouplingBooleanEqualLessThan couplingBooleanEqualLessThan = new CouplingBooleanEqualLessThan(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                remove(couplingPosition+(2));
+                replace(couplingPosition,couplingBooleanEqualLessThan);
+                remove(couplingPosition+(1));
                 break;
             case EQUAL_GREATER_THAN:
-
+                CouplingBooleanEqualGreaterThan couplingBooleanEqualGreaterThan = new CouplingBooleanEqualGreaterThan(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                remove(couplingPosition+(2));
+                replace(couplingPosition,couplingBooleanEqualGreaterThan);
+                remove(couplingPosition+(1));
                 break;
             case AND:
 
@@ -680,6 +793,25 @@ public class CouplingObjectFactory {
 
                 break;
         }
+    }
+
+
+    public StringIdentifierObject wrapStringIdentifier(UnidentifiedIdentifierObject unidentifiedIdentifierObject, StringValueObject stringValueObject) {
+        Identifier identifier = unidentifiedIdentifierObject.getIdentifier();
+        StringIdentifierObject stringIdentifierObject = new StringIdentifierObject(identifier, stringValueObject);
+        return stringIdentifierObject;
+    }
+
+    public IntIdentifierObject wrapIntegerIdentifier(UnidentifiedIdentifierObject unidentifiedIdentifierObject, IntValueObject intValueObject) {
+        Identifier identifier = unidentifiedIdentifierObject.getIdentifier();
+        IntIdentifierObject intIdentifierObject = new IntIdentifierObject(identifier, intValueObject);
+        return intIdentifierObject;
+    }
+
+    public BooleanIdentifierObject wrapBooleanIdentifier(UnidentifiedIdentifierObject unidentifiedIdentifierObject, BooleanValueObject booleanValueObject) {
+        Identifier identifier = unidentifiedIdentifierObject.getIdentifier();
+        BooleanIdentifierObject booleanIdentifierObject = new BooleanIdentifierObject(identifier, booleanValueObject);
+        return booleanIdentifierObject;
     }
 
 

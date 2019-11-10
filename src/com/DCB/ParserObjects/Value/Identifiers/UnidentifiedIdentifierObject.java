@@ -7,14 +7,17 @@ import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.CouplingStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
-public class UndeclaredIdentifierObject extends CoupledObject {
+public class UnidentifiedIdentifierObject extends CoupledObject {
     private final Identifier identifier;
 
-    public UndeclaredIdentifierObject(Identifier identifier) {
-        super(CoupleObjectType.UNDECLARED_VALUE);
+    public UnidentifiedIdentifierObject(Identifier identifier) {
+        super(CoupleObjectType.UNDECLARED_IDENTIFIER);
         this.identifier = identifier;
     }
 
+    public Identifier getIdentifier() {
+        return identifier;
+    }
 
     @Override
     public boolean hasReturnType() {

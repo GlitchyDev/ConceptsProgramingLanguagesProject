@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings.Statements;
+package com.DCB.ParserObjects.Couplings.Statements.Print;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CouplingStatement;
@@ -8,7 +8,7 @@ public class CouplingStringPrint extends CouplingStatement implements StringValu
     private final StringValueObject stringValueObject;
 
     public CouplingStringPrint(StringValueObject stringValueObject) {
-        super(CoupleObjectType.PRINT_INT);
+        super(CoupleObjectType.PRINT_STRING);
         this.stringValueObject = stringValueObject;
     }
 
@@ -29,7 +29,7 @@ public class CouplingStringPrint extends CouplingStatement implements StringValu
 
     @Override
     public String getStringIdentifier() {
-        return "[" + coupleObjectType + " | " + stringValueObject.getStringIdentifier() + " ]";
+        return "[" + coupleObjectType + " | ID:" + stringValueObject.getStringIdentifier() + " ]";
     }
 
     @Override

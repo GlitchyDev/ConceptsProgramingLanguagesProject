@@ -26,7 +26,6 @@ public abstract class CoupledObject {
 
     public enum CoupleObjectType {
         // Completed
-        UNDECLARED_VALUE,
         BOOLEAN_VALUE,
         INT_VALUE,
         STRING_VALUE,
@@ -36,8 +35,8 @@ public abstract class CoupledObject {
         INT_IDENTIFIER,
         STRING_IDENTIFIER,
 
-        BOOLEAN_PARENTHIS,
-        INT_PARENTHIS,
+        BOOLEAN_PARENTHESES,
+        INT_PARENTHESES,
         STRING_PARENTHESES,
         // No worry
 
@@ -68,7 +67,11 @@ public abstract class CoupledObject {
         PRINT_INT,
         PRINT_STRING,
         PRINT_BOOLEAN,
-        ASSIGN,
+
+        ASSIGN_INT,
+        ASSIGN_STRING,
+        ASSIGN_BOOLEAN,
+
         //FOR_EACH,
     }
 }

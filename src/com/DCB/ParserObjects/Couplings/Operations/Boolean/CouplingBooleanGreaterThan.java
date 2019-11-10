@@ -1,18 +1,18 @@
-package com.DCB.ParserObjects.Couplings.Operations;
+package com.DCB.ParserObjects.Couplings.Operations.Boolean;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
-public class CouplingBooleanEqualLessThan  extends CoupledObject implements BooleanValueObject {
+public class CouplingBooleanGreaterThan extends CoupledObject implements BooleanValueObject {
     private final boolean value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
-    public CouplingBooleanEqualLessThan(IntValueObject number1, IntValueObject number2) {
-        super(CoupleObjectType.BOOLEAN_EQUAL_LESS_THAN);
-        value = number1.getValue() <= number2.getValue();
+    public CouplingBooleanGreaterThan(IntValueObject number1, IntValueObject number2) {
+        super(CoupleObjectType.BOOLEAN_GREATER_THAN);
+        value = number1.getValue() > number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -36,8 +36,8 @@ public class CouplingBooleanEqualLessThan  extends CoupledObject implements Bool
     @Override
     public String getParsedGrammar() {
         return "<boolean_operation> -> <relative_operation> <arithmetic_expression> <arithmetic_expression>  \n"
-        		+ "<relative_operation> -> le_operator\n"
-                + number1.getParsedGrammar()
+        		+ "<relative_operation> -> gt_operator\n"
+        		+ number1.getParsedGrammar()
                 + number2.getParsedGrammar()                
                 ;
     }

@@ -1,6 +1,5 @@
-x = 2
-y = true
-if < x 2
-z = < x y
-else
-end
+x = + 3 8
+x = true
+print ( x )
+x = "BB"
+print ( x )

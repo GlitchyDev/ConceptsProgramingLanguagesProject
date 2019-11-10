@@ -22,34 +22,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2020">
-              <caret line="301" column="36" selection-start-line="301" selection-start-column="36" selection-end-line="301" selection-end-column="36" />
+            <state relative-caret-position="381">
+              <caret line="567" column="21" selection-start-line="567" selection-start-column="21" selection-end-line="567" selection-end-column="21" />
               <folding>
-                <element signature="e#29439#29440#0" expanded="true" />
-                <element signature="e#29543#29544#0" expanded="true" />
-                <element signature="e#29637#29638#0" expanded="true" />
-                <element signature="e#29757#29758#0" expanded="true" />
-                <element signature="e#29875#29876#0" expanded="true" />
-                <element signature="e#29987#29988#0" expanded="true" />
-                <element signature="e#30117#30118#0" expanded="true" />
-                <element signature="e#30245#30246#0" expanded="true" />
-                <element signature="e#30367#30368#0" expanded="true" />
-                <element signature="e#30448#30449#0" expanded="true" />
-                <element signature="e#30535#30536#0" expanded="true" />
-                <element signature="e#30641#30642#0" expanded="true" />
+                <element signature="e#41296#41297#0" expanded="true" />
+                <element signature="e#41400#41401#0" expanded="true" />
+                <element signature="e#41494#41495#0" expanded="true" />
+                <element signature="e#41614#41615#0" expanded="true" />
+                <element signature="e#41732#41733#0" expanded="true" />
+                <element signature="e#41844#41845#0" expanded="true" />
+                <element signature="e#41974#41975#0" expanded="true" />
+                <element signature="e#42102#42103#0" expanded="true" />
+                <element signature="e#42224#42225#0" expanded="true" />
+                <element signature="e#42305#42306#0" expanded="true" />
+                <element signature="e#42392#42393#0" expanded="true" />
+                <element signature="e#42498#42499#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/DCB/LexicalObjects/KeyWord.java">
+        <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingBooleanPrint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+            <state relative-caret-position="45">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Files/TestDocument.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -57,45 +69,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/DCB/LexicalAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="202" column="49" selection-start-line="202" selection-start-column="49" selection-end-line="202" selection-end-column="49" />
+            <state relative-caret-position="148">
+              <caret line="221" selection-start-line="221" selection-end-line="221" />
               <folding>
+                <element signature="e#12440#12441#0" expanded="true" />
                 <element signature="e#12477#12478#0" expanded="true" />
-                <element signature="e#12514#12515#0" expanded="true" />
-                <element signature="e#12564#12565#0" expanded="true" />
-                <element signature="e#12598#12599#0" expanded="true" />
-                <element signature="e#12651#12652#0" expanded="true" />
-                <element signature="e#12685#12686#0" expanded="true" />
-                <element signature="e#12726#12727#0" expanded="true" />
-                <element signature="e#12766#12767#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingIntAdd.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Files/TestDocument.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="9" selection-start-column="9" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/DCB/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="61" column="36" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -122,8 +101,11 @@
       <find>getObject</find>
       <find>getObjectLi</find>
       <find>else</find>
-      <find>FOR</find>
       <find>for</find>
+      <find>FOR</find>
+      <find>p</find>
+      <find>=</find>
+      <find>if</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -139,19 +121,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/CouplingIntAdd.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/CouplingIntMultiply.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/CouplingIntParentheses.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/CouplingStringConcat.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/CouplingStringParentheses.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/LexicalObjects/Identifier.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/Parser.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/StringValueObject.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/IntValueObject.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingStringParentheses.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/CouplingStatement.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingControlStatement.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingFunction.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanEqualLessThan.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanLessThan.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanGreaterThan.java" />
@@ -159,28 +135,43 @@
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/IntValueWrapper.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/StringValueWrapper.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/BooleanValueWrapper.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/StringIdentifierObject.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/IntIdentifierObject.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/BooleanIdentifierObject.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingStatement.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingStringPrint.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingIntPrint.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingPrint.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingAssignment.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingIntAdd.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingIntMultiply.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingIntParentheses.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingStringConcat.java" />
-        <option value="$PROJECT_DIR$/Files/TestDocument.txt" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/UndecaredValueWrapper.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/UndeclaredIdentifierObject.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingBooleanPrint.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanParetheses.java" />
-        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/CoupledObject.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/LexicalObjects/KeyWord.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingBooleanEqualLessThan.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingBooleanEqualGreaterThan.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanEqualGreaterThan.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingFunction.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingIfStatement.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingBooleanParetheses.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingStringPrint.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingBooleanPrint.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/CoupledObject.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingAssignment.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingIntAssignment.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingBooleanAssignment.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/UndeclaredIdentifierObject.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/IntIdentifierObject.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/BooleanIdentifierObject.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/StringIdentifierObject.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/LexicalObjects/Identifier.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/LexicalAnalyzer.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingStringAssignment.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingIntAssignment.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingBooleanAssignment.java" />
         <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingIntPrint.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingStringPrint.java" />
+        <option value="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingBooleanPrint.java" />
+        <option value="$PROJECT_DIR$/Files/TestDocument.txt" />
       </list>
     </option>
   </component>
@@ -255,7 +246,7 @@
               <item name="DCB" type="462c0819:PsiDirectoryNode" />
               <item name="ParserObjects" type="462c0819:PsiDirectoryNode" />
               <item name="Couplings" type="462c0819:PsiDirectoryNode" />
-              <item name="Operations" type="462c0819:PsiDirectoryNode" />
+              <item name="Statements" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ConceptsProgramingLanguagesProject" type="b2602c69:ProjectViewProjectNode" />
@@ -265,6 +256,17 @@
               <item name="ParserObjects" type="462c0819:PsiDirectoryNode" />
               <item name="Couplings" type="462c0819:PsiDirectoryNode" />
               <item name="Statements" type="462c0819:PsiDirectoryNode" />
+              <item name="Assignment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ConceptsProgramingLanguagesProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ConceptsProgramingLanguagesProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="DCB" type="462c0819:PsiDirectoryNode" />
+              <item name="ParserObjects" type="462c0819:PsiDirectoryNode" />
+              <item name="Couplings" type="462c0819:PsiDirectoryNode" />
+              <item name="Statements" type="462c0819:PsiDirectoryNode" />
+              <item name="Print" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ConceptsProgramingLanguagesProject" type="b2602c69:ProjectViewProjectNode" />
@@ -302,8 +304,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573337860288" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573353830395" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.DCB.ParserObjects.Couplings.Statements" />
+      <recent name="com.DCB.ParserObjects.Couplings.Statements.Assignment" />
+      <recent name="com.DCB.ParserObjects.Couplings.ControlStatements" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -361,7 +370,7 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.21062618" visible="true" weight="0.27221325" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.21062618" visible="true" weight="0.27221325" />
       <window_info id="Structure" order="1" sideWeight="0.7893738" side_tool="true" weight="0.13812602" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -369,16 +378,16 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4983845" weight="0.32739726" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8788368" visible="true" weight="0.3520548" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.48707592" weight="0.37260273" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49757674" weight="0.32739726" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.86995155" visible="true" weight="0.3520548" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.47980613" weight="0.37260273" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.12116317" side_tool="true" visible="true" weight="0.3520548" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.13004847" side_tool="true" visible="true" weight="0.3520548" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49192247" weight="0.32739726" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.48869145" weight="0.32739726" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -427,33 +436,21 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java</url>
-          <line>456</line>
+          <line>172</line>
           <properties />
-          <option name="timeStamp" value="26" />
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/DCB/Main.java</url>
-          <line>33</line>
+          <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java</url>
+          <line>128</line>
           <properties />
-          <option name="timeStamp" value="31" />
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/DCB/Main.java</url>
-          <line>41</line>
+          <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java</url>
+          <line>157</line>
           <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/DCB/Main.java</url>
-          <line>19</line>
-          <properties />
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/DCB/Main.java</url>
-          <line>32</line>
-          <properties />
-          <option name="timeStamp" value="41" />
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -469,13 +466,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="533" column="13" selection-start-line="533" selection-start-column="13" selection-end-line="533" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Identifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -497,63 +487,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="33" lean-forward="true" selection-start-line="4" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/LexicalObjects/Identifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-          <folding>
-            <element signature="e#889#890#0" expanded="true" />
-            <element signature="e#923#924#0" expanded="true" />
-            <element signature="e#954#955#0" expanded="true" />
-            <element signature="e#982#983#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-174">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#247#248#0" expanded="true" />
-            <element signature="e#275#276#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#367#368#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanEqualLessThan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="40" column="55" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanLessThan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="40" column="50" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanGreaterThan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="40" column="46" selection-start-line="40" selection-start-column="46" selection-end-line="40" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -579,17 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/StringIdentifierObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="39" selection-start-line="39" selection-end-line="42" selection-end-column="5" />
-          <folding>
-            <element signature="e#1218#1219#0" expanded="true" />
-            <element signature="e#1264#1265#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Files/OutputFile.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -602,17 +524,6 @@
             <element signature="e#377#378#0" expanded="true" />
             <element signature="e#418#419#0" expanded="true" />
             <element signature="e#456#457#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingIntParentheses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
-          <folding>
-            <element signature="e#1108#1109#0" expanded="true" />
-            <element signature="e#1144#1145#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -641,40 +552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingStringPrint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="36" selection-start-line="36" selection-end-line="46" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingAssignment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="15" column="85" selection-start-line="15" selection-start-column="85" selection-end-line="15" selection-end-column="85" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="61" column="36" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingControlStatement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -689,51 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/IntIdentifierObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="34" selection-start-line="34" selection-end-line="42" selection-end-column="5" />
-          <folding>
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1236#1237#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/BooleanValueWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="44" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="44" />
-          <folding>
-            <element signature="e#1016#1017#0" expanded="true" />
-            <element signature="e#1088#1089#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/BooleanIdentifierObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding>
-            <element signature="e#1231#1232#0" expanded="true" />
-            <element signature="e#1288#1289#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/UndeclaredIdentifierObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#1041#1042#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/UndecaredValueWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -741,67 +573,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingIntPrint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="49" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingBooleanPrint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="46" column="36" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingStringParentheses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="45" />
-          <folding>
-            <element signature="e#1154#1155#0" expanded="true" />
-            <element signature="e#1213#1214#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingBooleanParetheses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
-            <element signature="e#1007#1008#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingIntAdd.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Files/TestDocument.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CoupledObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="69" column="22" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+          <caret line="42" column="50" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -812,41 +587,258 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanGreaterThan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEqualLessThan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEqualGreaterThan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingStringParentheses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingIntParentheses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingIfStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingBooleanParetheses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="50" selection-start-line="11" selection-start-column="50" selection-end-line="11" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanLessThan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/BooleanValueWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="e#1016#1017#0" expanded="true" />
+            <element signature="e#1085#1086#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/UnidentifiedIdentifierObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="17" selection-start-line="17" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Identifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/LexicalObjects/Identifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DCB/LexicalAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="202" column="49" selection-start-line="202" selection-start-column="49" selection-end-line="202" selection-end-column="49" />
+        <state relative-caret-position="148">
+          <caret line="221" selection-start-line="221" selection-end-line="221" />
           <folding>
+            <element signature="e#12440#12441#0" expanded="true" />
             <element signature="e#12477#12478#0" expanded="true" />
-            <element signature="e#12514#12515#0" expanded="true" />
-            <element signature="e#12564#12565#0" expanded="true" />
-            <element signature="e#12598#12599#0" expanded="true" />
-            <element signature="e#12651#12652#0" expanded="true" />
-            <element signature="e#12685#12686#0" expanded="true" />
-            <element signature="e#12726#12727#0" expanded="true" />
-            <element signature="e#12766#12767#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/StringIdentifierObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="12" column="40" lean-forward="true" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/IntIdentifierObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" selection-start-line="23" selection-end-line="29" selection-end-column="5" />
+          <folding>
+            <element signature="e#827#828#0" expanded="true" />
+            <element signature="e#864#865#0" expanded="true" />
+            <element signature="e#932#933#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CoupledObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/BooleanIdentifierObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="47" column="31" selection-start-line="47" selection-end-line="50" />
+          <folding>
+            <element signature="e#878#879#0" expanded="true" />
+            <element signature="e#919#920#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingIntAssignment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="38" column="122" selection-start-line="38" selection-start-column="122" selection-end-line="38" selection-end-column="122" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingBooleanAssignment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="36" column="130" selection-start-line="36" selection-start-column="130" selection-end-line="36" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#951#952#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingStringAssignment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="34" selection-start-line="34" selection-end-line="37" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2020">
-          <caret line="301" column="36" selection-start-line="301" selection-start-column="36" selection-end-line="301" selection-end-column="36" />
+        <state relative-caret-position="381">
+          <caret line="567" column="21" selection-start-line="567" selection-start-column="21" selection-end-line="567" selection-end-column="21" />
           <folding>
-            <element signature="e#29439#29440#0" expanded="true" />
-            <element signature="e#29543#29544#0" expanded="true" />
-            <element signature="e#29637#29638#0" expanded="true" />
-            <element signature="e#29757#29758#0" expanded="true" />
-            <element signature="e#29875#29876#0" expanded="true" />
-            <element signature="e#29987#29988#0" expanded="true" />
-            <element signature="e#30117#30118#0" expanded="true" />
-            <element signature="e#30245#30246#0" expanded="true" />
-            <element signature="e#30367#30368#0" expanded="true" />
-            <element signature="e#30448#30449#0" expanded="true" />
-            <element signature="e#30535#30536#0" expanded="true" />
-            <element signature="e#30641#30642#0" expanded="true" />
+            <element signature="e#41296#41297#0" expanded="true" />
+            <element signature="e#41400#41401#0" expanded="true" />
+            <element signature="e#41494#41495#0" expanded="true" />
+            <element signature="e#41614#41615#0" expanded="true" />
+            <element signature="e#41732#41733#0" expanded="true" />
+            <element signature="e#41844#41845#0" expanded="true" />
+            <element signature="e#41974#41975#0" expanded="true" />
+            <element signature="e#42102#42103#0" expanded="true" />
+            <element signature="e#42224#42225#0" expanded="true" />
+            <element signature="e#42305#42306#0" expanded="true" />
+            <element signature="e#42392#42393#0" expanded="true" />
+            <element signature="e#42498#42499#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingIntPrint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="29" selection-start-line="29" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingStringPrint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="31" column="68" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingBooleanPrint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Files/TestDocument.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
         </state>
       </provider>
     </entry>

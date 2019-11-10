@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings.Statements;
+package com.DCB.ParserObjects.Couplings.Statements.Print;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CouplingStatement;
@@ -9,7 +9,7 @@ public class CouplingBooleanPrint extends CouplingStatement implements IntValueO
     private final BooleanValueObject booleanValueObject;
 
     public CouplingBooleanPrint(BooleanValueObject booleanValueObject) {
-        super(CoupleObjectType.PRINT_INT);
+        super(CoupleObjectType.PRINT_BOOLEAN);
         this.booleanValueObject = booleanValueObject;
     }
 
@@ -30,7 +30,7 @@ public class CouplingBooleanPrint extends CouplingStatement implements IntValueO
 
     @Override
     public String getStringIdentifier() {
-        return null;
+        return "[" + coupleObjectType + " | ID:" + booleanValueObject.getStringIdentifier() + " ]";
     }
 
     @Override

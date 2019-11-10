@@ -218,15 +218,9 @@ public class LexicalAnalyzer {
         // If the Variable was already declared, search for it and add it
         for (Identifier identifier : identifiers) {
             if (identifier.getIdentifier().equals(input)) {
-                Identifier newIdentifer = new Identifier(identifier.getVariableType(),identifier.getIdentifier());
-                newIdentifer.setValue(identifier.getValue());
+                Identifier newIdentifer = new Identifier(KeyWord.VariableType.TYPELESS,identifier.getIdentifier());
                 analyzedScript.add(newIdentifer);
                 scriptLines.add(currentLineNumber);
-                if(analyzedScript.size() > 1) {
-                    if(analyzedScript.get(analyzedScript.size()-2) instanceof KeyWord && analyzedScript.get(analyzedScript.size()-2) == KeyWord.FUNCTION) {
-                        newIdentifer.setVariableType(KeyWord.VariableType.FUNCTION_IDENTIFIER);
-                    }
-                }
                 return true;
             }
         }
@@ -243,17 +237,7 @@ public class LexicalAnalyzer {
         return false;
     }
 
-    public void checkIdentifier() {
-        Value value = (Value) analyzedScript.get(analyzedScript.size()-1);
-        if(analyzedScript.size() >= 3) {
-            if(analyzedScript.get(analyzedScript.size()-2) instanceof KeyWord && analyzedScript.get(analyzedScript.size()-2) == KeyWord.ASSIGN) {
-                if(analyzedScript.get(analyzedScript.size()-3) instanceof Identifier) {
-                    ((Identifier) analyzedScript.get(analyzedScript.size()-3)).setVariableType(value.getVariableType());
-                    ((Identifier) analyzedScript.get(analyzedScript.size()-3)).setValue(value);
-                }
-            }
-        }
-    }
+
 
 
     // Return True if it can create a valid Value from given Input
@@ -263,20 +247,17 @@ public class LexicalAnalyzer {
         if (input.charAt(0) == '"' && input.length() > 1 && input.charAt(input.length() - 1) == '"') {
             analyzedScript.add(new Value<>(KeyWord.VariableType.STRING, input.replace("\"", "")));
             scriptLines.add(currentLineNumber);
-            checkIdentifier();
             return true;
         } else {
             // If we know its not a string, lets see if it contains numbers, and if it is a number input
             if (Character.isDigit(input.charAt(0))) { // Check if Number
                 analyzedScript.add(new Value<>(KeyWord.VariableType.NUMBER, Integer.valueOf(input)));
                 scriptLines.add(currentLineNumber);
-                checkIdentifier();
                 return true;
             } else {
                 if (input.toUpperCase().equals("TRUE") || input.toUpperCase().equals("FALSE")) { // Check if Boolean
                     analyzedScript.add(new Value<>(KeyWord.VariableType.BOOLEAN, input.toUpperCase().equals("TRUE")));
                     scriptLines.add(currentLineNumber);
-                    checkIdentifier();
                     return true;
                 }
             }

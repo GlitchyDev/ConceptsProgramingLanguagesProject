@@ -1,4 +1,4 @@
-package com.DCB.ParserObjects.Couplings.Statements;
+package com.DCB.ParserObjects.Couplings.Statements.Print;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CouplingStatement;
@@ -29,7 +29,7 @@ public class CouplingIntPrint extends CouplingStatement implements IntValueObjec
 
     @Override
     public String getStringIdentifier() {
-        return null;
+        return "[" + coupleObjectType + " | ID:" + intValueObject.getStringIdentifier() + " ]";
     }
 
     @Override
