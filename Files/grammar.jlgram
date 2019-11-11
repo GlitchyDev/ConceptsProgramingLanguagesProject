@@ -31,6 +31,7 @@ id -> letter
 literal_integer -> digit literal_integer | digit
 literal_boolean -> true | false
 literal_string -> "{text}"
+literal_undeclared -> ????
 assignment_operator -> =
 le_operator -> <=
 lt_operator -> <
@@ -38,6 +39,7 @@ ge_operator -> >=
 gt_operator -> >
 eq_operator -> = =
 ne_operator -> !=
+and_operator -> && ???
 add_operator -> +
 sub_operator -> -
 mul_operator -> *

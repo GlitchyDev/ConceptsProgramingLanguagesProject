@@ -36,9 +36,9 @@ public class CouplingStringPrint extends CouplingStatement implements StringValu
     public String getParsedGrammar() {
         String grammer = "";
         if(!isLateStatement()) {
-            grammer += "<block> -> <statement> <block> \n";
+            grammer += "\n<block> -> <statement> <block> \n";
         } else {
-            grammer += "<block> -> <statement> \n";
+            grammer += "\n<block> -> <statement> \n";
         }
 
         grammer += "<statement> -> <print_statement> \n" +

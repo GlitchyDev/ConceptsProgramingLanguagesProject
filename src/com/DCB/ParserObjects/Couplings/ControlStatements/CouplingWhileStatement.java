@@ -41,7 +41,26 @@ public class CouplingWhileStatement extends CouplingStatement {
 
     @Override
     public String getParsedGrammar() {
-        return "I CANT DO THIS AHHHH~!!!!";
+    	
+    	String containGrammer = "\n";
+    	for (int i = 0; i<containedStatements.size();i++)
+    	{
+    		containGrammer += containedStatements.get(i).getParsedGrammar();
+    	}
+    	
+    	String grammer = "";
+        if(!isLateStatement()) {
+            grammer += "\n<block> -> <statement> <block> \n";
+        } else {
+            grammer += "\n<block> -> <statement> \n";
+        }
+
+        grammer += "<statement> -> <while_statement>\r\n" + 
+        		"<while_statement> -> while <boolean_expression> <block> end\r\n"
+                + booleanValueObject.getParsedGrammar()
+                + containGrammer;
+                ;
+        return grammer;
     }
 }
 

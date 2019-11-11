@@ -35,8 +35,8 @@ public class CouplingBooleanEqualGreaterThan extends CoupledObject implements Bo
 
     @Override
     public String getParsedGrammar() {
-        return "<boolean_operation> -> <relative_operation> <arithmetic_expression> <arithmetic_expression>  \n"
-        		+ "<relative_operation> -> le_operator\n"
+        return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
+        		+ "<relative_op> -> ge_operator\n"
                 + number1.getParsedGrammar()
                 + number2.getParsedGrammar()                
                 ;

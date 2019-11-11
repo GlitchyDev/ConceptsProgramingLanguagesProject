@@ -35,8 +35,8 @@ public class CouplingBooleanEqualLessThan  extends CoupledObject implements Bool
 
     @Override
     public String getParsedGrammar() {
-        return "<boolean_operation> -> <relative_operation> <arithmetic_expression> <arithmetic_expression>  \n"
-        		+ "<relative_operation> -> le_operator\n"
+        return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
+        		+ "<relative_op> -> le_operator\n"
                 + number1.getParsedGrammar()
                 + number2.getParsedGrammar()                
                 ;

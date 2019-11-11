@@ -43,9 +43,9 @@ public class CouplingIntAssignment extends CouplingStatement implements IntValue
     public String getParsedGrammar() {
         String grammer = "";
         if (!isLateStatement()) {
-            grammer += "<block> -> <statement> <block> \n";
+            grammer += "\n<block> -> <statement> <block> \n";
         } else {
-            grammer += "<block> -> <statement> \n";
+            grammer += "\n<block> -> <statement> \n";
         }
 
         grammer += "<statement> -> <assignment_statement> \n" +

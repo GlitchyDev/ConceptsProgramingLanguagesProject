@@ -37,13 +37,13 @@ public class CouplingBooleanPrint extends CouplingStatement implements IntValueO
     public String getParsedGrammar() {
         String grammer = "";
         if(!isLateStatement()) {
-            grammer += "<block> -> <statement> <block> \n";
+            grammer += "\n<block> -> <statement> <block> \n";
         } else {
-            grammer += "<block> -> <statement> \n";
+            grammer += "\n<block> -> <statement> \n";
         }
 
         grammer += "<statement> -> <print_statement> \n" +
-                "<print_statement> -> print (<arithmetic_expression) \n"
+                "<print_statement> -> print (<arithmetic_expression>) \n"
                 + booleanValueObject.getParsedGrammar();
         return grammer;
     }

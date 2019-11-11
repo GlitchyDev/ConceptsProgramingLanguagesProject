@@ -35,7 +35,10 @@ public class CouplingBooleanAnd extends CoupledObject implements BooleanValueObj
 
     @Override
     public String getParsedGrammar() {
-        return null
+        return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
+        		+ "<relative_op> -> and_operator\n"
+                + number1.getParsedGrammar()
+                + number2.getParsedGrammar()                
                 ;
     }
 

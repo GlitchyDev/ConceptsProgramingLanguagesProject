@@ -60,7 +60,10 @@ public class CouplingBooleanEquals extends CoupledObject implements BooleanValue
 
     @Override
     public String getParsedGrammar() {
-        return null
+        return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
+        		+ "<relative_op> -> eq_operator\n"
+        		//+ number1.getParsedGrammar()
+                //+ number2.getParsedGrammar()                    
                 ;
     }
 

@@ -35,8 +35,8 @@ public class CouplingBooleanLessThan extends CoupledObject implements BooleanVal
 
     @Override
     public String getParsedGrammar() {
-            return "<boolean_operation> -> <relative_operation> <arithmetic_expression> <arithmetic_expression>  \n"
-            		+ "<relative_operation> -> lt_operator\n"
+            return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
+            		+ "<relative_op> -> lt_operator\n"
             		+ number1.getParsedGrammar()
                     + number2.getParsedGrammar()                    
                     ;

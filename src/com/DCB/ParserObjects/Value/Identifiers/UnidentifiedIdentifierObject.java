@@ -36,6 +36,6 @@ public class UnidentifiedIdentifierObject extends CoupledObject {
 
     @Override
     public String getParsedGrammar() {
-        return "<arithmetic_expression> -> <literal_undeclared> \n";
+        return "<arithmetic_expression> -> literal_undeclared \n";
     }
 }

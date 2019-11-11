@@ -47,7 +47,27 @@ public class CouplingForStatement extends CouplingStatement {
 
     @Override
     public String getParsedGrammar() {
-        return "I CANT DO THIS AHHHH~!!!!";
+    	
+    	String containGrammer = "\n";
+    	for (int i = 0; i<containedStatements.size();i++)
+    	{
+    		containGrammer += containedStatements.get(i).getParsedGrammar();
+    	}
+    	
+    	String grammer = "";
+        if(!isLateStatement()) {
+            grammer += "\n<block> -> <statement> <block> \n";
+        } else {
+            grammer += "\n<block> -> <statement> \n";
+        }
+
+        grammer += "<statement> -> <for_statement>\r\n"
+        		+ "<for_statement> -> for id = <iter> <block> end\n"
+                + couplingIntAssignment.getParsedGrammar()
+                + intValueObject.getParsedGrammar()
+                + containGrammer
+                ;
+        return grammer;
     }
 }
 

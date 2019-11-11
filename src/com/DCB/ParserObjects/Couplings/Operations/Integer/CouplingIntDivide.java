@@ -37,7 +37,10 @@ public class CouplingIntDivide extends CoupledObject implements IntValueObject {
 
     @Override
     public String getParsedGrammar() {
-        return null
+        return "<arithmetic_expression> -> <binary_expression> \n"
+                + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
+                + "<arithmetic_op> -> div_operator\n"
+                + number1.getParsedGrammar() + number2.getParsedGrammar()
                 ;
     }
 

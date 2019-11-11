@@ -47,6 +47,30 @@ public class CouplingIfStatement extends CouplingStatement {
 
     @Override
     public String getParsedGrammar() {
-        return "I CANT DO THIS AHHHH~!!!!";
+    	String ifGrammer = "\n";
+    	String elseGrammer = "\n";
+    	for (int i = 0; i<ifStatements.size();i++)
+    	{
+    		ifGrammer += ifStatements.get(i).getParsedGrammar();
+    	}
+    	
+    	for (int i = 0; i<elseStatements.size();i++)
+    	{
+    		elseGrammer += elseStatements.get(i).getParsedGrammar();
+    	}
+    	
+    	String grammer = "";
+        if(!isLateStatement()) {
+            grammer += "\n<block> -> <statement> <block> \n";
+        } else {
+            grammer += "\n<block> -> <statement> \n";
+        }
+
+        grammer += "<statement> -> <if_statement>\n"
+        		+ "<if_statement> -> if <boolean_expression> <block> else <block> end\r\n"
+                + booleanValueObject.getParsedGrammar() //Missing arithExp to ID and Lit Int
+                + ifGrammer + elseGrammer;
+                ;
+        return grammer;
     }
 }

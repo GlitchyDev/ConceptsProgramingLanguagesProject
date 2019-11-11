@@ -60,7 +60,10 @@ public class CouplingBooleanNotEquals extends CoupledObject implements BooleanVa
 
     @Override
     public String getParsedGrammar() {
-        return null
+        return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
+        		+ "<relative_op> -> ne_operator\n"
+        		//+ object1. .getParsedGrammar()
+                //+ number2.getParsedGrammar()                    
                 ;
     }
 
