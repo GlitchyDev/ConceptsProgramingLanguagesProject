@@ -5,14 +5,14 @@ import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
-public class CouplingBooleanGreaterThan extends CoupledObject implements BooleanValueObject {
+public class CouplingBooleanNotEqual extends CoupledObject implements BooleanValueObject {
     private final boolean value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
-    public CouplingBooleanGreaterThan(IntValueObject number1, IntValueObject number2) {
-        super(CoupleObjectType.BOOLEAN_GREATER_THAN);
-        value = number1.getValue() > number2.getValue();
+    public CouplingBooleanNotEqual(IntValueObject number1, IntValueObject number2) {
+        super(CoupleObjectType.BOOLEAN_NOT_EQUAl);
+        value = number1.getValue() != number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -35,10 +35,7 @@ public class CouplingBooleanGreaterThan extends CoupledObject implements Boolean
 
     @Override
     public String getParsedGrammar() {
-        return "<boolean_operation> -> <relative_operation> <arithmetic_expression> <arithmetic_expression>  \n"
-        		+ "<relative_operation> -> gt_operator\n"
-        		+ number1.getParsedGrammar()
-                + number2.getParsedGrammar()                
+        return null
                 ;
     }
 
@@ -50,4 +47,3 @@ public class CouplingBooleanGreaterThan extends CoupledObject implements Boolean
 
 
 }
-

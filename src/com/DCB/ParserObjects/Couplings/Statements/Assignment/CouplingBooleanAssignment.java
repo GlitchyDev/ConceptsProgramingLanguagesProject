@@ -12,7 +12,7 @@ public class CouplingBooleanAssignment extends CouplingStatement implements Bool
     private final BooleanValueObject booleanValueObject;
 
     public CouplingBooleanAssignment(BooleanIdentifierObject booleanIdentifierObject, BooleanValueObject booleanValueObject) {
-        super(CoupleObjectType.ASSIGN_INT);
+        super(CoupleObjectType.ASSIGN_BOOLEAN);
         this.booleanIdentifierObject = booleanIdentifierObject;
         this.booleanValueObject = booleanValueObject;
     }

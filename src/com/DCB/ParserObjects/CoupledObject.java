@@ -56,7 +56,7 @@ public abstract class CoupledObject {
         NUMBER_EXPONTENTIAL,
         NUMBER_MOD,
         NUMBER_IDENTITY, // NO
-        NUMBER_INVERT, // NO
+        NUMBER_INVERT_IDENTITY, // NO
 
 
         IF,

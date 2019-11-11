@@ -1,17 +1,18 @@
-package com.DCB.ParserObjects.Couplings.Operations;
+package com.DCB.ParserObjects.Couplings.Operations.Boolean;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
-public class CouplingIntMod extends CoupledObject implements IntValueObject {
-    private final int value;
+public class CouplingBooleanEqual extends CoupledObject implements BooleanValueObject {
+    private final boolean value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
-    public CouplingIntMod(IntValueObject number1, IntValueObject number2) {
-        super(CoupleObjectType.NUMBER_MOD);
-        value = number1.getValue() % number2.getValue();
+    public CouplingBooleanEqual(IntValueObject number1, IntValueObject number2) {
+        super(CoupleObjectType.BOOLEAN_EQUAl);
+        value = number1.getValue() == number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -23,7 +24,7 @@ public class CouplingIntMod extends CoupledObject implements IntValueObject {
 
     @Override
     public KeyWord.VariableType getReturnType() {
-        return KeyWord.VariableType.NUMBER;
+        return KeyWord.VariableType.BOOLEAN;
     }
 
 
@@ -34,16 +35,13 @@ public class CouplingIntMod extends CoupledObject implements IntValueObject {
 
     @Override
     public String getParsedGrammar() {
-        return "<arithmetic_expression> -> <binary_expression> \n"
-                + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
-                + "<arithmetic_op> -> mod_operator\n"
-                + number1.getParsedGrammar() + number2.getParsedGrammar()
+        return null
                 ;
     }
 
 
     @Override
-    public int getValue() {
+    public boolean getValue() {
         return value;
     }
 

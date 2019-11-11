@@ -12,7 +12,7 @@ public class CouplingStringAssignment extends CouplingStatement implements Strin
     private final StringValueObject stringValueObject;
 
     public CouplingStringAssignment(StringIdentifierObject stringIdentifierObject, StringValueObject stringValueObject) {
-        super(CoupleObjectType.ASSIGN_INT);
+        super(CoupleObjectType.ASSIGN_STRING);
         this.stringIdentifierObject = stringIdentifierObject;
         this.stringValueObject = stringValueObject;
     }

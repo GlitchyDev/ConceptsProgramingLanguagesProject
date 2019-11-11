@@ -7,10 +7,8 @@ import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingForStatement;
 import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingIfStatement;
 import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingWhileStatement;
 import com.DCB.ParserObjects.Couplings.Operations.*;
-import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanEqualGreaterThan;
-import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanEqualLessThan;
-import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanGreaterThan;
-import com.DCB.ParserObjects.Couplings.Operations.Boolean.CouplingBooleanLessThan;
+import com.DCB.ParserObjects.Couplings.Operations.Boolean.*;
+import com.DCB.ParserObjects.Couplings.Operations.Integer.*;
 import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingBooleanParetheses;
 import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingIntParentheses;
 import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingStringParentheses;
@@ -29,7 +27,6 @@ import com.DCB.ParserObjects.Value.Wrapper.BooleanValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
 
-import java.security.Key;
 import java.util.ArrayList;
 
 
@@ -323,14 +320,6 @@ public class CouplingObjectFactory {
                     }
                 }
                 break;
-                /*
-            case DO:
-
-                break;
-            case REPEAT:
-
-                break;
-                */
             case PRINT:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     return true;
@@ -431,8 +420,6 @@ public class CouplingObjectFactory {
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+2) instanceof IntValueObject) {
                         return true;
-                    } else {
-                        // Have it check if there is a unresolved statement next to it, like a parenthis
                     }
                 }
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
@@ -444,8 +431,6 @@ public class CouplingObjectFactory {
             case SUBTRACT:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+2) instanceof IntValueObject) {
-                        return true;
-                    } else {
                         return true;
                     }
                 }
@@ -483,16 +468,6 @@ public class CouplingObjectFactory {
                     if (getObject(couplingPosition + 2) instanceof IntValueObject) {
                         return true;
                     }
-                }
-                break;
-            case NUMBER_IDENTITY:
-                if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    return true;
-                }
-                break;
-            case NUMBER_INVERT:
-                if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    return true;
                 }
                 break;
         }
@@ -604,14 +579,6 @@ public class CouplingObjectFactory {
                     remove(i);
                 }
                 break;
-                /*
-            case DO:
-
-                break;
-            case REPEAT:
-
-                break;
-                */
             case PRINT:
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
                     CouplingStringPrint couplingStringPrint = new CouplingStringPrint((StringValueObject) getObject(couplingPosition+1));
@@ -786,13 +753,22 @@ public class CouplingObjectFactory {
                 remove(couplingPosition+(1));
                 break;
             case AND:
-
+                CouplingBooleanAnd couplingBooleanAnd = new CouplingBooleanAnd(((BooleanValueObject)getObject(couplingPosition+1)),((BooleanValueObject)getObject(couplingPosition+2)));
+                remove(couplingPosition+(2));
+                replace(couplingPosition,couplingBooleanAnd);
+                remove(couplingPosition+(1));
                 break;
             case EQUAL:
-
+                CouplingBooleanEquals couplingBooleanEquals = new CouplingBooleanEquals(getObject(couplingPosition+1),getObject(couplingPosition+2));
+                remove(couplingPosition+(2));
+                replace(couplingPosition,couplingBooleanEquals);
+                remove(couplingPosition+(1));
                 break;
             case NOT_EQUAL:
-
+                CouplingBooleanNotEquals couplingBooleanNotEquals = new CouplingBooleanNotEquals(getObject(couplingPosition+1),getObject(couplingPosition+2));
+                remove(couplingPosition+(2));
+                replace(couplingPosition,couplingBooleanNotEquals);
+                remove(couplingPosition+(1));
                 break;
             case ADD:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
@@ -801,8 +777,6 @@ public class CouplingObjectFactory {
                         remove(couplingPosition+(2));
                         replace(couplingPosition,couplingIntAdd);
                         remove(couplingPosition+(1));
-                    } else {
-                        // This is Number Identity
                     }
                 } else {
                     if (getObject(couplingPosition + 1) instanceof StringValueObject) {
@@ -818,9 +792,10 @@ public class CouplingObjectFactory {
             case SUBTRACT:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
                     if(getObject(couplingPosition+2) instanceof IntValueObject) {
-
-                    } else {
-                        // This is Number Invert
+                        CouplingIntSubtract couplingIntSubtract = new CouplingIntSubtract(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                        remove(couplingPosition+(2));
+                        replace(couplingPosition,couplingIntSubtract);
+                        remove(couplingPosition+(1));
                     }
                 }
                 break;
@@ -831,27 +806,48 @@ public class CouplingObjectFactory {
                         remove(couplingPosition+(2));
                         replace(couplingPosition,couplingIntMultiply);
                         remove(couplingPosition+(1));
-                        // This is Number Identity
                     }
                 }
                 break;
             case DIVIDE:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        CouplingIntDivide couplingIntDivide = new CouplingIntDivide(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                        remove(couplingPosition+(2));
+                        replace(couplingPosition,couplingIntDivide);
+                        remove(couplingPosition+(1));
+                    }
+                }
                 break;
             case INVERT_DIVIDE:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        CouplingIntInvertDivide couplingIntInvertDivide = new CouplingIntInvertDivide(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                        remove(couplingPosition+(2));
+                        replace(couplingPosition,couplingIntInvertDivide);
+                        remove(couplingPosition+(1));
+                    }
+                }
                 break;
             case EXPONENTIAL:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        CouplingIntExponential couplingIntExponential = new CouplingIntExponential(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                        remove(couplingPosition+(2));
+                        replace(couplingPosition,couplingIntExponential);
+                        remove(couplingPosition+(1));
+                    }
+                }
                 break;
             case MOD:
-
-                break;
-            case NUMBER_IDENTITY:
-
-                break;
-            case NUMBER_INVERT:
-
+                if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                    if(getObject(couplingPosition+2) instanceof IntValueObject) {
+                        CouplingIntMod couplingIntMod = new CouplingIntMod(((IntValueObject)getObject(couplingPosition+1)),((IntValueObject)getObject(couplingPosition+2)));
+                        remove(couplingPosition+(2));
+                        replace(couplingPosition,couplingIntMod);
+                        remove(couplingPosition+(1));
+                    }
+                }
                 break;
         }
     }
