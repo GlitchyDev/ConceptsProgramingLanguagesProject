@@ -1,6 +1,7 @@
 package com.DCB;
 
 import com.DCB.ParserObjects.CouplingObjectFactory;
+import com.DCB.ParserObjects.CouplingStatement;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,9 @@ public class Parser {
         this.couplingObjectFactory = new CouplingObjectFactory(analyzedScript,lineNumbers,currentLineNumber);
 
         couplingObjectFactory.createAllCouplings();
+        if(analyzedScript.get(analyzedScript.size()-1) instanceof CouplingStatement) {
+            ((CouplingStatement) analyzedScript.get(analyzedScript.size()-1)).setLateStatement();
+        }
     }
 
     public ArrayList<Object> getAnalyzedScript() {
