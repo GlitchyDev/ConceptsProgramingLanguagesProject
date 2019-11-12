@@ -1,7 +1,11 @@
 package com.DCB;
 
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingControlStatement;
 import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingForStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingIfStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingWhileStatement;
 
 import java.io.*;
 import java.util.Scanner;

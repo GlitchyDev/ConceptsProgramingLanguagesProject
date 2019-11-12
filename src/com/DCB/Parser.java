@@ -16,11 +16,7 @@ public class Parser {
         this.currentLineNumber = linesRead;
         this.couplingObjectFactory = new CouplingObjectFactory(analyzedScript,lineNumbers,currentLineNumber);
 
-        if(couplingObjectFactory.createAllCouplings()) {
-            System.out.println("Parsing Completed!");
-        } else {
-            System.out.println("Parsing Failed");
-        }
+        couplingObjectFactory.createAllCouplings();
     }
 
     public ArrayList<Object> getAnalyzedScript() {

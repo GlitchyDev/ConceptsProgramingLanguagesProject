@@ -1,12 +1,13 @@
 package com.DCB.ParserObjects.Couplings.ControlStatements;
 
 import com.DCB.LexicalObjects.KeyWord;
+import com.DCB.ParserObjects.CouplingControlStatement;
 import com.DCB.ParserObjects.CouplingStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 import java.util.ArrayList;
 
-public class CouplingWhileStatement extends CouplingStatement {
+public class CouplingWhileStatement extends CouplingControlStatement {
     private final BooleanValueObject booleanValueObject;
     private final ArrayList<CouplingStatement> containedStatements;
 
@@ -59,8 +60,21 @@ public class CouplingWhileStatement extends CouplingStatement {
         		"<while_statement> -> while <boolean_expression> <block> end\r\n"
                 + booleanValueObject.getParsedGrammar()
                 + containGrammer;
-                ;
         return grammer;
     }
+
+    public BooleanValueObject getBooleanValueObject() {
+        return booleanValueObject;
+    }
+
+    public ArrayList<CouplingStatement> getContainedStatements() {
+        return containedStatements;
+    }
+
+    @Override
+    public void setLateStatement() {
+        containedStatements.get(containedStatements.size()-1).setLateStatement();
+    }
 }
+
 

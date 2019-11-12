@@ -74,7 +74,7 @@ public class CouplingObjectFactory {
 
     // So what if we looked ahead, and marked anything intertwine parenthesis as "Urgent Complete first",
 
-    public boolean createAllCouplings() {
+    public void createAllCouplings() {
         // Check and removal all raw values and replace with other couplings
         for(int i = 0; i < parsedScript.size(); i++) {
             Object object = getObject(i);
@@ -207,8 +207,6 @@ public class CouplingObjectFactory {
 
         }
 
-        return true;
-
     }
 
 
@@ -290,34 +288,33 @@ public class CouplingObjectFactory {
                 }
                 break;
             case FOR:
-                if(getObject(couplingPosition+1) instanceof KeyWord && getObject(couplingPosition+1) == KeyWord.LEFT_PARENTHESIS) {
-                    if(getObject(couplingPosition+2) instanceof CouplingIntAssignment) {
-                        if (getObject(couplingPosition + 3) instanceof KeyWord && getObject(couplingPosition + 3) == KeyWord.COLLEN) {
-                            if (getObject(couplingPosition + 4) instanceof IntValueObject) {
-                                if (getObject(couplingPosition + 5) instanceof KeyWord && getObject(couplingPosition + 5) == KeyWord.RIGHT_PARENTHESIS) {
-                                    int foundEndLine = -1;
-                                    int nonStatementFoundLine = -1;
-                                    for (int i = couplingPosition + 6; i < parsedScript.size(); i++) {
-                                        if (!(getObject(i) instanceof CouplingStatement)) {
-                                            if (getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
-                                                foundEndLine = i;
-                                                break;
-                                            } else {
-                                                nonStatementFoundLine = getObjectLineNumber(i);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if (nonStatementFoundLine == -1) {
-                                        if (foundEndLine != -1) {
-                                            return true;
-                                        }
 
+                if(getObject(couplingPosition+1) instanceof CouplingIntAssignment) {
+                    if (getObject(couplingPosition + 2) instanceof KeyWord && getObject(couplingPosition + 2
+                    ) == KeyWord.COLLEN) {
+                        if (getObject(couplingPosition + 3) instanceof IntValueObject) {
+                            int foundEndLine = -1;
+                            int nonStatementFoundLine = -1;
+                            for (int i = couplingPosition + 4; i < parsedScript.size(); i++) {
+                                if (!(getObject(i) instanceof CouplingStatement)) {
+                                    if (getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
+                                        foundEndLine = i;
+                                        break;
+                                    } else {
+                                        nonStatementFoundLine = getObjectLineNumber(i);
+                                        break;
                                     }
                                 }
                             }
+                            if (nonStatementFoundLine == -1) {
+                                if (foundEndLine != -1) {
+                                    return true;
+                                }
+
+                            }
                         }
                     }
+
                 }
                 break;
             case PRINT:
@@ -522,18 +519,17 @@ public class CouplingObjectFactory {
                 break;
             case FOR:
                 encapsulatedStatements = new ArrayList<>();
-                CouplingIntAssignment assignmentStatemnt = (CouplingIntAssignment) getObject(couplingPosition+2);
-                IntValueObject intValueObject = (IntValueObject) getObject(couplingPosition+4);
+                CouplingIntAssignment assignmentStatemnt = (CouplingIntAssignment) getObject(couplingPosition+1);
+                IntValueObject intValueObject = (IntValueObject) getObject(couplingPosition+3);
 
                 encapsulatedStatements.add(couplingPosition+1); // (
                 encapsulatedStatements.add(couplingPosition+2); // x = 5
                 encapsulatedStatements.add(couplingPosition+3); // :
-                encapsulatedStatements.add(couplingPosition+4); // x
-                encapsulatedStatements.add(couplingPosition+5); // )
+
 
                 ArrayList<CouplingStatement> containedStatements = new ArrayList<>();
                 foundEnd = false;
-                cursor = couplingPosition+6;
+                cursor = couplingPosition+4;
                 while(!foundEnd) {
                     if(getObject(cursor) instanceof CouplingStatement) {
                         containedStatements.add((CouplingStatement) getObject(cursor));

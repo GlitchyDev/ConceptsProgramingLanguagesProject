@@ -1,6 +1,7 @@
 package com.DCB.ParserObjects.Couplings.ControlStatements;
 
 import com.DCB.LexicalObjects.KeyWord;
+import com.DCB.ParserObjects.CouplingControlStatement;
 import com.DCB.ParserObjects.CouplingStatement;
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingIntAssignment;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
@@ -9,7 +10,7 @@ import com.sun.jdi.IntegerValue;
 
 import java.util.ArrayList;
 
-public class CouplingForStatement extends CouplingStatement {
+public class CouplingForStatement extends CouplingControlStatement {
     private final CouplingIntAssignment couplingIntAssignment;
     private final IntValueObject intValueObject;
     private final ArrayList<CouplingStatement> containedStatements;
@@ -68,6 +69,23 @@ public class CouplingForStatement extends CouplingStatement {
                 + containGrammer
                 ;
         return grammer;
+    }
+
+    public CouplingIntAssignment getCouplingIntAssignment() {
+        return couplingIntAssignment;
+    }
+
+    public IntValueObject getIntValueObject() {
+        return intValueObject;
+    }
+
+    public ArrayList<CouplingStatement> getContainedStatements() {
+        return containedStatements;
+    }
+
+    @Override
+    public void setLateStatement() {
+        containedStatements.get(containedStatements.size()-1).setLateStatement();
     }
 }
 

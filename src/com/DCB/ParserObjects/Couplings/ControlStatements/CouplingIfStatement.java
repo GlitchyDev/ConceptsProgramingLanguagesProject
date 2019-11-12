@@ -2,12 +2,13 @@ package com.DCB.ParserObjects.Couplings.ControlStatements;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingControlStatement;
 import com.DCB.ParserObjects.CouplingStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 import java.util.ArrayList;
 
-public class CouplingIfStatement extends CouplingStatement {
+public class CouplingIfStatement extends CouplingControlStatement {
     private final BooleanValueObject booleanValueObject;
     private final ArrayList<CouplingStatement> ifStatements;
     private final ArrayList<CouplingStatement> elseStatements;
@@ -72,5 +73,22 @@ public class CouplingIfStatement extends CouplingStatement {
                 + ifGrammer + elseGrammer;
                 ;
         return grammer;
+    }
+
+    public BooleanValueObject getBooleanValueObject() {
+        return booleanValueObject;
+    }
+
+    public ArrayList<CouplingStatement> getIfStatements() {
+        return ifStatements;
+    }
+
+    public ArrayList<CouplingStatement> getElseStatements() {
+        return elseStatements;
+    }
+
+    @Override
+    public void setLateStatement() {
+        elseStatements.get(elseStatements.size()-1).setLateStatement();
     }
 }
