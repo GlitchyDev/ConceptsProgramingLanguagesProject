@@ -72,6 +72,8 @@ public abstract class CoupledObject {
         ASSIGN_STRING,
         ASSIGN_BOOLEAN,
 
+        ITER,
+
         //FOR_EACH,
     }
 }

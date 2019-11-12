@@ -15,6 +15,7 @@ import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingStringPare
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingBooleanAssignment;
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingIntAssignment;
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingStringAssignment;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingIter;
 import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingBooleanPrint;
 import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingIntPrint;
 import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingStringPrint;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 public class CouplingObjectFactory {
     private final KeyWord[] NUMBER_OPERATIONS = new KeyWord[]{KeyWord.LEFT_PARENTHESIS, KeyWord.EXPONENTIAL,KeyWord.MULTIPLY, KeyWord.DIVIDE,
             KeyWord.INVERT_DIVIDE, KeyWord.ADD, KeyWord.SUBTRACT, KeyWord.NUMBER_IDENTITY, KeyWord.NUMBER_INVERT, KeyWord.LESS_THAN, KeyWord.GREATER_THAN,KeyWord.EQUAL_LESS_THAN, KeyWord.EQUAL_GREATER_THAN,
-            KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL, KeyWord.ASSIGN
+            KeyWord.AND,KeyWord.EQUAL, KeyWord.NOT_EQUAL, KeyWord.ASSIGN, KeyWord.COLLEN
     };
 
     private KeyWord[] STATEMENTS = new KeyWord[]{KeyWord.PRINT
@@ -122,6 +123,9 @@ public class CouplingObjectFactory {
                     }
                     if(nextPotentialCouplingLocation != -1) {
                         KeyWord keyword = (KeyWord) getObject(nextPotentialCouplingLocation);
+                        if(keyword == KeyWord.COLLEN) {
+                            System.out.println("YO");
+                        }
                         if(canCreateCoupling(keyword,nextPotentialCouplingLocation)) {
                             createCoupling(keyword,nextPotentialCouplingLocation);
                             numberOfOperationsCompleted++;
@@ -288,31 +292,25 @@ public class CouplingObjectFactory {
                 }
                 break;
             case FOR:
-
-                if(getObject(couplingPosition+1) instanceof CouplingIntAssignment) {
-                    if (getObject(couplingPosition + 2) instanceof KeyWord && getObject(couplingPosition + 2
-                    ) == KeyWord.COLLEN) {
-                        if (getObject(couplingPosition + 3) instanceof IntValueObject) {
-                            int foundEndLine = -1;
-                            int nonStatementFoundLine = -1;
-                            for (int i = couplingPosition + 4; i < parsedScript.size(); i++) {
-                                if (!(getObject(i) instanceof CouplingStatement)) {
-                                    if (getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
-                                        foundEndLine = i;
-                                        break;
-                                    } else {
-                                        nonStatementFoundLine = getObjectLineNumber(i);
-                                        break;
-                                    }
-                                }
-                            }
-                            if (nonStatementFoundLine == -1) {
-                                if (foundEndLine != -1) {
-                                    return true;
-                                }
-
+                if(getObject(couplingPosition+1) instanceof CouplingIter) {
+                    int foundEndLine = -1;
+                    int nonStatementFoundLine = -1;
+                    for (int i = couplingPosition + 2; i < parsedScript.size(); i++) {
+                        if (!(getObject(i) instanceof CouplingStatement)) {
+                            if (getObject(i) instanceof KeyWord && getObject(i) == KeyWord.END) {
+                                foundEndLine = i;
+                                break;
+                            } else {
+                                nonStatementFoundLine = getObjectLineNumber(i);
+                                break;
                             }
                         }
+                    }
+                    if (nonStatementFoundLine == -1) {
+                        if (foundEndLine != -1) {
+                            return true;
+                        }
+
                     }
 
                 }
@@ -326,6 +324,13 @@ public class CouplingObjectFactory {
                 }
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
                     return true;
+                }
+                break;
+            case COLLEN:
+                if(getObject(couplingPosition-1) instanceof CouplingIntAssignment) {
+                    if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                        return true;
+                    }
                 }
                 break;
             case ASSIGN:
@@ -519,17 +524,13 @@ public class CouplingObjectFactory {
                 break;
             case FOR:
                 encapsulatedStatements = new ArrayList<>();
-                CouplingIntAssignment assignmentStatemnt = (CouplingIntAssignment) getObject(couplingPosition+1);
-                IntValueObject intValueObject = (IntValueObject) getObject(couplingPosition+3);
-
+                CouplingIter couplingIter = (CouplingIter) getObject(couplingPosition+1);
                 encapsulatedStatements.add(couplingPosition+1); // (
-                encapsulatedStatements.add(couplingPosition+2); // x = 5
-                encapsulatedStatements.add(couplingPosition+3); // :
 
 
                 ArrayList<CouplingStatement> containedStatements = new ArrayList<>();
                 foundEnd = false;
-                cursor = couplingPosition+4;
+                cursor = couplingPosition+2;
                 while(!foundEnd) {
                     if(getObject(cursor) instanceof CouplingStatement) {
                         containedStatements.add((CouplingStatement) getObject(cursor));
@@ -543,7 +544,7 @@ public class CouplingObjectFactory {
                         cursor++;
                     }
                 }
-                CouplingForStatement couplingForStatement = new CouplingForStatement(assignmentStatemnt,intValueObject,containedStatements);
+                CouplingForStatement couplingForStatement = new CouplingForStatement(couplingIter,containedStatements);
                 replace(couplingPosition,couplingForStatement);
                 for(int i = cursor; i > couplingPosition; i--) {
                     remove(i);
@@ -594,6 +595,15 @@ public class CouplingObjectFactory {
                     }
                 }
                 break;
+            case COLLEN:
+                if(getObject(couplingPosition-1) instanceof CouplingIntAssignment) {
+                    if(getObject(couplingPosition+1) instanceof IntValueObject) {
+                        CouplingIter returnIter = new CouplingIter(((CouplingIntAssignment)getObject(couplingPosition-1)),((IntValueObject)getObject(couplingPosition+1)));
+                        replace(couplingPosition,returnIter);
+                        remove(couplingPosition+1);
+                        remove(couplingPosition-1);
+                    }
+                }
             case ASSIGN:
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
                     StringIdentifierObject stringIdentifierObject = null;

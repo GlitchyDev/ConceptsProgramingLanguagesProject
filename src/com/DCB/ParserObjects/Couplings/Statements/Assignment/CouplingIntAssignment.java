@@ -53,4 +53,9 @@ public class CouplingIntAssignment extends CouplingStatement implements IntValue
                 intValueObject.getParsedGrammar();
         return grammer;
     }
+
+    public IntValueObject getIntValueObject() {
+        return intValueObject;
+    }
+    
 }
