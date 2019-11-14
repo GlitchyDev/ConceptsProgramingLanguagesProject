@@ -33,6 +33,14 @@ public class CouplingIter extends CouplingStatement {
 
     @Override
     public String getParsedGrammar() {
-        return null;
+    	String grammer = "";
+        
+
+        grammer += "<iter> -> <arithmetic_expression> : <arithmetic_expression>\n"
+                + couplingIntAssignment.getParsedGrammar()
+                + intValueObject.getParsedGrammar()
+                ;
+                
+        return grammer;
     }
 }

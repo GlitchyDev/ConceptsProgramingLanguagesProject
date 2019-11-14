@@ -47,9 +47,6 @@ end
 <assignment_statement> -> id assignment_operator <arithmetic_expression>
 <arithmetic_expression> -> literal_integer
 
-error: here it is printing block statement (not 100% sure why, it may be because there is only 1 IF statement block).
-It thinks this one is last.
-
 <block> -> <statement> <block>
 <statement> -> <if_statement>
 <if_statement> -> if <boolean_expression> <block> else <block> end
@@ -117,15 +114,6 @@ print ( 89 )
 <arithmetic_expression> -> literal_integer
 
 ================= Test 4 ========================
-//error: missing from FOR
-pretty much everything.
-
-//error: missing from IF
-<arithmetic_expression> -> id
-<arithmetic_expression> -> literal_integer
-
-and END is leaving a token keyword thing. 
-
 for i = 3 : 5
 if != i 4
 print ( i )
@@ -141,6 +129,10 @@ end
 <statement> -> <for_statement>
 <for_statement> -> for id = <iter> <block> end
 <iter> -> <arithmetic_expression> : <arithmetic_expression>
+
+<block> -> <statement> <block> 
+<statement> -> <assignment_statement> 
+<assignment_statement> -> id assignment_operator <arithmetic_expression> 
 <arithmetic_expression> -> literal_integer
 <arithmetic_expression> -> literal_integer
 

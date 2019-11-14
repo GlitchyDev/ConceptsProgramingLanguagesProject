@@ -69,8 +69,9 @@ public class CouplingIfStatement extends CouplingControlStatement {
 
         grammer += "<statement> -> <if_statement>\n"
         		+ "<if_statement> -> if <boolean_expression> <block> else <block> end\r\n"
-                + booleanValueObject.getParsedGrammar() //Missing arithExp to ID and Lit Int
-                + ifGrammer + elseGrammer;
+                + booleanValueObject.getParsedGrammar()
+                + ifGrammer 
+                + elseGrammer
                 ;
         return grammer;
     }

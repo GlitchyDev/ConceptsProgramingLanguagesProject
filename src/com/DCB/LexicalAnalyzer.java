@@ -29,7 +29,7 @@ public class LexicalAnalyzer {
     private String currentString;
     // A special boolean that trips when a Number grabs a extra character to see when the end of the number is
     // By tripping this we know an extra character was taken and can compensate
-    private int currentLineNumber = 0;
+    private int currentLineNumber = 1; //DJM 11.13.2019: Revised to start at 1 since lines of paper start with 1.
 
     public LexicalAnalyzer(ScriptReader scriptReader) {
         this.scriptReader = scriptReader;
@@ -59,7 +59,7 @@ public class LexicalAnalyzer {
                     }
                     currentString = "";
                 } else {
-                    System.out.println("Error at line " + currentLineNumber + " Too many Spaces");
+                    System.out.println("Error at line " + currentLineNumber + ". Too many spaces.");
                     System.exit(0);
                 }
             }
