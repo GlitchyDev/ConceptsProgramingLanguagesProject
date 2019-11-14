@@ -11,6 +11,9 @@ import com.sun.jdi.IntegerValue;
 
 import java.util.ArrayList;
 
+/**
+ * Control Statement encapsulation coupling for the For Control Statement
+ */
 public class CouplingForStatement extends CouplingControlStatement {
     private final CouplingIter couplingIter;
     private final ArrayList<CouplingStatement> containedStatements;

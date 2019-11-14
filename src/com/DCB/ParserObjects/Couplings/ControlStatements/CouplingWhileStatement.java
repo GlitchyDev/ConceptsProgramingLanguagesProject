@@ -7,6 +7,9 @@ import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 import java.util.ArrayList;
 
+/**
+ * Control Statement encapsulation coupling for the While Control Statement
+ */
 public class CouplingWhileStatement extends CouplingControlStatement {
     private final BooleanValueObject booleanValueObject;
     private final ArrayList<CouplingStatement> containedStatements;

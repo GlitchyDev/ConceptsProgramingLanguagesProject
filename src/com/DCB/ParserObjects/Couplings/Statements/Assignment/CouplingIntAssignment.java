@@ -57,5 +57,5 @@ public class CouplingIntAssignment extends CouplingStatement implements IntValue
     public IntValueObject getIntValueObject() {
         return intValueObject;
     }
-    
+
 }

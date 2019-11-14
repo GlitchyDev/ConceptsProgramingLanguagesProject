@@ -8,6 +8,9 @@ import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 import java.util.ArrayList;
 
+/**
+ * Control Statement encapsulation coupling for the If Control Statement
+ */
 public class CouplingIfStatement extends CouplingControlStatement {
     private final BooleanValueObject booleanValueObject;
     private final ArrayList<CouplingStatement> ifStatements;

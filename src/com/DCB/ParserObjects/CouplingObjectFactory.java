@@ -103,9 +103,9 @@ public class CouplingObjectFactory {
         }
 
 
-
-        boolean completedAllValueCouplings = false;
-        while(!completedAllValueCouplings) {
+        // Builds all Operational couplings, in PDMOS order, and restart each time an operation is found, to preserve order
+        boolean completedAllOperationalCouplings = false;
+        while(!completedAllOperationalCouplings) {
             int numberOfOperationsCompleted = 0;
 
             for (KeyWord currentKeyword : NUMBER_OPERATIONS) {
@@ -123,9 +123,6 @@ public class CouplingObjectFactory {
                     }
                     if(nextPotentialCouplingLocation != -1) {
                         KeyWord keyword = (KeyWord) getObject(nextPotentialCouplingLocation);
-                        if(keyword == KeyWord.COLLEN) {
-                            System.out.println("YO");
-                        }
                         if(canCreateCoupling(keyword,nextPotentialCouplingLocation)) {
                             createCoupling(keyword,nextPotentialCouplingLocation);
                             numberOfOperationsCompleted++;
@@ -139,14 +136,20 @@ public class CouplingObjectFactory {
                 }
             }
             if(numberOfOperationsCompleted == 0) {
-                completedAllValueCouplings = true;
+                completedAllOperationalCouplings = true;
             }
 
         }
+        for(int i = 0; i < parsedScript.size(); i++) {
+            for(KeyWord keyWord: NUMBER_OPERATIONS) {
+                if(getObject(i) == keyWord) {
+                    System.out.println("ERROR! Found at line " + (getObjectLineNumber(i)+1) + " Token number " + (i+1) + " Operator " + keyWord + " incorrect usage");
+                    System.exit(0);
+                }
+            }
+        }
 
-
-
-
+        // Complete all statements top to bottom
         boolean completedAllStatementCouplings = false;
         while(!completedAllStatementCouplings) {
             int statementCompleteCount = 0;
@@ -172,8 +175,16 @@ public class CouplingObjectFactory {
                 completedAllStatementCouplings = true;
             }
         }
+        for(int i = 0; i < parsedScript.size(); i++) {
+            for(KeyWord keyWord: STATEMENTS) {
+                if(getObject(i) == keyWord) {
+                    System.out.println("ERROR! Found at line " + (getObjectLineNumber(i)+1) + " Token number " + (i+1) + " Statement " + keyWord + " wrong input values");
+                    System.exit(0);
+                }
+            }
+        }
 
-
+        // Complete all control statements
         boolean completedAllControlStatementCouplings = false;
         while(!completedAllControlStatementCouplings) {
             int numberOfOperationsCompleted = 0;
@@ -210,6 +221,17 @@ public class CouplingObjectFactory {
             }
 
         }
+        for(int i = 0; i < parsedScript.size(); i++) {
+            for(KeyWord keyWord: CONTROL_STATEMENTS) {
+                if(getObject(i) == keyWord) {
+                    System.out.println("ERROR! Found at line " + (getObjectLineNumber(i)+1) + " Token number " + (i+1) + " Control Statement " + keyWord + " wrong syntax used!");
+                    System.exit(0);
+                }
+            }
+        }
+
+
+
 
     }
 

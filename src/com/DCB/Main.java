@@ -43,6 +43,7 @@ public class Main {
                 System.out.println(o + " ||| " + parser.getLineNumbers().get(i));
             }
         }
+
         System.out.println("[Grammer]=========================");
         System.out.println("\n<program> -> function id ( ) <block> end\n");
 

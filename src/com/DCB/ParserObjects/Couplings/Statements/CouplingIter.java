@@ -6,6 +6,9 @@ import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingIntAssignme
 import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
+/**
+ * Used to represent the For loop Iter object
+ */
 public class CouplingIter extends CouplingStatement {
     private final CouplingIntAssignment couplingIntAssignment;
     private final IntValueObject intValueObject;

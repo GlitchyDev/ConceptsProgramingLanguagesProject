@@ -5,6 +5,10 @@ import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
+
+/**
+ * Coupling that supports the Boolean And operation
+ */
 public class CouplingBooleanAnd extends CoupledObject implements BooleanValueObject {
     private final boolean value;
     private final BooleanValueObject number1;

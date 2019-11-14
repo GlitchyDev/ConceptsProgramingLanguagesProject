@@ -5,6 +5,9 @@ import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 import java.lang.Math;
 
+/**
+ * Coupling that supports the Integer Exponetial operation
+ */
 public class CouplingIntExponential extends CoupledObject implements IntValueObject {
     private final int value;
     private final IntValueObject number1;

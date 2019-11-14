@@ -5,7 +5,7 @@ import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
 /**
- * Coupling that supports the Integer Multiply Operation
+ * Coupling that supports the Integer Divide Operation
  */
 public class CouplingIntDivide extends CoupledObject implements IntValueObject {
     private final int value;

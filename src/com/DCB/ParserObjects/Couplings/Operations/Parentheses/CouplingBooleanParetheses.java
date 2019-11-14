@@ -4,6 +4,9 @@ import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
+/**
+ * Coupling that supports the Boolean Parentheses operation
+ */
 public class CouplingBooleanParetheses extends CoupledObject implements BooleanValueObject {
     private final boolean value;
     private final BooleanValueObject booleanValueObject;

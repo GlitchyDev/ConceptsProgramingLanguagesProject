@@ -4,6 +4,9 @@ import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
+/**
+ * Coupling that supports the Integer Mod operation
+ */
 public class CouplingIntMod extends CoupledObject implements IntValueObject {
     private final int value;
     private final IntValueObject number1;

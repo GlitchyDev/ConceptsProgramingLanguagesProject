@@ -6,6 +6,10 @@ import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
+
+/**
+ * Coupling that supports the Boolean Equal operation
+ */
 public class CouplingBooleanEquals extends CoupledObject implements BooleanValueObject {
     private final boolean value;
     private final Object object1;
