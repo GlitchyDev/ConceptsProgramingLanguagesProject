@@ -64,10 +64,13 @@ public class CouplingBooleanEquals extends CoupledObject implements BooleanValue
 
     @Override
     public String getParsedGrammar() {
-        return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
+        CoupledObject number1 = (object1 instanceof CoupledObject)? (CoupledObject)object1 : null;
+        CoupledObject number2 = (object2 instanceof CoupledObject)? (CoupledObject)object2 : null;
+    	    	
+    	return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
         		+ "<relative_op> -> eq_operator\n"
-        		//+ number1.getParsedGrammar()
-                //+ number2.getParsedGrammar()                    
+        		+ number1.getParsedGrammar()
+                + number2.getParsedGrammar()                    
                 ;
     }
 
