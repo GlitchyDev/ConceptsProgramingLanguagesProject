@@ -49,8 +49,9 @@ public class IntIdentifierObject  extends CoupledObject implements IntValueObjec
         return "[" + coupleObjectType + " | " + identifier + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
-        return "<arithmetic_expression> -> id \n";
+        return "<arithmetic_expression> -> id\n";
     }
 }

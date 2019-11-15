@@ -1,5 +1,7 @@
 package com.DCB.ParserObjects.Couplings.Operations.Boolean;
 
+//import org.graalvm.compiler.phases.common.NonNullParametersPhase;
+
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.ParserObjects.CoupledObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
@@ -62,16 +64,20 @@ public class CouplingBooleanNotEquals extends CoupledObject implements BooleanVa
         return identifier;
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
+    	
+    	//object1 and 2 have the chance of not being CoupledObjects, this will error check. 
     	CoupledObject number1 = (object1 instanceof CoupledObject)? (CoupledObject)object1 : null;
         CoupledObject number2 = (object2 instanceof CoupledObject)? (CoupledObject)object2 : null;
+        String n1 = (number1 == null) ? "" : number1.getParsedGrammar();
+        String n2 = (number2 == null) ? "" : number2.getParsedGrammar();
     	
     	return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
         		+ "<relative_op> -> ne_operator\n"
-        		+ number1.getParsedGrammar()
-                + number2.getParsedGrammar()                    
-                ;
+        		+ n1
+        		+ n2;
     }
 
 

@@ -37,13 +37,13 @@ public class CouplingBooleanEqualLessThan  extends CoupledObject implements Bool
         return "[" + coupleObjectType + " | " + number1.getStringIdentifier() + " | " + number2.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
         		+ "<relative_op> -> le_operator\n"
                 + number1.getParsedGrammar()
-                + number2.getParsedGrammar()                
-                ;
+                + number2.getParsedGrammar();
     }
 
 

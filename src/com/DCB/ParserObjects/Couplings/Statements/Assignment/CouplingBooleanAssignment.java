@@ -37,6 +37,7 @@ public class CouplingBooleanAssignment extends CouplingStatement implements Bool
         return "[" + coupleObjectType + " | ID:" + booleanIdentifierObject.getStringIdentifier() + " Value:" +  booleanValueObject.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";

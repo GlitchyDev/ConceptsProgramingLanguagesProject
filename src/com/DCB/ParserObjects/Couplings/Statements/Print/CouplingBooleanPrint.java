@@ -33,6 +33,7 @@ public class CouplingBooleanPrint extends CouplingStatement implements IntValueO
         return "[" + coupleObjectType + " | ID:" + booleanValueObject.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";

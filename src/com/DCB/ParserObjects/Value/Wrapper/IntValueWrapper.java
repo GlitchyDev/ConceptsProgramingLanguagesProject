@@ -37,6 +37,7 @@ public class IntValueWrapper extends CoupledObject implements IntValueObject {
         return "[" + coupleObjectType + " | " + value + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
          return "<arithmetic_expression> -> literal_integer\n";

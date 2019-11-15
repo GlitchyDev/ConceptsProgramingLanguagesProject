@@ -36,13 +36,14 @@ public class CouplingIntSubtract extends CoupledObject implements IntValueObject
         return "[" + coupleObjectType + " | " + number1.getStringIdentifier() + " | " + number2.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         return "<arithmetic_expression> -> <binary_expression> \n"
                 + "<binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression> \n"
                 + "<arithmetic_op> -> sub_operator\n"
-                + number1.getParsedGrammar() + number2.getParsedGrammar()
-                ;
+                + number1.getParsedGrammar() 
+                + number2.getParsedGrammar();
     }
 
 

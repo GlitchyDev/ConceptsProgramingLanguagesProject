@@ -21,7 +21,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("Files/TestDocument.txt");
+        File file = new File("Files/TestDocument.julia");
         Scanner scanner = new Scanner(file);
         ScriptReader scriptReader = new ScriptReader(scanner);
         LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer(scriptReader);
@@ -45,7 +45,7 @@ public class Main {
         }
 
         System.out.println("[Grammer]=========================");
-        System.out.println("\n<program> -> function id ( ) <block> end\n");
+        System.out.println("\n<program> -> function id ( ) <block> end");
 
 
         for(int i = 0; i < parser.getAnalyzedScript().size(); i++) {

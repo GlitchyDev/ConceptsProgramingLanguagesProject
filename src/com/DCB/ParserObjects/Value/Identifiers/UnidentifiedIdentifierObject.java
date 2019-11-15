@@ -34,8 +34,9 @@ public class UnidentifiedIdentifierObject extends CoupledObject {
         return "[" + coupleObjectType + " | " + identifier + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
-        return "<arithmetic_expression> -> literal_undeclared \n";
+        return "<arithmetic_expression> -> literal_undeclared\n";
     }
 }

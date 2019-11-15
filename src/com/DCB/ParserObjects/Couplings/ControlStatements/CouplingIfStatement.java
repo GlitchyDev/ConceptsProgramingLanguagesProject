@@ -49,8 +49,12 @@ public class CouplingIfStatement extends CouplingControlStatement {
         return identifier;
     }
 
+    //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
+    	
+    	//This will grab the IF and ELSE block and loop through the lines to output the proper grammar. 
+    	//once preped, it will be ready to be placed at the bottom below. 
     	String ifGrammer = "\n";
     	String elseGrammer = "\n";
     	for (int i = 0; i<ifStatements.size();i++)
@@ -74,8 +78,7 @@ public class CouplingIfStatement extends CouplingControlStatement {
         		+ "<if_statement> -> if <boolean_expression> <block> else <block> end\r\n"
                 + booleanValueObject.getParsedGrammar()
                 + ifGrammer 
-                + elseGrammer
-                ;
+                + elseGrammer;
         return grammer;
     }
 

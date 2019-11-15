@@ -32,6 +32,7 @@ public class CouplingStringPrint extends CouplingStatement implements StringValu
         return "[" + coupleObjectType + " | ID:" + stringValueObject.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";
@@ -41,8 +42,8 @@ public class CouplingStringPrint extends CouplingStatement implements StringValu
             grammer += "\n<block> -> <statement> \n";
         }
 
-        grammer += "<statement> -> <print_statement> \n" +
-                "<print_statement> -> print (<arithmetic_expression>) \n"
+        grammer += "<statement> -> <print_statement> \n" 
+        		+ "<print_statement> -> print (<arithmetic_expression>) \n"
                 + stringValueObject.getParsedGrammar();
         return grammer;
     }

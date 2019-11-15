@@ -30,7 +30,7 @@
 id -> letter
 literal_integer -> digit literal_integer | digit
 literal_boolean -> true | false
-literal_string -> "{text}"
+literal_string -> "text"
 literal_undeclared -> ????
 assignment_operator -> =
 le_operator -> <=

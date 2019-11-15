@@ -47,9 +47,14 @@ public class CouplingForStatement extends CouplingControlStatement {
         return identifier;
     }
 
+    //The Parsed Grammar below will check if it is the last block in the array. If so It will not request another block. 
+    //After it will lay out the grammar as requested. It does this by grabbing that coupling and seeing what it contains. 
+    //If anything extra is added, that piece will have a note.
     @Override
     public String getParsedGrammar() {
     	
+    	//The For statement has a code block. This loop will pull everything from that block into the following string.
+    	//It will then be placed at the end of the for grammar block. 
     	String containGrammer = "\n";
     	for (int i = 0; i<containedStatements.size();i++)
     	{
@@ -66,8 +71,7 @@ public class CouplingForStatement extends CouplingControlStatement {
         grammer += "<statement> -> <for_statement>\r\n"
         		+ "<for_statement> -> for id = <iter> <block> end\n"
                 + couplingIter.getParsedGrammar()
-                + containGrammer
-                ;
+                + containGrammer;
         return grammer;
     }
 

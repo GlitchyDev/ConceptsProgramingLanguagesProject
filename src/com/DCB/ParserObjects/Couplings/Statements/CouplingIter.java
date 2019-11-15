@@ -34,16 +34,13 @@ public class CouplingIter extends CouplingStatement {
         return "[" + coupleObjectType + " | " + couplingIntAssignment.getStringIdentifier() +  " | " + intValueObject.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
     	String grammer = "";
-        
-
         grammer += "<iter> -> <arithmetic_expression> : <arithmetic_expression>\n"
                 + couplingIntAssignment.getParsedGrammar()
-                + intValueObject.getParsedGrammar()
-                ;
-                
+                + intValueObject.getParsedGrammar();
         return grammer;
     }
 }

@@ -36,13 +36,13 @@ public class CouplingBooleanGreaterThan extends CoupledObject implements Boolean
         return "[" + coupleObjectType + " | " + number1.getStringIdentifier() + " | " + number2.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         return "<boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>  \n"
         		+ "<relative_op> -> gt_operator\n"
         		+ number1.getParsedGrammar()
-                + number2.getParsedGrammar()                
-                ;
+                + number2.getParsedGrammar();
     }
 
 

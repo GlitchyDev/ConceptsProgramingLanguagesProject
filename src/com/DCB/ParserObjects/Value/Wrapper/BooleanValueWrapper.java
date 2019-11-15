@@ -37,6 +37,7 @@ public class BooleanValueWrapper extends CoupledObject implements BooleanValueOb
         return "[" + coupleObjectType + " | " + value + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         return "<arithmetic_expression> -> literal_boolean\n";

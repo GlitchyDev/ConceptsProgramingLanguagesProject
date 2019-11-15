@@ -50,8 +50,9 @@ public class StringIdentifierObject  extends CoupledObject implements StringValu
         return "[" + coupleObjectType + " | " + identifier + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
-        return "<arithmetic_expression> -> id \n";
+        return "<arithmetic_expression> -> id\n";
     }
 }

@@ -39,6 +39,7 @@ public class CouplingIntAssignment extends CouplingStatement implements IntValue
         return "[" + coupleObjectType + " | ID:" + intIdentifierObject.getStringIdentifier() + " Value:" +  intValueObject.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";

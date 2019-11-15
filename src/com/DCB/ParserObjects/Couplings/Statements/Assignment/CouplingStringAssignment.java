@@ -37,6 +37,7 @@ public class CouplingStringAssignment extends CouplingStatement implements Strin
         return "[" + coupleObjectType + " | ID:" + stringIdentifierObject.getStringIdentifier() + " Value:" +  stringValueObject.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";

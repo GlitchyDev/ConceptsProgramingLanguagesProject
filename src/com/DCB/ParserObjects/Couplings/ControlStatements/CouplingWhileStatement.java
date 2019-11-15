@@ -43,9 +43,11 @@ public class CouplingWhileStatement extends CouplingControlStatement {
         return identifier;
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
     	
+    	//This will loop through the while block and pull the parsed grammar to be placed below.
     	String containGrammer = "\n";
     	for (int i = 0; i<containedStatements.size();i++)
     	{
@@ -54,9 +56,9 @@ public class CouplingWhileStatement extends CouplingControlStatement {
     	
     	String grammer = "";
         if(!isLateStatement()) {
-            grammer += "\n<block> -> <statement> <block> \n";
+            grammer += "\n<block> -> <statement> <block>\n";
         } else {
-            grammer += "\n<block> -> <statement> \n";
+            grammer += "\n<block> -> <statement>\n";
         }
 
         grammer += "<statement> -> <while_statement>\r\n" + 

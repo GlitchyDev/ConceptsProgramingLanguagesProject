@@ -32,6 +32,7 @@ public class CouplingIntPrint extends CouplingStatement implements IntValueObjec
         return "[" + coupleObjectType + " | ID:" + intValueObject.getStringIdentifier() + " ]";
     }
 
+  //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";
