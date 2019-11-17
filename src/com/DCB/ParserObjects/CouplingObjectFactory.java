@@ -103,6 +103,7 @@ public class CouplingObjectFactory {
         }
 
 
+
         // Builds all Operational couplings, in PDMOS order, and restart each time an operation is found, to preserve order
         boolean completedAllOperationalCouplings = false;
         while(!completedAllOperationalCouplings) {
@@ -143,7 +144,89 @@ public class CouplingObjectFactory {
         for(int i = 0; i < parsedScript.size(); i++) {
             for(KeyWord keyWord: NUMBER_OPERATIONS) {
                 if(getObject(i) == keyWord) {
-                    System.out.println("ERROR! Found at line " + (getObjectLineNumber(i)+1) + " Token number " + (i+1) + " Operator " + keyWord + " incorrect usage");
+                    System.out.println("ERROR!");
+                    System.out.println("Line #" + (getObjectLineNumber(i)+1));
+                    System.out.println("Token number " + (i+1));
+                    switch(keyWord) {
+                        case LEFT_PARENTHESIS:
+                            if(!(getObject(i+1) instanceof IntValueObject) || !(getObject(i+1) instanceof StringValueObject) || !(getObject(i+1) instanceof BooleanValueObject)) {
+                                System.out.println("Sample Example of the Token | ( id ) | ( literal_int ) | ( literal_boolean ) | ( literal_string )");
+                                System.out.println("Expression causing the error: " + "( " + " <NonValueObject> " + " )");
+                            }
+                            if(!(getObject(i+2) instanceof KeyWord) || getObject(i+2) instanceof KeyWord && getObject(i+2) != KeyWord.RIGHT_PARENTHESIS) {
+                                System.out.println("Sample Example of the Token | ( id ) | ( literal_int ) | ( literal_boolean ) | ( literal_string )");
+                                System.out.println("Expression causing the error: " + "( " + " <Value> " + " <No Right Side Parentheses>");
+                            }
+                            break;
+                        case ASSIGN:
+                            if(!(getObject(i-1) instanceof Identifier)) {
+                                System.out.println("Sample Example of the Token | <assignment_statement> -> id assignment_operator <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <assignment_statement> -> <No ID> assignment_operator <arithmetic_expression>");
+                            }
+                            if(!(getObject(i+1) instanceof IntValueObject) || !(getObject(i+1) instanceof StringValueObject) || !(getObject(i+1) instanceof BooleanValueObject)) {
+                                System.out.println("Sample Example of the Token | <assignment_statement> -> id assignment_operator <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <assignment_statement> -> id assignment_operator <no arithmetic expression>");
+                            }
+                            break;
+                        case COLLEN:
+                            if(!(getObject(i-1) instanceof CouplingIntAssignment)) {
+                                System.out.println("Sample Example of the Token | <iter> -> <arithmetic_expression> : <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <iter> -> <No Arithmetic expression> : <arithmetic_expression>");
+                            }
+                            if(!(getObject(i+1) instanceof IntValueObject) || !(getObject(i+1) instanceof StringValueObject) || !(getObject(i+1) instanceof BooleanValueObject)) {
+                                System.out.println("Sample Example of the Token | <iter> -> <arithmetic_expression> : <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <iter> -> <arithmetic_expression> : <No Arithmetic expression> ");
+                            }
+                            break;
+                        case EQUAL:
+                        case NOT_EQUAL:
+                            if(!(getObject(i+1) instanceof IntValueObject) || !(getObject(i+1) instanceof StringValueObject) || !(getObject(i+1) instanceof BooleanValueObject)) {
+                                System.out.println("Sample Example of the Token | <binary_expression> -> <arithmetic_op> <arithmetic_expression> <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <binary_expression> -> <arithmetic_op> <non arithmetic_expression> <arithmetic_expression>");
+                            }
+                            if(!(getObject(i+2) instanceof IntValueObject) || !(getObject(i+2) instanceof StringValueObject) || !(getObject(i+2) instanceof BooleanValueObject)) {
+                                System.out.println("Sample Example of the Token | <boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <boolean_expression> -> <relative_op> <arithmetic_expression> <non arithmetic_expression>");
+                            }
+                            break;
+                        case EXPONENTIAL:
+                        case MULTIPLY:
+                        case DIVIDE:
+                        case INVERT_DIVIDE:
+                        case ADD:
+                        case SUBTRACT:
+                            if(!(getObject(i+1) instanceof IntValueObject)) {
+                                System.out.println("Sample Example of the Token | <boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <boolean_expression> -> <relative_op> <non arithmetic_expression> <arithmetic_expression> ");
+                            }
+                            if(!(getObject(i+2) instanceof IntValueObject)) {
+                                System.out.println("Sample Example of the Token | <boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>");
+                                System.out.println("Expression causing the error: <boolean_expression> -> <relative_op> <arithmetic_expression> <non arithmetic_expression>");
+                            }
+                            break;
+                        case LESS_THAN:
+                        case GREATER_THAN:
+                        case EQUAL_LESS_THAN:
+                        case EQUAL_GREATER_THAN:
+                        case AND:
+                            if(!(getObject(i+1) instanceof BooleanValueObject)) {
+                                System.out.println("Sample Example of the Token | <boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>\n");
+                                System.out.println("Expression causing the error: <boolean_expression> -> <relative_op> <non arithmetic_expression> <arithmetic_expression>\n ");
+                            }
+                            if(!(getObject(i+2) instanceof BooleanValueObject)) {
+                                System.out.println("Sample Example of the Token | <boolean_expression> -> <relative_op> <arithmetic_expression> <arithmetic_expression>\n");
+                                System.out.println("Expression causing the error: <boolean_expression> -> <relative_op> <arithmetic_expression> <non arithmetic_expression>\n");
+                            }
+                            break;
+                    }
+                    System.exit(0);
+                }
+                if(getObject(i)  instanceof UnidentifiedIdentifierObject) {
+                    System.out.println("ERROR!");
+                    System.out.println("Line #" + (getObjectLineNumber(i)+1));
+                    System.out.println("Token number " + (i+1));
+                    System.out.println("Sample Example of the Token | <assignment_statement> -> id assignment_operator <arithmetic_expression>");
+                    System.out.println("Expression causing the error: null - No Assignment_Statement found for this ID");
                     System.exit(0);
                 }
             }
@@ -178,7 +261,16 @@ public class CouplingObjectFactory {
         for(int i = 0; i < parsedScript.size(); i++) {
             for(KeyWord keyWord: STATEMENTS) {
                 if(getObject(i) == keyWord) {
-                    System.out.println("ERROR! Found at line " + (getObjectLineNumber(i)+1) + " Token number " + (i+1) + " Statement " + keyWord + " wrong input values");
+                    System.out.println("ERROR!");
+                    System.out.println("Line #" + (getObjectLineNumber(i)+1));
+                    System.out.println("Token number " + (i+1));
+                    switch(keyWord) {
+                        case PRINT:
+                            System.out.println("Sample Example of the Token | print ( <arithmetic_expression> )");
+                            System.out.println("Expression causing the error: print ( <non arithmetic_expression> )");
+                            break;
+                    }
+
                     System.exit(0);
                 }
             }
@@ -224,7 +316,23 @@ public class CouplingObjectFactory {
         for(int i = 0; i < parsedScript.size(); i++) {
             for(KeyWord keyWord: CONTROL_STATEMENTS) {
                 if(getObject(i) == keyWord) {
-                    System.out.println("ERROR! Found at line " + (getObjectLineNumber(i)+1) + " Token number " + (i+1) + " Control Statement " + keyWord + " wrong syntax used!");
+                    System.out.println("ERROR!");
+                    System.out.println("Line #" + (getObjectLineNumber(i)+1));
+                    System.out.println("Token number " + (i+1));
+                    switch(keyWord) {
+                        case IF:
+                            System.out.println("Sample Example of the Token | <if_statement> -> if <boolean_expression> <block> else <block> end");
+                            System.out.println("Expression causing the error: <if_statement> -> if <bo boolean_expression> <no block> <no else> <no block> <no end>");
+                            break;
+                        case WHILE:
+                            System.out.println("Sample Example of the Token | <while_statement> -> while <boolean_expression> <block> end\n");
+                            System.out.println("Expression causing the error: <while_statement> -> while <no boolean_expression> <no block> <no en>\n");
+                            break;
+                        case FOR:
+                            System.out.println("Sample Example of the Token | <for_statement> -> for id = <iter> <block> end");
+                            System.out.println("Expression causing the error: <for_statement> -> for <No Id> <No => <No Iter> <No Block> <No End>>");
+                            break;
+                    }
                     System.exit(0);
                 }
             }
