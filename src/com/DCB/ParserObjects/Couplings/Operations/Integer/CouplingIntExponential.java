@@ -1,21 +1,19 @@
 package com.DCB.ParserObjects.Couplings.Operations.Integer;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 import java.lang.Math;
 
 /**
  * Coupling that supports the Integer Exponetial operation
  */
-public class CouplingIntExponential extends CoupledObject implements IntValueObject {
-    private final int value;
+public class CouplingIntExponential extends CouplingObject implements IntValueObject {
     private final IntValueObject number1;
     private final IntValueObject number2;
 
     public CouplingIntExponential(IntValueObject number1, IntValueObject number2) {
         super(CoupleObjectType.NUMBER_EXPONTENTIAL);
-        value = (int) Math.pow(number1.getValue() , number2.getValue());
         this.number1 = number1;
         this.number2 = number2;
 
@@ -50,7 +48,7 @@ public class CouplingIntExponential extends CoupledObject implements IntValueObj
 
     @Override
     public int getValue() {
-        return value;
+        return (int) Math.pow(number1.getValue() , number2.getValue());
     }
 
 

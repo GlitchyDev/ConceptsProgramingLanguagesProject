@@ -2,12 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc1de702-8652-4f12-a3bf-ba997975b490" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DCB/Interpreter/InterpreterManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingOperation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingAssignment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/IdentifierCoupling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Files/OutputFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/OutputFile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Files/TestDocument.julia" beforeDir="false" afterPath="$PROJECT_DIR$/Files/TestDocument.julia" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/CoupledObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingControlStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingControlStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingForStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingForStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingForStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/Conditionals/CouplingForStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingIfStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/Conditionals/CouplingIfStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/CouplingWhileStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/ControlStatements/Conditionals/CouplingWhileStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanAnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanAnd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEqualGreaterThan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEqualGreaterThan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEqualLessThan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEqualLessThan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEquals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanEquals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanGreaterThan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanGreaterThan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanLessThan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanLessThan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanNotEquals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Boolean/CouplingBooleanNotEquals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/CouplingStringConcat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/String/CouplingStringConcat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntDivide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntDivide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntExponential.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntExponential.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntInvertDivide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntInvertDivide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntMultiply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntMultiply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntSubtract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Integer/CouplingIntSubtract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingBooleanParetheses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingBooleanParetheses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingIntParentheses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingIntParentheses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingStringParentheses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Operations/Parentheses/CouplingStringParentheses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingBooleanAssignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingBooleanAssignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingIntAssignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingIntAssignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingStringAssignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingStringAssignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/CouplingIter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingIter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingBooleanPrint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingBooleanPrint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingIntPrint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingIntPrint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingStringPrint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Print/CouplingStringPrint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/BooleanIdentifierObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/BooleanIdentifierObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/IntIdentifierObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/IntIdentifierObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/StringIdentifierObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/StringIdentifierObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/UnidentifiedIdentifierObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Identifiers/UnidentifiedIdentifierObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/BooleanValueWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/BooleanValueWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/IntValueWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/IntValueWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/StringValueWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DCB/ParserObjects/Value/Wrapper/StringValueWrapper.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +62,7 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -125,13 +168,28 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java</url>
-          <line>728</line>
-          <option name="timeStamp" value="93" />
+          <line>151</line>
+          <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java</url>
-          <line>459</line>
-          <option name="timeStamp" value="96" />
+          <line>166</line>
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java</url>
+          <line>170</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/CouplingObjectFactory.java</url>
+          <line>229</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/DCB/ParserObjects/Couplings/Statements/Assignment/CouplingIntAssignment.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="109" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

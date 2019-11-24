@@ -3,27 +3,25 @@ package com.DCB.ParserObjects;
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
-import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingForStatement;
-import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingIfStatement;
-import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingWhileStatement;
-import com.DCB.ParserObjects.Couplings.Operations.*;
+import com.DCB.ParserObjects.Couplings.ControlStatements.Conditionals.CouplingForStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.Conditionals.CouplingIfStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.Conditionals.CouplingWhileStatement;
 import com.DCB.ParserObjects.Couplings.Operations.Boolean.*;
 import com.DCB.ParserObjects.Couplings.Operations.Integer.*;
 import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingBooleanParetheses;
 import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingIntParentheses;
 import com.DCB.ParserObjects.Couplings.Operations.Parentheses.CouplingStringParentheses;
+import com.DCB.ParserObjects.Couplings.Operations.String.CouplingStringConcat;
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingBooleanAssignment;
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingIntAssignment;
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingStringAssignment;
-import com.DCB.ParserObjects.Couplings.Statements.CouplingIter;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingIter;
 import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingBooleanPrint;
 import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingIntPrint;
 import com.DCB.ParserObjects.Couplings.Statements.Print.CouplingStringPrint;
 import com.DCB.ParserObjects.Value.*;
-import com.DCB.ParserObjects.Value.Identifiers.BooleanIdentifierObject;
-import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
-import com.DCB.ParserObjects.Value.Identifiers.StringIdentifierObject;
-import com.DCB.ParserObjects.Value.Identifiers.UnidentifiedIdentifierObject;
+import com.DCB.ParserObjects.Value.Identifiers.*;
 import com.DCB.ParserObjects.Value.Wrapper.BooleanValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 import com.DCB.ParserObjects.Value.Wrapper.StringValueWrapper;
@@ -52,11 +50,18 @@ public class CouplingObjectFactory {
     private final ArrayList<Integer> lineNumbers;
     private final int currentLineNumber;
 
+    private final ArrayList<CouplingStatement> parsedStatements;
+    private final ArrayList<IdentifierCoupling> identifiers;
+
+
 
     public CouplingObjectFactory(ArrayList<Object> parsedScript, ArrayList<Integer> lineNumbers, int currentLineNumber) {
         this.parsedScript = parsedScript;
         this.lineNumbers = lineNumbers;
         this.currentLineNumber = currentLineNumber;
+
+        this.parsedStatements = new ArrayList<>();
+        this.identifiers = new ArrayList<>();
     }
 
 
@@ -339,6 +344,16 @@ public class CouplingObjectFactory {
         }
 
 
+        for(int i = 0; i < parsedScript.size(); i++) {
+            if(!(getObject(i) instanceof CouplingStatement)) {
+                System.out.println("ERROR NONPARSED STATEMENT AT LINE " + (i+1));
+                System.exit(0);
+            }
+        }
+
+        for(int i = 0; i < parsedScript.size(); i++) {
+            parsedStatements.add((CouplingStatement) parsedScript.get(i));
+        }
 
 
     }
@@ -734,11 +749,13 @@ public class CouplingObjectFactory {
                         remove(couplingPosition-1);
                     }
                 }
+                break;
             case ASSIGN:
                 if(getObject(couplingPosition+1) instanceof StringValueObject) {
                     StringIdentifierObject stringIdentifierObject = null;
                     if(getObject(couplingPosition-1) instanceof UnidentifiedIdentifierObject) {
                         stringIdentifierObject = wrapStringIdentifier(((UnidentifiedIdentifierObject)getObject(couplingPosition-1)),((StringValueObject)getObject(couplingPosition+1)));
+                        identifiers.add(stringIdentifierObject);
                     } else {
                         if(getObject(couplingPosition-1) instanceof StringIdentifierObject) {
                             stringIdentifierObject = (StringIdentifierObject) getObject(couplingPosition-1);
@@ -765,12 +782,15 @@ public class CouplingObjectFactory {
                     replace(couplingPosition, couplingStringAssignment);
                     remove(couplingPosition+1);
                     remove(couplingPosition-1);
+
+
                 } else {
 
                     if (getObject(couplingPosition + 1) instanceof IntValueObject) {
                         IntIdentifierObject intIdentifierObject = null;
                         if (getObject(couplingPosition - 1) instanceof UnidentifiedIdentifierObject) {
                             intIdentifierObject = wrapIntegerIdentifier(((UnidentifiedIdentifierObject) getObject(couplingPosition - 1)), ((IntValueObject) getObject(couplingPosition + 1)));
+                            identifiers.add(intIdentifierObject);
                         } else {
                             if (getObject(couplingPosition - 1) instanceof IntIdentifierObject) {
                                 intIdentifierObject = (IntIdentifierObject) getObject(couplingPosition - 1);
@@ -802,6 +822,7 @@ public class CouplingObjectFactory {
                             BooleanIdentifierObject booleanIdentifierObject = null;
                             if (getObject(couplingPosition - 1) instanceof UnidentifiedIdentifierObject) {
                                 booleanIdentifierObject = wrapBooleanIdentifier(((UnidentifiedIdentifierObject) getObject(couplingPosition - 1)), ((BooleanValueObject) getObject(couplingPosition + 1)));
+                                identifiers.add(booleanIdentifierObject);
                             } else {
                                 if (getObject(couplingPosition - 1) instanceof BooleanIdentifierObject) {
                                     booleanIdentifierObject = (BooleanIdentifierObject) getObject(couplingPosition - 1);
@@ -1065,5 +1086,14 @@ public class CouplingObjectFactory {
 
     private Object getObjectOffset(int i, int offset) {
         return parsedScript.get(i+offset);
+    }
+
+
+    public ArrayList<CouplingStatement> getParsedStatements() {
+        return parsedStatements;
+    }
+
+    public ArrayList<IdentifierCoupling> getIdentifiers() {
+        return identifiers;
     }
 }

@@ -1,14 +1,14 @@
 package com.DCB.ParserObjects.Couplings.Operations.Boolean;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
 /**
  * Coupling that supports the Boolean LessThan operation
  */
-public class CouplingBooleanLessThan extends CoupledObject implements BooleanValueObject {
+public class CouplingBooleanLessThan extends CouplingObject implements BooleanValueObject {
     private final boolean value;
     private final IntValueObject number1;
     private final IntValueObject number2;

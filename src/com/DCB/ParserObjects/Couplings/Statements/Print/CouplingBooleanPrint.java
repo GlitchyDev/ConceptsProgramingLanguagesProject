@@ -1,9 +1,12 @@
 package com.DCB.ParserObjects.Couplings.Statements.Print;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
+import com.DCB.ParserObjects.Value.Identifiers.IdentifierCoupling;
 import com.DCB.ParserObjects.Value.IntValueObject;
+
+import java.util.ArrayList;
 
 public class CouplingBooleanPrint extends CouplingStatement implements IntValueObject {
     private final BooleanValueObject booleanValueObject;
@@ -47,5 +50,12 @@ public class CouplingBooleanPrint extends CouplingStatement implements IntValueO
                 "<print_statement> -> print (<arithmetic_expression>) \n"
                 + booleanValueObject.getParsedGrammar();
         return grammer;
+    }
+
+
+    @Override
+    public void executeStatement() {
+        // TODO
+        // Look at CouplingIntPrint for reference
     }
 }

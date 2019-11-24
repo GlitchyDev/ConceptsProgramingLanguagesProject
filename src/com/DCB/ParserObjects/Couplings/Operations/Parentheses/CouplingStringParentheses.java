@@ -1,20 +1,18 @@
 package com.DCB.ParserObjects.Couplings.Operations.Parentheses;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
 
 /**
  * Coupling that supports the String Parentheses Operation
  */
-public class CouplingStringParentheses extends CoupledObject implements StringValueObject {
-    private final String value;
+public class CouplingStringParentheses extends CouplingObject implements StringValueObject {
     private final StringValueObject stringValueObject;
 
     public CouplingStringParentheses(StringValueObject stringValueObject) {
         super(CoupleObjectType.STRING_PARENTHESES);
-        this.value = stringValueObject.getValue();
         this.stringValueObject = stringValueObject;
     }
 
@@ -30,7 +28,7 @@ public class CouplingStringParentheses extends CoupledObject implements StringVa
 
     @Override
     public String getValue() {
-        return value;
+        return stringValueObject.getValue();
     }
 
     @Override

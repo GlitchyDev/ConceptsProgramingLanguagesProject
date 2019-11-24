@@ -2,17 +2,12 @@ package com.DCB.ParserObjects.Value.Identifiers;
 
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.LexicalObjects.Value;
-import com.DCB.ParserObjects.CoupledObject;
-import com.DCB.ParserObjects.CouplingStatement;
-import com.DCB.ParserObjects.Value.BooleanValueObject;
+import com.DCB.ParserObjects.CouplingObject;
 
-public class UnidentifiedIdentifierObject extends CoupledObject {
-    private final Identifier identifier;
+public class UnidentifiedIdentifierObject extends IdentifierCoupling {
 
     public UnidentifiedIdentifierObject(Identifier identifier) {
-        super(CoupleObjectType.UNDECLARED_IDENTIFIER);
-        this.identifier = identifier;
+        super(CoupleObjectType.UNDECLARED_IDENTIFIER, identifier);
     }
 
     public Identifier getIdentifier() {

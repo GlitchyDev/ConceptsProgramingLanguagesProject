@@ -2,19 +2,16 @@ package com.DCB.ParserObjects.Value.Identifiers;
 
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
-import com.DCB.ParserObjects.Value.IntValueObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
 /**
  * Coupling that supports identifier objects, and keep tracks of their values
  */
-public class StringIdentifierObject  extends CoupledObject implements StringValueObject {
-    private final Identifier identifier;
+public class StringIdentifierObject  extends IdentifierCoupling implements StringValueObject {
     private StringValueObject stringValueObject;
     public StringIdentifierObject(Identifier identifier, StringValueObject stringValueObject) {
-        super(CoupleObjectType.STRING_IDENTIFIER);
-        this.identifier = identifier;
+        super(CoupleObjectType.STRING_IDENTIFIER, identifier);
         this.stringValueObject = stringValueObject;
     }
 

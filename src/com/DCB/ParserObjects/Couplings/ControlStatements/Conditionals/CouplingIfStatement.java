@@ -1,9 +1,8 @@
-package com.DCB.ParserObjects.Couplings.ControlStatements;
+package com.DCB.ParserObjects.Couplings.ControlStatements.Conditionals;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
-import com.DCB.ParserObjects.CouplingControlStatement;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingControlStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 import java.util.ArrayList;
@@ -97,5 +96,13 @@ public class CouplingIfStatement extends CouplingControlStatement {
     @Override
     public void setLateStatement() {
         elseStatements.get(elseStatements.size()-1).setLateStatement();
+    }
+
+
+    @Override
+    public void executeStatement() {
+        // TODO
+        // Look at the CouplingForStatement
+        // TLDR, do a litteral if else, use the booleanValue.getValue to determine which branch is run. In the if have it run all IfStatements, in the else have it run the ElseStatements
     }
 }

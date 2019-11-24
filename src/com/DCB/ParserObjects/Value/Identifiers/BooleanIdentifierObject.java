@@ -2,18 +2,16 @@ package com.DCB.ParserObjects.Value.Identifiers;
 
 import com.DCB.LexicalObjects.Identifier;
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 /**
  * Coupling that supports identifier objects, and keep tracks of their values
  */
-public class BooleanIdentifierObject extends CoupledObject implements BooleanValueObject {
-    private final Identifier identifier;
+public class BooleanIdentifierObject extends IdentifierCoupling implements BooleanValueObject {
     private BooleanValueObject booleanValueObject;
     public BooleanIdentifierObject(Identifier identifier, BooleanValueObject booleanValueObject) {
-        super(CoupleObjectType.BOOLEAN_IDENTIFIER);
-        this.identifier = identifier;
+        super(CoupleObjectType.BOOLEAN_IDENTIFIER, identifier);
         this.booleanValueObject = booleanValueObject;
     }
 

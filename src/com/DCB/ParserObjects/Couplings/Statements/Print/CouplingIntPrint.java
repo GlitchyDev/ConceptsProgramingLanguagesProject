@@ -1,8 +1,11 @@
 package com.DCB.ParserObjects.Couplings.Statements.Print;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
+import com.DCB.ParserObjects.Value.Identifiers.IdentifierCoupling;
 import com.DCB.ParserObjects.Value.IntValueObject;
+
+import java.util.ArrayList;
 
 public class CouplingIntPrint extends CouplingStatement implements IntValueObject {
     private final IntValueObject intValueObject;
@@ -46,5 +49,11 @@ public class CouplingIntPrint extends CouplingStatement implements IntValueObjec
                 "<print_statement> -> print (<arithmetic_expression>) \n"
                 + intValueObject.getParsedGrammar();
         return grammer;
+    }
+
+
+    @Override
+    public void executeStatement() {
+        System.out.println("PRINT: " + intValueObject.getValue());
     }
 }

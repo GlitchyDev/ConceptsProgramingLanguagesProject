@@ -1,15 +1,14 @@
 package com.DCB.ParserObjects.Couplings.Operations.Boolean;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
-import com.DCB.ParserObjects.Value.IntValueObject;
 
 
 /**
  * Coupling that supports the Boolean And operation
  */
-public class CouplingBooleanAnd extends CoupledObject implements BooleanValueObject {
+public class CouplingBooleanAnd extends CouplingObject implements BooleanValueObject {
     private final boolean value;
     private final BooleanValueObject number1;
     private final BooleanValueObject number2;

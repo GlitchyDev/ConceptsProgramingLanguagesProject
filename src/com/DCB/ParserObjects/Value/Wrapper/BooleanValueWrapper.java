@@ -3,13 +3,13 @@ package com.DCB.ParserObjects.Value.Wrapper;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 /**
  * Coupling that supports Value objects, and properly encapsulates them
  */
-public class BooleanValueWrapper extends CoupledObject implements BooleanValueObject {
+public class BooleanValueWrapper extends CouplingObject implements BooleanValueObject {
     private final Value value;
     public BooleanValueWrapper(Value value) {
         super(CoupleObjectType.BOOLEAN_VALUE);

@@ -1,10 +1,12 @@
-package com.DCB.ParserObjects.Couplings.Statements;
+package com.DCB.ParserObjects.Couplings.Statements.Print;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
 import com.DCB.ParserObjects.Couplings.Statements.Assignment.CouplingIntAssignment;
-import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
+import com.DCB.ParserObjects.Value.Identifiers.IdentifierCoupling;
 import com.DCB.ParserObjects.Value.IntValueObject;
+
+import java.util.ArrayList;
 
 /**
  * Used to represent the For loop Iter object
@@ -42,5 +44,18 @@ public class CouplingIter extends CouplingStatement {
                 + couplingIntAssignment.getParsedGrammar()
                 + intValueObject.getParsedGrammar();
         return grammer;
+    }
+
+    public CouplingIntAssignment getCouplingIntAssignment() {
+        return couplingIntAssignment;
+    }
+
+    public IntValueObject getIntValueObject() {
+        return intValueObject;
+    }
+
+    @Override
+    public void executeStatement() {
+        // Nothing to write here! This statement does nothing!
     }
 }

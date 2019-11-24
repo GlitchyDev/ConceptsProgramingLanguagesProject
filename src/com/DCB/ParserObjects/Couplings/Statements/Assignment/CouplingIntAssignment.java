@@ -1,13 +1,14 @@
 package com.DCB.ParserObjects.Couplings.Statements.Assignment;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.LexicalObjects.Value;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
+import com.DCB.ParserObjects.Value.Identifiers.IdentifierCoupling;
 import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 
-import javax.print.attribute.standard.PrinterState;
+import java.util.ArrayList;
 
 public class CouplingIntAssignment extends CouplingStatement implements IntValueObject {
     private final IntIdentifierObject intIdentifierObject;
@@ -39,7 +40,11 @@ public class CouplingIntAssignment extends CouplingStatement implements IntValue
         return "[" + coupleObjectType + " | ID:" + intIdentifierObject.getStringIdentifier() + " Value:" +  intValueObject.getStringIdentifier() + " ]";
     }
 
-  //See CouplingForStatement.java for explanation.
+    public IntIdentifierObject getIntIdentifierObject() {
+        return intIdentifierObject;
+    }
+
+    //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";
@@ -59,4 +64,13 @@ public class CouplingIntAssignment extends CouplingStatement implements IntValue
         return intValueObject;
     }
 
+
+    @Override
+    public void executeStatement() {
+        System.out.println("DEBUG Assignment: Setting value of " + intIdentifierObject.getStringIdentifier() + " from " + intIdentifierObject.getValue() + " to " + intValueObject.getValue());
+        // So what this does, is force the Identifier to use a final number as its value, or else if its assigned (itself + 1) it might become recursive
+        intIdentifierObject.setIntValueObject(new IntValueWrapper(new Value(KeyWord.VariableType.NUMBER,intValueObject.getValue())));
+        System.out.println("DEBUG Assignment: Value is now " +  intIdentifierObject.getValue());
+
+    }
 }

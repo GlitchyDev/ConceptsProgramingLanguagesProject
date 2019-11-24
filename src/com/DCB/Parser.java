@@ -1,7 +1,8 @@
 package com.DCB;
 
 import com.DCB.ParserObjects.CouplingObjectFactory;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
+import com.DCB.ParserObjects.Value.Identifiers.IdentifierCoupling;
 
 import java.util.ArrayList;
 
@@ -23,8 +24,12 @@ public class Parser {
         }
     }
 
-    public ArrayList<Object> getAnalyzedScript() {
-        return analyzedScript;
+    public ArrayList<CouplingStatement> getParsedStatements() {
+        return couplingObjectFactory.getParsedStatements();
+    }
+
+    public ArrayList<IdentifierCoupling> getIdentifers() {
+        return couplingObjectFactory.getIdentifiers();
     }
 
     public ArrayList<Integer> getLineNumbers() {

@@ -1,13 +1,14 @@
 package com.DCB.ParserObjects.Couplings.Statements.Assignment;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.Identifiers.BooleanIdentifierObject;
-import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
-import com.DCB.ParserObjects.Value.IntValueObject;
+import com.DCB.ParserObjects.Value.Identifiers.IdentifierCoupling;
 
-public class CouplingBooleanAssignment extends CouplingStatement implements BooleanValueObject {
+import java.util.ArrayList;
+
+public class CouplingBooleanAssignment extends CouplingAssignment implements BooleanValueObject {
     private final BooleanIdentifierObject booleanIdentifierObject;
     private final BooleanValueObject booleanValueObject;
 
@@ -37,7 +38,11 @@ public class CouplingBooleanAssignment extends CouplingStatement implements Bool
         return "[" + coupleObjectType + " | ID:" + booleanIdentifierObject.getStringIdentifier() + " Value:" +  booleanValueObject.getStringIdentifier() + " ]";
     }
 
-  //See CouplingForStatement.java for explanation.
+    public BooleanIdentifierObject getBooleanIdentifierObject() {
+        return booleanIdentifierObject;
+    }
+
+    //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";
@@ -51,5 +56,12 @@ public class CouplingBooleanAssignment extends CouplingStatement implements Bool
                 "<assignment_statement> -> id assignment_operator <arithmetic_expression> \n" +
                 booleanValueObject.getParsedGrammar();
         return grammer;
+    }
+
+
+    @Override
+    public void executeStatement() {
+        // TODO
+        // Look at CouplingIntAssignment, that one's complete!
     }
 }

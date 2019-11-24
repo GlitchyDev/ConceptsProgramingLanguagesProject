@@ -1,21 +1,19 @@
-package com.DCB.ParserObjects.Couplings.Operations;
+package com.DCB.ParserObjects.Couplings.Operations.String;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
 
 /**
  * Coupling that supports the String concat operation
  */
-public class CouplingStringConcat extends CoupledObject implements StringValueObject {
-    private final String value;
+public class CouplingStringConcat extends CouplingObject implements StringValueObject {
     private final StringValueObject string1;
     private final StringValueObject string2;
 
     public CouplingStringConcat(StringValueObject string1, StringValueObject string2) {
         super(CoupleObjectType.STRING_CONCAT);
-        value = string1.getValue() + string2.getValue();
         this.string1 = string1;
         this.string2 = string2;
     }
@@ -48,7 +46,7 @@ public class CouplingStringConcat extends CoupledObject implements StringValueOb
 
     @Override
     public String getValue() {
-        return value;
+        return string1.getValue() + string2.getValue();
     }
 
 

@@ -2,13 +2,13 @@ package com.DCB.ParserObjects.Value.Wrapper;
 
 import com.DCB.LexicalObjects.KeyWord;
 import com.DCB.LexicalObjects.Value;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
 
 /**
  * Coupling that supports Value objects, and properly encapsulates them
  */
-public class StringValueWrapper extends CoupledObject implements StringValueObject {
+public class StringValueWrapper extends CouplingObject implements StringValueObject {
     private final Value value;
 
     public StringValueWrapper(Value value) {

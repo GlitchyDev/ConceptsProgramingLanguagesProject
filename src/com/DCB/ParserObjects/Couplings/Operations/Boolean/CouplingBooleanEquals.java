@@ -1,7 +1,7 @@
 package com.DCB.ParserObjects.Couplings.Operations.Boolean;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
@@ -10,7 +10,7 @@ import com.DCB.ParserObjects.Value.StringValueObject;
 /**
  * Coupling that supports the Boolean Equal operation
  */
-public class CouplingBooleanEquals extends CoupledObject implements BooleanValueObject {
+public class CouplingBooleanEquals extends CouplingObject implements BooleanValueObject {
     private final boolean value;
     private final Object object1;
     private final Object object2;
@@ -48,13 +48,13 @@ public class CouplingBooleanEquals extends CoupledObject implements BooleanValue
     @Override
     public String getStringIdentifier() {
         String identifier = "[" + coupleObjectType + " | ";
-        if(object1 instanceof CoupledObject) {
-            identifier += ((CoupledObject) object1).getStringIdentifier();
+        if(object1 instanceof CouplingObject) {
+            identifier += ((CouplingObject) object1).getStringIdentifier();
         } else {
             identifier += object1;
         }
-        if(object2 instanceof CoupledObject) {
-            identifier += ((CoupledObject) object2).getStringIdentifier();
+        if(object2 instanceof CouplingObject) {
+            identifier += ((CouplingObject) object2).getStringIdentifier();
         } else {
             identifier += object2;
         }
@@ -67,8 +67,8 @@ public class CouplingBooleanEquals extends CoupledObject implements BooleanValue
     public String getParsedGrammar() {
         
     	//object1 and 2 have the chance of not being CoupledObjects, this will error check. 
-    	CoupledObject number1 = (object1 instanceof CoupledObject)? (CoupledObject)object1 : null;
-        CoupledObject number2 = (object2 instanceof CoupledObject)? (CoupledObject)object2 : null;
+    	CouplingObject number1 = (object1 instanceof CouplingObject)? (CouplingObject)object1 : null;
+        CouplingObject number2 = (object2 instanceof CouplingObject)? (CouplingObject)object2 : null;
         String n1 = (number1 == null) ? "" : number1.getParsedGrammar();
         String n2 = (number2 == null) ? "" : number2.getParsedGrammar();
     	    	

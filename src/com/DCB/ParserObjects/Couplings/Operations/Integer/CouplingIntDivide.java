@@ -1,20 +1,18 @@
 package com.DCB.ParserObjects.Couplings.Operations.Integer;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
 /**
  * Coupling that supports the Integer Divide Operation
  */
-public class CouplingIntDivide extends CoupledObject implements IntValueObject {
-    private final int value;
+public class CouplingIntDivide extends CouplingObject implements IntValueObject {
     private final IntValueObject number1;
     private final IntValueObject number2;
 
     public CouplingIntDivide(IntValueObject number1, IntValueObject number2) {
         super(CoupleObjectType.NUMBER_DIVIDE);
-        value = number1.getValue() / number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -48,7 +46,7 @@ public class CouplingIntDivide extends CoupledObject implements IntValueObject {
 
     @Override
     public int getValue() {
-        return value;
+        return number1.getValue() / number2.getValue();
     }
 
 

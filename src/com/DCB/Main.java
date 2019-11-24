@@ -1,11 +1,7 @@
 package com.DCB;
 
-import com.DCB.ParserObjects.CoupledObject;
-import com.DCB.ParserObjects.CouplingControlStatement;
-import com.DCB.ParserObjects.CouplingStatement;
-import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingForStatement;
-import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingIfStatement;
-import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingWhileStatement;
+import com.DCB.Interpreter.InterpreterManager;
+import com.DCB.ParserObjects.CouplingObject;
 
 import java.io.*;
 import java.util.Scanner;
@@ -35,29 +31,24 @@ public class Main {
         }
         System.out.println("[Identifiers]=========================");
         Parser parser = new Parser(lexicalAnalyzer.getAnalyzedScript(),lexicalAnalyzer.getScriptLines(),lexicalAnalyzer.getCurrentLineNumber());
-        for(int i = 0; i < parser.getAnalyzedScript().size(); i++) {
-            Object o = parser.getAnalyzedScript().get(i);
-            if(o instanceof CoupledObject) {
-                System.out.println(((CoupledObject) o).getStringIdentifier());
-            } else {
-                System.out.println(o + " ||| " + parser.getLineNumbers().get(i));
-            }
+        for(int i = 0; i < parser.getParsedStatements().size(); i++) {
+            System.out.println(parser.getParsedStatements().get(i).getStringIdentifier());
         }
 
         System.out.println("[Grammer]=========================");
         System.out.println("\n<program> -> function id ( ) <block> end");
 
 
-        for(int i = 0; i < parser.getAnalyzedScript().size(); i++) {
-            Object o = parser.getAnalyzedScript().get(i);
-            if(o instanceof CoupledObject) {
-                System.out.println(((CoupledObject) o).getParsedGrammar());
-            } else {
-                System.out.println(o + " ||| " + parser.getLineNumbers().get(i));
-            }
+        for(int i = 0; i < parser.getParsedStatements().size(); i++) {
+            Object o = parser.getParsedStatements().get(i);
+            System.out.println(parser.getParsedStatements().get(i).getParsedGrammar());
         }
-        int i = 0;
-        // write your code here
+
+
+        System.out.println("[Interpreter]=========================");
+        InterpreterManager interpreterManager = new InterpreterManager(parser.getParsedStatements(),parser.getIdentifers());
+        interpreterManager.executeAllStatements();
+
     }
 
 

@@ -1,20 +1,18 @@
 package com.DCB.ParserObjects.Couplings.Operations.Parentheses;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
 
 
 /**
  * Coupling that supports the Integer Parentheses operation
  */
-public class CouplingIntParentheses extends CoupledObject implements IntValueObject {
-    private final int value;
+public class CouplingIntParentheses extends CouplingObject implements IntValueObject {
     private final IntValueObject intValueObject;
 
     public CouplingIntParentheses(IntValueObject intValueObject) {
         super(CoupleObjectType.INT_PARENTHESES);
-        this.value = intValueObject.getValue();
         this.intValueObject = intValueObject;
     }
 
@@ -30,7 +28,7 @@ public class CouplingIntParentheses extends CoupledObject implements IntValueObj
 
     @Override
     public int getValue() {
-        return value;
+        return intValueObject.getValue();
     }
 
     @Override

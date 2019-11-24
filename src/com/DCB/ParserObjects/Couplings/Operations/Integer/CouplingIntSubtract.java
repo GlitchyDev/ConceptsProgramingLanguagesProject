@@ -1,21 +1,18 @@
 package com.DCB.ParserObjects.Couplings.Operations.Integer;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CoupledObject;
+import com.DCB.ParserObjects.CouplingObject;
 import com.DCB.ParserObjects.Value.IntValueObject;
-import com.DCB.ParserObjects.Value.StringValueObject;
 
 /**
  * Coupling that supports the Integer Subtract Operation
  */
-public class CouplingIntSubtract extends CoupledObject implements IntValueObject {
-    private final int value;
+public class CouplingIntSubtract extends CouplingObject implements IntValueObject {
     private final IntValueObject number1;
     private final IntValueObject number2;
 
     public CouplingIntSubtract(IntValueObject number1, IntValueObject number2) {
         super(CoupleObjectType.NUMBER_SUBTRACT);
-        value = number1.getValue() - number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -49,7 +46,7 @@ public class CouplingIntSubtract extends CoupledObject implements IntValueObject
 
     @Override
     public int getValue() {
-        return value;
+        return number1.getValue() - number2.getValue();
     }
 
 

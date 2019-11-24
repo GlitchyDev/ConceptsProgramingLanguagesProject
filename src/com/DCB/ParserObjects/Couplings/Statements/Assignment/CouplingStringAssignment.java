@@ -1,11 +1,12 @@
 package com.DCB.ParserObjects.Couplings.Statements.Assignment;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CouplingStatement;
-import com.DCB.ParserObjects.Value.Identifiers.IntIdentifierObject;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
+import com.DCB.ParserObjects.Value.Identifiers.IdentifierCoupling;
 import com.DCB.ParserObjects.Value.Identifiers.StringIdentifierObject;
-import com.DCB.ParserObjects.Value.IntValueObject;
 import com.DCB.ParserObjects.Value.StringValueObject;
+
+import java.util.ArrayList;
 
 public class CouplingStringAssignment extends CouplingStatement implements StringValueObject {
     private final StringIdentifierObject stringIdentifierObject;
@@ -37,7 +38,11 @@ public class CouplingStringAssignment extends CouplingStatement implements Strin
         return "[" + coupleObjectType + " | ID:" + stringIdentifierObject.getStringIdentifier() + " Value:" +  stringValueObject.getStringIdentifier() + " ]";
     }
 
-  //See CouplingForStatement.java for explanation.
+    public StringIdentifierObject getStringIdentifierObject() {
+        return stringIdentifierObject;
+    }
+
+    //See CouplingForStatement.java for explanation.
     @Override
     public String getParsedGrammar() {
         String grammer = "";
@@ -51,5 +56,12 @@ public class CouplingStringAssignment extends CouplingStatement implements Strin
                 "<assignment_statement> -> id assignment_operator <arithmetic_expression> \n" +
                 stringValueObject.getParsedGrammar();
         return grammer;
+    }
+
+
+    @Override
+    public void executeStatement() {
+        // TODO
+        // Look at CouplingIntAssignment, that one's complete!
     }
 }

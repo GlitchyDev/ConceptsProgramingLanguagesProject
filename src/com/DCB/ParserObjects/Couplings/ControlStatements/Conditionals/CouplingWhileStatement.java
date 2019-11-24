@@ -1,8 +1,8 @@
-package com.DCB.ParserObjects.Couplings.ControlStatements;
+package com.DCB.ParserObjects.Couplings.ControlStatements.Conditionals;
 
 import com.DCB.LexicalObjects.KeyWord;
-import com.DCB.ParserObjects.CouplingControlStatement;
-import com.DCB.ParserObjects.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
+import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingControlStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
 
 import java.util.ArrayList;
@@ -79,6 +79,14 @@ public class CouplingWhileStatement extends CouplingControlStatement {
     @Override
     public void setLateStatement() {
         containedStatements.get(containedStatements.size()-1).setLateStatement();
+    }
+
+
+    @Override
+    public void executeStatement() {
+        // TODO
+        // Look in CouplingForStatement for Reference
+        // TLDR: Do an actual While Loop, with the boolean inside being the booleanValueObject.getValue, and have the inside of the loop run all the statements inside the While aka containedStatements
     }
 }
 

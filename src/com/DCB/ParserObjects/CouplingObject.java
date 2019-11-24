@@ -7,9 +7,9 @@ import com.DCB.LexicalObjects.KeyWord;
  * This is a Coupling Object that is used to encapsulate all Operations and Statements that allows for proper parsing via
  * the grammer encapsulation assignment method
  */
-public abstract class CoupledObject {
+public abstract class CouplingObject {
     protected final CoupleObjectType coupleObjectType;
-    public CoupledObject(CoupleObjectType coupleObjectType) {
+    public CouplingObject(CoupleObjectType coupleObjectType) {
         this.coupleObjectType = coupleObjectType;
     }
 
