@@ -1,9 +1,11 @@
 package com.DCB.ParserObjects.Couplings.ControlStatements.Conditionals;
 
 import com.DCB.LexicalObjects.KeyWord;
+import com.DCB.LexicalObjects.Value;
 import com.DCB.ParserObjects.Couplings.Statements.CouplingStatement;
 import com.DCB.ParserObjects.Couplings.ControlStatements.CouplingControlStatement;
 import com.DCB.ParserObjects.Value.BooleanValueObject;
+import com.DCB.ParserObjects.Value.Wrapper.IntValueWrapper;
 
 import java.util.ArrayList;
 
@@ -84,8 +86,17 @@ public class CouplingWhileStatement extends CouplingControlStatement {
 
     @Override
     public void executeStatement() {
-        // TODO
-        // Look in CouplingForStatement for Reference
+    	// giving an i here so we can count while (ha get it) we move though the loop.
+        int i = 0;
+        // So the for loop stars from CouplingIter's current assignment value, to the Value object's value. The second value can tecnically update so we need to be careful
+        while(booleanValueObject.getValue()) {
+        	System.out.println("DEBUG WhileStatement: On loop number " + i); 
+        	
+        	for(int x = 0; x < containedStatements.size(); x++) {
+                containedStatements.get(x).executeStatement();
+            }
+        }
+        System.out.println("DEBUG WhileStatement: Exiting Loop");
         // TLDR: Do an actual While Loop, with the boolean inside being the booleanValueObject.getValue, and have the inside of the loop run all the statements inside the While aka containedStatements
     }
 }

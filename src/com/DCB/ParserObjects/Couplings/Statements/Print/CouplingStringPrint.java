@@ -54,7 +54,6 @@ public class CouplingStringPrint extends CouplingStatement implements StringValu
 
     @Override
     public void executeStatement() {
-        // TODO
-        // Look at CouplingIntPrint for reference
+    	System.out.println("PRINT: " + stringValueObject.getValue());
     }
 }
