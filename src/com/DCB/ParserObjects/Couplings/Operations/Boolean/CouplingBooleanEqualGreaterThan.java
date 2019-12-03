@@ -10,13 +10,11 @@ import com.DCB.ParserObjects.Value.IntValueObject;
  * Coupling that supports the Boolean EqualGreaterThan operation
  */
 public class CouplingBooleanEqualGreaterThan extends CouplingObject implements BooleanValueObject {
-    private final boolean value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
     public CouplingBooleanEqualGreaterThan(IntValueObject number1, IntValueObject number2) {
         super(CoupleObjectType.BOOLEAN_EQUAL_GREATER_THAN);
-        value = number1.getValue() <= number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -49,7 +47,7 @@ public class CouplingBooleanEqualGreaterThan extends CouplingObject implements B
 
     @Override
     public boolean getValue() {
-        return value;
+        return number1.getValue() <= number2.getValue();
     }
 
 

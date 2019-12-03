@@ -13,25 +13,11 @@ import com.DCB.ParserObjects.Value.StringValueObject;
  * Coupling that supports the Boolean NotEquals operation
  */
 public class CouplingBooleanNotEquals extends CouplingObject implements BooleanValueObject {
-    private final boolean value;
     private final Object object1;
     private final Object object2;
 
     public CouplingBooleanNotEquals(Object object1, Object object2) {
         super(CoupleObjectType.BOOLEAN_NOT_EQUAl);
-        if(object1 instanceof IntValueObject && object2 instanceof IntValueObject) {
-            value = ((IntValueObject) object1).getValue() != ((IntValueObject) object2).getValue();
-        } else {
-            if (object1 instanceof BooleanValueObject && object2 instanceof BooleanValueObject) {
-                value = ((BooleanValueObject) object1).getValue() != ((BooleanValueObject) object2).getValue();
-            } else {
-                if (object1 instanceof StringValueObject && object2 instanceof StringValueObject) {
-                    value = !((StringValueObject) object1).getValue().equals(((StringValueObject) object2).getValue());
-                } else {
-                    value = false;
-                }
-            }
-        }
         this.object1 = object1;
         this.object2 = object2;
     }
@@ -83,7 +69,20 @@ public class CouplingBooleanNotEquals extends CouplingObject implements BooleanV
 
     @Override
     public boolean getValue() {
-        return value;
+
+        if(object1 instanceof IntValueObject && object2 instanceof IntValueObject) {
+            return ((IntValueObject) object1).getValue() != ((IntValueObject) object2).getValue();
+        } else {
+            if (object1 instanceof BooleanValueObject && object2 instanceof BooleanValueObject) {
+                return ((BooleanValueObject) object1).getValue() != ((BooleanValueObject) object2).getValue();
+            } else {
+                if (object1 instanceof StringValueObject && object2 instanceof StringValueObject) {
+                    return !((StringValueObject) object1).getValue().equals(((StringValueObject) object2).getValue());
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 
 

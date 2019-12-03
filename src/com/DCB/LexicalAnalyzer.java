@@ -60,7 +60,7 @@ public class LexicalAnalyzer {
                     currentString = "";
                 } else {
                     System.out.println("Error at line " + currentLineNumber + ". Too many spaces.");
-                    System.exit(0);
+                    currentString = "";
                 }
             }
         }

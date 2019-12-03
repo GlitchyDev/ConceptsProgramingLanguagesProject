@@ -9,13 +9,11 @@ import com.DCB.ParserObjects.Value.IntValueObject;
  * Coupling that supports the Boolean LessThan operation
  */
 public class CouplingBooleanLessThan extends CouplingObject implements BooleanValueObject {
-    private final boolean value;
     private final IntValueObject number1;
     private final IntValueObject number2;
 
     public CouplingBooleanLessThan(IntValueObject number1, IntValueObject number2) {
         super(CoupleObjectType.BOOLEAN_LESS_THAN);
-        value = number1.getValue() < number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -48,7 +46,7 @@ public class CouplingBooleanLessThan extends CouplingObject implements BooleanVa
 
     @Override
     public boolean getValue() {
-        return value;
+        return number1.getValue() < number2.getValue();
     }
 
 

@@ -9,13 +9,11 @@ import com.DCB.ParserObjects.Value.BooleanValueObject;
  * Coupling that supports the Boolean And operation
  */
 public class CouplingBooleanAnd extends CouplingObject implements BooleanValueObject {
-    private final boolean value;
     private final BooleanValueObject number1;
     private final BooleanValueObject number2;
 
     public CouplingBooleanAnd(BooleanValueObject number1, BooleanValueObject number2) {
         super(CoupleObjectType.BOOLEAN_AND);
-        value = number1.getValue() && number2.getValue();
         this.number1 = number1;
         this.number2 = number2;
     }
@@ -48,7 +46,7 @@ public class CouplingBooleanAnd extends CouplingObject implements BooleanValueOb
 
     @Override
     public boolean getValue() {
-        return value;
+        return number1.getValue() && number2.getValue();
     }
 
 

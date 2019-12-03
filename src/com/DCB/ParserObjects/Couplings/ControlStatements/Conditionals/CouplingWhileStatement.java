@@ -95,6 +95,7 @@ public class CouplingWhileStatement extends CouplingControlStatement {
         	for(int x = 0; x < containedStatements.size(); x++) {
                 containedStatements.get(x).executeStatement();
             }
+        	i++;
         }
         System.out.println("DEBUG WhileStatement: Exiting Loop");
         // TLDR: Do an actual While Loop, with the boolean inside being the booleanValueObject.getValue, and have the inside of the loop run all the statements inside the While aka containedStatements
