@@ -92,7 +92,7 @@ public class CouplingForStatement extends CouplingControlStatement {
         // We want to comment this out once we are done
         System.out.println("DEBUG ForStatement: Starting for loop from " + couplingIter.getCouplingIntAssignment().getValue() + " to " + couplingIter.getIntValueObject().getValue());
 
-        // So the for loop stars from CouplingIter's current assignment value, to the Value object's value. The second value can tecnically update so we need to be careful
+        // So the for loop stars from CouplingIter's current assignment value, to the Value object's value. The second value can technically update so we need to be careful
         for(int i = couplingIter.getCouplingIntAssignment().getValue(); i <= couplingIter.getIntValueObject().getValue(); i++) {
             System.out.println("DEBUG ForStatement: On loop number " + i);
             // We update our int assignment in the iter, this is a real variable whose value can update, but incrementing its value will not change the i normally

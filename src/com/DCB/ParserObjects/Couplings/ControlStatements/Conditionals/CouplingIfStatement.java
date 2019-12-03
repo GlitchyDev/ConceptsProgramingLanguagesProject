@@ -101,8 +101,14 @@ public class CouplingIfStatement extends CouplingControlStatement {
 
     @Override
     public void executeStatement() {
-        // TODO
-        // Look at the CouplingForStatement
-        // TLDR, do a litteral if else, use the booleanValue.getValue to determine which branch is run. In the if have it run all IfStatements, in the else have it run the ElseStatements
+        if(booleanValueObject.getValue()) {
+            for(int x = 0; x < ifStatements.size(); x++) {
+                ifStatements.get(x).executeStatement();
+            }
+        } else {
+            for(int x = 0; x < elseStatements.size(); x++) {
+                elseStatements.get(x).executeStatement();
+            }
+        }
     }
 }

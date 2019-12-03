@@ -54,8 +54,7 @@ public class CouplingBooleanPrint extends CouplingStatement implements IntValueO
 
 
     @Override
-    public void executeStatement() {
-        // TODO
-        // Look at CouplingIntPrint for reference
+    public void executeStatement() { System.out.println("PRINT: " + booleanValueObject.getValue());
+
     }
 }

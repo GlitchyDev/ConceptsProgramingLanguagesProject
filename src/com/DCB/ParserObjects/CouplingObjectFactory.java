@@ -379,7 +379,6 @@ public class CouplingObjectFactory {
                                 break;
                             } else {
                                 nonStatementFoundLine = getObjectLineNumber(i);
-                                break;
                             }
                         }
                     }
