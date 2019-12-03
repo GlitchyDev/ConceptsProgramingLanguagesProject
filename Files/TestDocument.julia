@@ -1,6 +1,2 @@
-if ( < 5 3 )
-print ( "A" )
-else
-b = "Yo"
+b = ( "Yo" )
 print b
-end

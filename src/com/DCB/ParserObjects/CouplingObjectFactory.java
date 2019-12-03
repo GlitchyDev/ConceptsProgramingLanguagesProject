@@ -497,17 +497,17 @@ public class CouplingObjectFactory {
                 break;
             case LEFT_PARENTHESIS:
                 if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2)== KeyWord.RIGHT_PARENTHESIS) {
+                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.RIGHT_PARENTHESIS) {
                         return true;
                     }
                 }
-                if(getObject(couplingPosition+1) instanceof IntValueObject) {
-                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2)== KeyWord.RIGHT_PARENTHESIS) {
+                if(getObject(couplingPosition+1) instanceof StringValueObject) {
+                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.RIGHT_PARENTHESIS) {
                         return true;
                     }
                 }
                 if(getObject(couplingPosition+1) instanceof BooleanValueObject) {
-                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2)== KeyWord.RIGHT_PARENTHESIS) {
+                    if(getObject(couplingPosition+2) instanceof KeyWord && getObject(couplingPosition+2) == KeyWord.RIGHT_PARENTHESIS) {
                         return true;
                     }
                 }
@@ -765,7 +765,7 @@ public class CouplingObjectFactory {
                     Identifier identifier = stringIdentifierObject.getIdentifier();
                     for(int i = currentLineNumber; i < parsedScript.size(); i++) {
                         if(getObject(i) instanceof UnidentifiedIdentifierObject) {
-                            if(((UnidentifiedIdentifierObject) getObject(i)).getIdentifier().equals(identifier)) {
+                            if(((UnidentifiedIdentifierObject) getObject(i)).getIdentifier().getIdentifier().equals(identifier.getIdentifier())) {
                                 replace(i,stringIdentifierObject);
                             }
                         }
@@ -837,7 +837,7 @@ public class CouplingObjectFactory {
                                     }
                                 }
                                 if (getObject(i) instanceof StringIdentifierObject) {
-                                    if (((StringIdentifierObject) getObject(i)).getIdentifier().equals(identifier)) {
+                                    if (((StringIdentifierObject) getObject(i)).getIdentifier().getIdentifier().equals(identifier.getIdentifier())) {
                                         replace(i, booleanIdentifierObject);
                                     }
                                 }
