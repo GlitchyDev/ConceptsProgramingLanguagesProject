@@ -67,10 +67,10 @@ public class CouplingIntAssignment extends CouplingStatement implements IntValue
 
     @Override
     public void executeStatement() {
-        System.out.println("DEBUG Assignment: Setting value of " + intIdentifierObject.getStringIdentifier() + " from " + intIdentifierObject.getValue() + " to " + intValueObject.getValue());
+        //System.out.println("DEBUG Assignment: Setting value of " + intIdentifierObject.getStringIdentifier() + " from " + intIdentifierObject.getValue() + " to " + intValueObject.getValue());
         // So what this does, is force the Identifier to use a final number as its value, or else if its assigned (itself + 1) it might become recursive
         intIdentifierObject.setIntValueObject(new IntValueWrapper(new Value(KeyWord.VariableType.NUMBER,intValueObject.getValue())));
-        System.out.println("DEBUG Assignment: Value is now " +  intIdentifierObject.getValue());
+        //System.out.println("DEBUG Assignment: Value is now " +  intIdentifierObject.getValue());
 
     }
 }

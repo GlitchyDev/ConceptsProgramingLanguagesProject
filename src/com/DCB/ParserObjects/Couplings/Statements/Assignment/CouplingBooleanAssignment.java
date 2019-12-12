@@ -64,9 +64,9 @@ public class CouplingBooleanAssignment extends CouplingAssignment implements Boo
 
     @Override
     public void executeStatement() {
-        System.out.println("DEBUG Assignment: Setting value of " + booleanIdentifierObject.getStringIdentifier() + " from " + booleanIdentifierObject.getValue() + " to " + booleanValueObject.getValue());
+        //System.out.println("DEBUG Assignment: Setting value of " + booleanIdentifierObject.getStringIdentifier() + " from " + booleanIdentifierObject.getValue() + " to " + booleanValueObject.getValue());
         // So what this does, is force the Identifier to use a final number as its value, or else if its assigned (itself + 1) it might become recursive
         booleanIdentifierObject.setBooleanValueObject(new BooleanValueWrapper(new Value(KeyWord.VariableType.BOOLEAN,booleanValueObject.getValue())));
-        System.out.println("DEBUG Assignment: Value is now " +  booleanIdentifierObject.getValue());
+        //System.out.println("DEBUG Assignment: Value is now " +  booleanIdentifierObject.getValue());
     }
 }

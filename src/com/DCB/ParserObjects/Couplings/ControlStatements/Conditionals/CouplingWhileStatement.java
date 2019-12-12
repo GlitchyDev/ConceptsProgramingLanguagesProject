@@ -90,14 +90,14 @@ public class CouplingWhileStatement extends CouplingControlStatement {
         int i = 0;
         // So the for loop stars from CouplingIter's current assignment value, to the Value object's value. The second value can tecnically update so we need to be careful
         while(booleanValueObject.getValue()) {
-        	System.out.println("DEBUG WhileStatement: On loop number " + i); 
+        	//System.out.println("DEBUG WhileStatement: On loop number " + i);
         	
         	for(int x = 0; x < containedStatements.size(); x++) {
                 containedStatements.get(x).executeStatement();
             }
         	i++;
         }
-        System.out.println("DEBUG WhileStatement: Exiting Loop");
+        //System.out.println("DEBUG WhileStatement: Exiting Loop");
         // TLDR: Do an actual While Loop, with the boolean inside being the booleanValueObject.getValue, and have the inside of the loop run all the statements inside the While aka containedStatements
     }
 }

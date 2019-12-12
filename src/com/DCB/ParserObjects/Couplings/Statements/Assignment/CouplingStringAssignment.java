@@ -64,9 +64,9 @@ public class CouplingStringAssignment extends CouplingStatement implements Strin
 
     @Override
     public void executeStatement() {
-    	System.out.println("DEBUG Assignment: Setting value of " + stringIdentifierObject.getStringIdentifier() + " from " + stringIdentifierObject.getValue() + " to " + stringIdentifierObject.getValue());
+    	//System.out.println("DEBUG Assignment: Setting value of " + stringIdentifierObject.getStringIdentifier() + " from " + stringIdentifierObject.getValue() + " to " + stringIdentifierObject.getValue());
         // So what this does, is force the Identifier to use a final number as its value, or else if its assigned (itself + 1) it might become recursive
     	stringIdentifierObject.setStringValueObject(new StringValueWrapper(new Value(KeyWord.VariableType.STRING,stringValueObject.getValue())));
-        System.out.println("DEBUG Assignment: Value is now " +  stringIdentifierObject.getValue());
+        //System.out.println("DEBUG Assignment: Value is now " +  stringIdentifierObject.getValue());
     }
 }
